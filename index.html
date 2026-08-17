@@ -3,29 +3,65 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Centro de Reportes</title>
+  <title>Panel de Reportes Electorales</title>
   <link rel="stylesheet" href="styles.css">
+  <!-- Script oficial de Flourish -->
+  <script src="https://public.flourish.studio/resources/embed.js"></script>
 </head>
 <body>
 
+  <!-- Overlay para menú en móviles -->
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
   <!-- Barra Lateral -->
-  <aside class="sidebar">
-    <h2>Reportes</h2>
-    <nav>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="brand">
+        <span class="brand-icon">🗳️</span>
+        <span class="brand-title">Resultados</span>
+      </div>
+      <button class="close-btn" id="close-sidebar" aria-label="Cerrar menú">✕</button>
+    </div>
+
+    <nav class="sidebar-nav">
+      <span class="nav-section-title">SELECCIONA UN REPORTE</span>
       <ul>
-        <li><button class="nav-btn active" data-src="https://flo.uri.sh/visualisation/29990496/embed">Reporte General</button></li>
-        <li><button class="nav-btn" data-src="https://flo.uri.sh/visualisation/29972342/embed">Análisis Regional</button></li>
-        <li><button class="nav-btn" data-src="https://flo.uri.sh/visualisation/3456789/embed">Comparativa Anual</button></li>
+        <li>
+          <button class="nav-btn active" data-id="29990496" data-title="Resultados Alcaldías">
+            <span class="nav-icon">🏛️</span>
+            <span class="nav-text">Resultados Alcaldías</span>
+          </button>
+        </li>
+        <li>
+          <button class="nav-btn" data-id="29972342" data-title="Resultados Distritos Locales">
+            <span class="nav-icon">🗺️</span>
+            <span class="nav-text">Distritos Locales</span>
+          </button>
+        </li>
       </ul>
     </nav>
   </aside>
 
-  <!-- Área de Contenido -->
-  <main class="content">
-    <div class="iframe-wrapper">
-      <iframe id="flourish-frame" src="https://flo.uri.sh/visualisation/1234567/embed" frameborder="0" scrolling="no"></iframe>
-    </div>
-  </main>
+  <!-- Área Principal -->
+  <div class="main-wrapper">
+    <!-- Header Superior -->
+    <header class="topbar">
+      <button class="toggle-btn" id="toggle-sidebar" aria-label="Abrir menú">
+        ☰
+      </button>
+      <h1 class="report-title" id="current-title">Resultados Alcaldías</h1>
+    </header>
+
+    <!-- Contenedor del Gráfico -->
+    <main class="content-area">
+      <div class="chart-card">
+        <div id="flourish-container">
+          <!-- Gráfico activo por defecto: Alcaldías -->
+          <div class="flourish-embed flourish-chart" data-src="visualisation/29990496"></div>
+        </div>
+      </div>
+    </main>
+  </div>
 
   <script src="script.js"></script>
 </body>
