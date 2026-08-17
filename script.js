@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   const buttons = document.querySelectorAll('.nav-btn');
-  // Referencia directa al iframe, no al contenedor
-  const flourishIframe = document.getElementById('flourish-iframe');
+  const reports = document.querySelectorAll('.flourish-report');
   const currentTitle = document.getElementById('current-title');
   const sidebar = document.getElementById('sidebar');
   const overlay = document.getElementById('sidebar-overlay');
@@ -18,10 +17,10 @@ document.addEventListener('DOMContentLoaded', () => {
   if (closeBtn) closeBtn.addEventListener('click', toggleSidebar);
   if (overlay) overlay.addEventListener('click', toggleSidebar);
 
-  // Evento al presionar cualquier botón del menú
+  // Cambio entre reportes mediante alternancia de clases CSS
   buttons.forEach(button => {
     button.addEventListener('click', () => {
-      // 1. Manejar la clase activa en la interfaz (CSS)
+      // 1. Marcar botón activo en el menú
       buttons.forEach(btn => btn.classList.remove('active'));
       button.classList.add('active');
 
@@ -31,14 +30,17 @@ document.addEventListener('DOMContentLoaded', () => {
         currentTitle.textContent = newTitle;
       }
 
-      // 3. CAMBIO CLAVE: Actualizar el SRC del iframe
-      // Esto fuerza al navegador a recargar Flourish completamente
-      const chartId = button.getAttribute('data-id');
-      if (flourishIframe) {
-        flourishIframe.src = `https://public.flourish.studio/visualisation/${chartId}/embed`;
-      }
+      // 3. Ocultar todos los iframes y mostrar solo el seleccionado
+      const targetId = button.getAttribute('data-target');
+      reports.forEach(iframe => {
+        if (iframe.id === targetId) {
+          iframe.classList.add('active');
+        } else {
+          iframe.classList.remove('active');
+        }
+      });
 
-      // 4. Cierre automático del menú en vistas móviles
+      // 4. Cerrar menú en dispositivos móviles al seleccionar
       if (window.innerWidth <= 850 && sidebar && sidebar.classList.contains('open')) {
         toggleSidebar();
       }
