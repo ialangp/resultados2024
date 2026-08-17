@@ -215,3 +215,12 @@ body {
     padding: 1rem;
   }
 }
+/* Oculta los iframes por defecto */
+.flourish-report {
+  display: none;
+}
+
+/* Muestra únicamente el iframe que tiene la clase active */
+.flourish-report.active {
+  display: block;
+}
