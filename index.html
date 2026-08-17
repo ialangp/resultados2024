@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Centro de Reportes</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Barra Lateral -->
+  <aside class="sidebar">
+    <h2>Reportes</h2>
+    <nav>
+      <ul>
+        <li><button class="nav-btn active" data-src="https://flo.uri.sh/visualisation/1234567/embed">Reporte General</button></li>
+        <li><button class="nav-btn" data-src="https://flo.uri.sh/visualisation/2345678/embed">Análisis Regional</button></li>
+        <li><button class="nav-btn" data-src="https://flo.uri.sh/visualisation/3456789/embed">Comparativa Anual</button></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Área de Contenido -->
+  <main class="content">
+    <div class="iframe-wrapper">
+      <iframe id="flourish-frame" src="https://flo.uri.sh/visualisation/1234567/embed" frameborder="0" scrolling="no"></iframe>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
