@@ -133,58 +133,22 @@ function renderCards(list, container) {
   }
 
   list.forEach(item => {
-    const diff = (item.porcentaje - item.porcentajeAnterior).toFixed(1);
-    const diffClass = diff >= 0 ? 'positive' : 'negative';
-    const diffSign = diff >= 0 ? '+' : '';
-
-    const cardHTML = `
-      <div class="candidate-card">
-        <div class="candidate-header">
-          <img src="${item.foto}" alt="${item.nombre}" class="candidate-avatar" onerror="this.src='https://via.placeholder.com/64?text=Foto'">
-          <div class="candidate-info">
-            <h3>${item.nombre}</h3>
-            <span class="location-badge">${item.ubicacion}</span>
-          </div>
-        </div>
-
-        <div class="performance-metric">
-          <div class="metric-label">Porcentaje de Votación</div>
-          <div class="metric-value-row">
-            <span class="metric-number">${item.porcentaje}%</span>
-            <span class="metric-diff ${diffClass}">${diffSign}${diff}% vs anterior</span>
-          </div>
-          <div class="progress-bar-bg">
-            <div class="progress-bar-fill" style="width: ${Math.min(item.porcentaje, 100)}%;"></div>
-          </div>
-          <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.45rem;">
-            Total: ${Number(item.votos).toLocaleString()} votos
-          </div>
-        </div>
-      </div>
-    `;
-    container.insertAdjacentHTML('beforeend', cardHTML);
-  });
-}
-function renderCards(list, container) {
-  if (!container) return;
-  container.innerHTML = '';
-
-  if (list.length === 0) {
-    container.innerHTML = '<p style="color: var(--text-muted); padding: 1rem;">No se encontraron candidatos con los criterios seleccionados.</p>';
-    return;
-  }
-
-  list.forEach(item => {
     const incSign = item.incremento >= 0 ? '+' : '';
     const incClass = item.incremento >= 0 ? 'positive' : 'negative';
     const desClass = item.desempeno >= 0 ? 'positive' : 'negative';
 
+    // Validación de fotografía vacía
+    const hasPhoto = item.foto && item.foto.trim() !== '';
+    const avatarHTML = hasPhoto
+      ? `<img src="${item.foto}" alt="${item.nombre}" class="candidate-avatar" onerror="this.outerHTML='<div class=\\'candidate-avatar no-photo\\'>Sin foto</div>'">`
+      : `<div class="candidate-avatar no-photo">Sin foto</div>`;
+
     const cardHTML = `
       <div class="candidate-card">
         <div class="candidate-header">
-          <img src="${item.foto}" alt="${item.nombre}" class="candidate-avatar" onerror="this.src='https://via.placeholder.com/60?text=Sin+Foto'">
+          ${avatarHTML}
           <div class="candidate-info">
-            <h3>${item.nombre || 'Candidato Desconocido'}</h3>
+            <h3>${item.nombre || 'Sin Candidato'}</h3>
             <span class="location-badge">${item.ubicacion}</span>
           </div>
         </div>
