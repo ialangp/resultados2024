@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const toggleBtn = document.getElementById('toggle-sidebar');
   const closeBtn = document.getElementById('close-sidebar');
 
-  // Control de apertura/cierre de la barra lateral en móviles
   function toggleSidebar() {
     if (sidebar) sidebar.classList.toggle('open');
     if (overlay) overlay.classList.toggle('active');
@@ -17,30 +16,35 @@ document.addEventListener('DOMContentLoaded', () => {
   if (closeBtn) closeBtn.addEventListener('click', toggleSidebar);
   if (overlay) overlay.addEventListener('click', toggleSidebar);
 
-  // Cambio entre reportes mediante alternancia de clases CSS
   buttons.forEach(button => {
     button.addEventListener('click', () => {
-      // 1. Marcar botón activo en el menú
+      // 1. Activar botón en el menú
       buttons.forEach(btn => btn.classList.remove('active'));
       button.classList.add('active');
 
-      // 2. Actualizar el título superior
+      // 2. Actualizar el título
       const newTitle = button.getAttribute('data-title');
       if (newTitle && currentTitle) {
         currentTitle.textContent = newTitle;
       }
 
-      // 3. Ocultar todos los iframes y mostrar solo el seleccionado
+      // 3. Alternar visibilidad de los reportes
       const targetId = button.getAttribute('data-target');
       reports.forEach(iframe => {
         if (iframe.id === targetId) {
           iframe.classList.add('active');
+          
+          // FORZAR RESIZE: Notifica al iframe para recalculación de altura
+          setTimeout(() => {
+            window.dispatchEvent(new Event('resize'));
+          }, 50);
+          
         } else {
           iframe.classList.remove('active');
         }
       });
 
-      // 4. Cerrar menú en dispositivos móviles al seleccionar
+      // 4. Cerrar menú en móviles
       if (window.innerWidth <= 850 && sidebar && sidebar.classList.contains('open')) {
         toggleSidebar();
       }
