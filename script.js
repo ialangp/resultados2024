@@ -155,6 +155,16 @@ function renderCards(list, container) {
     return;
   }
 
+  // Mapa de íconos SVG específicos según la Acción Afirmativa
+  const iconMap = {
+    'personas adultas mayores': '<path d="M12 2a5 5 0 1 0 5 5 5 5 0 0 0-5-5zm0 8a3 3 0 1 1 3-3 3 3 0 0 1-3 3zm9 11v-1a7 7 0 0 0-7-7h-4a7 7 0 0 0-7 7v1h2v-1a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v1z"/>', // Bastón / Perfil
+    'personas jóvenes': '<path d="M13 3a1 1 0 0 0-2 0v8.59l-4.3-4.3a1 1 0 0 0-1.4 1.42l6 6a1 1 0 0 0 1.4 0l6-6a1 1 0 0 0-1.4-1.42L13 11.59Z"/>', // Rayo / Energía (flecha/dinámico)
+    'personas de la diversidad sexual': '<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>', // Corazón
+    'personas afromexicanas': '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>', // Círculo/Comunidad
+    'personas con discapacidad': '<path d="M12 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm9 7h-6v13h-2v-6h-2v6H9V9H3V7h18v2z"/>', // Accesibilidad
+    'persona integrante de pueblos y barrios originarios y comunidades indígenas': '<path d="M12 2L2 22h20L12 2zm0 4.1L18.6 19H5.4L12 6.1z"/>' // Montaña / Raíces
+  };
+
   list.forEach(item => {
     const isPositive = item.incremento >= 0;
     const incSign = isPositive ? '▲ +' : '▼ ';
@@ -168,34 +178,42 @@ function renderCards(list, container) {
     const safeName = (item.nombre || 'Sin Candidato').replace(/'/g, "\\'");
     const safeLocation = (item.ubicacion || '').replace(/'/g, "\\'");
 
-    // Fotografía con optimización loading="lazy" y evento onclick global
     const hasPhoto = item.foto && item.foto.trim() !== '';
     const avatarHTML = hasPhoto
       ? `<img src="${item.foto}" alt="${item.nombre}" class="candidate-avatar" loading="lazy" onclick="openImageModal('${item.foto}', '${safeName}', '${safeLocation}')" onerror="this.outerHTML='<div class=\\'candidate-avatar no-photo\\'>Sin foto</div>'">`
       : `<div class="candidate-avatar no-photo">Sin foto</div>`;
 
-    // Lógica para evaluar y construir el badge de Acción Afirmativa
-    const tieneAccionAfirmativa = Boolean(item.accionAfirmativa) && 
-                                  item.accionAfirmativa.trim() !== "" && 
-                                  item.accionAfirmativa.toLowerCase() !== "ninguna";
+    // 1. Lógica del Badge
+    const accionTexto = (item.accionAfirmativa || '').trim();
+    const tieneAccion = accionTexto !== '' && accionTexto.toLowerCase() !== 'ninguna';
+    
+    let emblemaHTML = '';
+    if (tieneAccion) {
+      const claveAccion = accionTexto.toLowerCase();
+      // Selecciona el ícono según la categoría o uno por defecto (estrella)
+      const pathSvg = iconMap[claveAccion] || '<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>';
+      
+      // Construye la clase dinámica (ej: badge-personas-jovenes) para poder meterle color propio en CSS
+      const claseEspecial = 'badge-' + claveAccion.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]/g, '-');
 
-    const emblemaHTML = tieneAccionAfirmativa ? `
-      <div class="emblema-accion-afirmativa" title="Acción Afirmativa: ${item.accionAfirmativa}">
-        <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-        <span>${item.accionAfirmativa}</span>
-      </div>
-    ` : '';
+      emblemaHTML = `
+        <div class="emblema-accion-afirmativa ${claseEspecial}" title="Acción Afirmativa: ${accionTexto}">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+            ${pathSvg}
+          </svg>
+          <span class="emblema-texto">${accionTexto}</span>
+        </div>
+      `;
+    }
 
     const cardHTML = `
       <div class="candidate-card ${cardBorderClass}">
-        ${emblemaHTML}
         <div class="candidate-header">
           ${avatarHTML}
           <div class="candidate-info">
             <h3>${item.nombre || 'Sin Candidato'}</h3>
             <span class="location-badge">🏛️ ${item.ubicacion}</span>
+            ${emblemaHTML}
           </div>
         </div>
 
