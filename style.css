@@ -296,7 +296,7 @@ body {
 }
 
 /* ==========================================
-   ESTILOS PREMIUM DE TARJETAS DE CANDIDATOS
+   NUEVO DISEÑO ATRACTIVO DE TARJETAS (CANDIDATOS)
    ========================================== */
 .candidates-filters {
   display: flex;
@@ -315,50 +315,66 @@ body {
 
 .filter-group label {
   font-size: 0.8rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
 }
 
 .filter-input, .filter-select {
-  padding: 0.65rem 0.85rem;
+  padding: 0.7rem 0.9rem;
   border: 1px solid var(--border-color);
   border-radius: 8px;
   font-size: 0.9rem;
   background-color: #ffffff;
   outline: none;
-  transition: border-color 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+  transition: all 0.2s ease;
 }
 
 .filter-input:focus, .filter-select:focus {
   border-color: var(--sidebar-active);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
 .candidates-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
   gap: 1.25rem;
 }
 
-/* Tarjeta Principal */
+/* --- TARJETA PRINCIPAL CON ACCENTO DE COLOR --- */
 .candidate-card {
   background: #ffffff !important;
   border: 1px solid var(--border-color) !important;
+  border-left: 5px solid #cbd5e1 !important; /* Color neutro por defecto */
   border-radius: 12px !important;
   padding: 1.25rem !important;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 1rem;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.04) !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03) !important;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Bordes laterales dinámicos según el rendimiento */
+.candidate-card.positive-card {
+  border-left-color: #10b981 !important; /* Verde */
+}
+
+.candidate-card.negative-card {
+  border-left-color: #ef4444 !important; /* Rojo */
 }
 
 .candidate-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.08) !important;
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
 }
 
-/* Header & Avatar */
+/* --- ENCABEZADO Y AVATAR --- */
 .candidate-header {
   display: flex;
   align-items: center;
@@ -366,11 +382,12 @@ body {
 }
 
 .candidate-avatar {
-  width: 62px;
-  height: 62px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid var(--border-color);
+  border: 3px solid #ffffff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
   background-color: var(--bg-main);
   flex-shrink: 0;
 }
@@ -380,130 +397,174 @@ body {
   align-items: center;
   justify-content: center;
   background-color: #e2e8f0;
-  color: var(--text-muted);
+  color: #64748b;
   font-size: 0.65rem;
   font-weight: 700;
   text-align: center;
   text-transform: uppercase;
   border-radius: 50%;
+  border: 3px solid #ffffff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.candidate-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .candidate-info h3 {
   font-size: 0.95rem;
-  font-weight: 700;
+  font-weight: 800;
   color: var(--text-primary);
   line-height: 1.25;
 }
 
 .location-badge {
-  display: inline-block;
-  font-size: 0.75rem;
-  background: #eff6ff;
-  color: var(--sidebar-active);
-  font-weight: 600;
-  padding: 0.2rem 0.55rem;
-  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.72rem;
+  background: #f1f5f9;
+  color: #334155;
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  border-radius: 20px;
   margin-top: 0.35rem;
+  border: 1px solid #e2e8f0;
 }
 
-/* Bloque Métrico Interior */
+/* --- BLOQUE DE MÉTRICAS VISUALES --- */
 .performance-metric {
-  background: var(--bg-main) !important;
+  background: #f8fafc !important;
   padding: 1rem !important;
   border-radius: 10px !important;
+  border: 1px solid #f1f5f9;
 }
 
 .metric-header-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.4rem;
 }
 
 .metric-label {
   font-size: 0.75rem;
   color: var(--text-muted);
-  font-weight: 500;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
 }
 
+/* Insignias de Incremento (Verde / Rojo) */
 .metric-diff {
-  font-size: 0.75rem;
-  font-weight: 700;
-  padding: 0.15rem 0.4rem;
-  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 0.2rem 0.55rem;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
 }
 
-.metric-diff.positive { background: #d1fae5 !important; color: #047857 !important; }
-.metric-diff.negative { background: #fee2e2 !important; color: #b91c1c !important; }
+.metric-diff.positive {
+  background: #d1fae5 !important;
+  color: #047857 !important;
+}
+
+.metric-diff.negative {
+  background: #fee2e2 !important;
+  color: #b91c1c !important;
+}
 
 .metric-value-row {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.5rem;
 }
 
 .metric-number {
-  font-size: 1.4rem;
-  font-weight: 800;
-  color: var(--text-primary);
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #0f172a;
 }
 
 .previous-votes {
-  font-size: 0.78rem;
-  color: var(--text-muted);
-  font-weight: 500;
+  font-size: 0.8rem;
+  color: #64748b;
+  font-weight: 600;
 }
 
+/* Barra de progreso coloreada */
 .progress-bar-bg {
   width: 100%;
-  height: 6px;
+  height: 8px;
   background: #e2e8f0;
-  border-radius: 3px;
+  border-radius: 4px;
   overflow: hidden;
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.85rem;
 }
 
 .progress-bar-fill {
   height: 100%;
-  background: var(--sidebar-active);
-  border-radius: 3px;
+  border-radius: 4px;
+  transition: width 0.4s ease;
 }
 
-/* Footer de Desempeño */
+.progress-bar-fill.positive {
+  background: linear-gradient(90deg, #34d399, #059669) !important;
+}
+
+.progress-bar-fill.negative {
+  background: linear-gradient(90deg, #f87171, #dc2626) !important;
+}
+
+/* --- FOOTER DE DESEMPEÑO --- */
 .performance-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-top: 1px dashed var(--border-color);
-  padding-top: 0.6rem;
-  margin-top: 0.2rem;
+  border-top: 1px dashed #cbd5e1;
+  padding-top: 0.65rem;
 }
 
 .footer-label {
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: var(--text-primary);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #334155;
 }
 
 .performance-badge {
-  font-size: 0.8rem;
-  font-weight: 700;
-  padding: 0.2rem 0.5rem;
+  font-size: 0.82rem;
+  font-weight: 800;
+  padding: 0.25rem 0.65rem;
   border-radius: 6px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 
-.performance-badge.positive { background: #10b981 !important; color: #ffffff !important; }
-.performance-badge.negative { background: #ef4444 !important; color: #ffffff !important; }
+.performance-badge.positive {
+  background: #10b981 !important;
+  color: #ffffff !important;
+}
 
-/* Adaptación Responsiva Consistente (Móviles) */
+.performance-badge.negative {
+  background: #ef4444 !important;
+  color: #ffffff !important;
+}
+
+/* --- ADAPTACIÓN RESPONSIVA (MÓVILES) --- */
 @media (max-width: 768px) {
   .candidates-grid {
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: 1.1rem;
   }
 
   .candidate-card {
-    padding: 1rem !important;
+    padding: 1.1rem !important;
+  }
+
+  .metric-number {
+    font-size: 1.45rem;
   }
 }
