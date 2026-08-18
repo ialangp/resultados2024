@@ -430,9 +430,12 @@ body {
   color: var(--text-primary);
   line-height: 1.25;
   width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  
+  /* Permite saltos de línea y que el nombre se despliegue completo */
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  word-break: break-word;
 }
 
 .location-badge {
