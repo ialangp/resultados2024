@@ -756,90 +756,87 @@ body {
 /* Contenedor relativo para posicionar el emblema en la tarjeta */
 .card-registro {
   position: relative;
-  /* Mantiene tus estilos actuales de tarjeta */
 }
 
 /* ==========================================
-   BADGES Y ACCIONES AFIRMATIVAS (EN FLUJO RELATIVO)
+   BADGES Y ACCIONES AFIRMATIVAS (DISEÑO PÍLDORA)
    ========================================== */
 
-/* Se define display flex inline para que conviva bajo el badge de ubicación */
 .emblema-accion-afirmativa {
-  position: relative !important; /* Fuerza flujo relativo para no montarse en nada */
+  position: relative !important;
   top: auto !important;
   right: auto !important;
   display: inline-flex !important;
   align-items: center;
   gap: 6px;
-  margin-top: 0.45rem;
-  padding: 3px 9px;
-  border-radius: 12px;
-  font-size: 0.7rem;
-  font-weight: 700;
-  cursor: help; /* Indica interacción al pasar el puntero */
-  background-color: #f1f5f9;
-  color: #475569;
-  border: 1px solid #cbd5e1;
-  max-width: 100%;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  margin-top: 0.5rem;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  cursor: pointer !important; /* Forzado a 'pointer' para eliminar el signo de interrogación */
+  backdrop-filter: blur(4px);
+  transition: all 0.2s ease-in-out;
 }
 
 .emblema-accion-afirmativa:hover {
   transform: translateY(-1px);
-  box-shadow: 0 2px 5px rgba(0,0,0,0.12);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
 }
 
 .emblema-accion-afirmativa svg {
   flex-shrink: 0;
+  opacity: 0.9;
 }
 
 .emblema-texto {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 150px;
+  max-width: 170px;
 }
 
-/* Identidad visual por grupo representativo */
+/* PALETA DE COLORES SOFT / ELEGANTE */
 
 /* Adultos Mayores */
 .badge-personas-adultas-mayores {
-  background-color: #fffbeb;
+  background-color: rgba(245, 158, 11, 0.12);
   color: #b45309;
-  border-color: #fde68a;
+  border: 1px solid rgba(245, 158, 11, 0.3);
 }
 
 /* Jóvenes */
 .badge-personas-jovenes {
-  background-color: #ecfdf5;
+  background-color: rgba(16, 185, 129, 0.12);
   color: #047857;
-  border-color: #a7f3d0;
+  border: 1px solid rgba(16, 185, 129, 0.3);
 }
 
 /* Diversidad Sexual */
 .badge-personas-de-la-diversidad-sexual {
-  background-color: #fdf4ff;
-  color: #a21caf;
-  border-color: #f5d0fe;
+  background-color: rgba(168, 85, 247, 0.12);
+  color: #7e22ce;
+  border: 1px solid rgba(168, 85, 247, 0.3);
 }
 
 /* Afromexicanas */
 .badge-personas-afromexicanas {
-  background-color: #fff7ed;
+  background-color: rgba(249, 115, 22, 0.12);
   color: #c2410c;
-  border-color: #ffedd5;
+  border: 1px solid rgba(249, 115, 22, 0.3);
 }
 
 /* Discapacidad */
 .badge-personas-con-discapacidad {
-  background-color: #eff6ff;
+  background-color: rgba(59, 130, 246, 0.12);
   color: #1d4ed8;
-  border-color: #bfdbfe;
+  border: 1px solid rgba(59, 130, 246, 0.3);
 }
 
 /* Pueblos y Barrios Originarios / Indígenas */
 .badge-persona-integrante-de-pueblos-y-barrios-originarios-y-comunidades-indigenas {
-  background-color: #f0fdf4;
-  color: #15803d;
-  border-color: #bbf7d0;
+  background-color: rgba(20, 184, 166, 0.12);
+  color: #0f766e;
+  border: 1px solid rgba(20, 184, 166, 0.3);
 }
