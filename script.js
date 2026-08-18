@@ -121,7 +121,7 @@ async function setupCandidatesModule(type, jsonFile, searchId, selectId, gridId,
       selectFilter.appendChild(option);
     });
 
-    // 2. Poblar desplegable de Acciones Afirmativas (si existe el elemento)
+    // 2. Poblar desplegable de Acciones Afirmativas (si existe)
     if (actionFilter) {
       const actions = [...new Set(
         candidates
@@ -137,18 +137,35 @@ async function setupCandidatesModule(type, jsonFile, searchId, selectId, gridId,
       });
     }
 
-    // 3. Función de filtrado combinada
+    // 3. Función de filtrado con la nueva lógica
     function applyFilters() {
       const nameQuery = searchInput.value.toLowerCase().trim();
       const locationQuery = selectFilter.value;
-      const actionQuery = actionFilter ? actionFilter.value : '';
+      const actionQuery = actionFilter ? actionFilter.value.trim() : '';
 
       const filtered = candidates.filter(c => {
+        // Validación de nombre
         const matchesName = (c.nombre || '').toLowerCase().includes(nameQuery);
+        
+        // Validación de ubicación / distrito
         const matchesLocation = locationQuery === '' || c.ubicacion === locationQuery;
         
+        // Validación de Acción Afirmativa
         const candidateAction = (c.accionAfirmativa || '').trim();
-        const matchesAction = actionQuery === '' || candidateAction === actionQuery;
+        const hasAction = candidateAction !== '' && candidateAction.toLowerCase() !== 'ninguna';
+
+        let matchesAction = true;
+
+        if (actionQuery === '') {
+          // Opción "Todos los candidatos": muestra todo sin importar si tiene o no acción
+          matchesAction = true;
+        } else if (actionQuery === '__TODAS_ACCIONES__') {
+          // Opción "Todas las Acciones Afirmativas": solo los que SI tienen alguna acción
+          matchesAction = hasAction;
+        } else {
+          // Opción específica: debe coincidir exactamente con la categoría seleccionada
+          matchesAction = candidateAction === actionQuery;
+        }
 
         return matchesName && matchesLocation && matchesAction;
       });
