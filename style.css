@@ -382,7 +382,7 @@ body {
   cursor: pointer;
   backdrop-filter: blur(4px);
   transition: all 0.2s ease-in-out;
-  max-width: 100%;
+  max-width: 95%;
 }
 
 .emblema-accion-afirmativa:hover {
