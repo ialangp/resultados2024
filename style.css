@@ -382,6 +382,7 @@ body {
   cursor: pointer;
   backdrop-filter: blur(4px);
   transition: all 0.2s ease-in-out;
+  text-overflow: ellipsis;
   max-width: 95%;
 }
 
