@@ -1,0 +1,162 @@
+[
+  {
+    "id": 1,
+    "nombre": "Sin Candidato",
+    "ubicacion": "ALVARO OBREGON",
+    "foto": "",
+    "porcentajeAnterior": 2.83,
+    "porcentaje": 5.95,
+    "incremento": 3.13,
+    "desempeno": -35.88
+  },
+  {
+    "id": 2,
+    "nombre": "LUISA YANIRA ALPIZAR CASTELLANOS",
+    "ubicacion": "AZCAPOTZALCO",
+    "foto": "img/mcalcaldes2024/Luisa Alpizar_YA.jpg",
+    "porcentajeAnterior": 2.78,
+    "porcentaje": 9.51,
+    "incremento": 6.73,
+    "desempeno": 93.26
+  },
+  {
+    "id": 3,
+    "nombre": "RODRIGO CORDERA THACKER",
+    "ubicacion": "BENITO JUAREZ",
+    "foto": "img/mcalcaldes2024/BJ_ALCALDE_RODRIGO CORDERA THACKER.JPG",
+    "porcentajeAnterior": 1.69,
+    "porcentaje": 4.81,
+    "incremento": 3.12,
+    "desempeno": -60.51
+  },
+  {
+    "id": 4,
+    "nombre": "SOFIA MARGARITA PROVENCIO O DONOGHUE",
+    "ubicacion": "COYOACAN",
+    "foto": "img/mcalcaldes2024/ALCALDESA COYOACAN_SOFIA MARGARITA PROVENCIO.JPG",
+    "porcentajeAnterior": 3.25,
+    "porcentaje": 7.25,
+    "incremento": 4.0,
+    "desempeno": -4.18
+  },
+  {
+    "id": 5,
+    "nombre": "VIRIDIANA PEREZ ROJAS",
+    "ubicacion": "CUAJIMALPA",
+    "foto": "img/mcalcaldes2024/Viridiana Perez Rojas_YA.jpg",
+    "porcentajeAnterior": 3.05,
+    "porcentaje": 8.89,
+    "incremento": 5.84,
+    "desempeno": 55.85
+  },
+  {
+    "id": 6,
+    "nombre": "HERMAN FERNANDO DOMINGUEZ LOZANO",
+    "ubicacion": "CUAUHTEMOC",
+    "foto": "img/mcalcaldes2024/CUAUH_ALCALDE__HERMAN FERNANDO DOMINGUEZ LOZANO.jpg",
+    "porcentajeAnterior": 3.64,
+    "porcentaje": 8.18,
+    "incremento": 4.54,
+    "desempeno": 11.06
+  },
+  {
+    "id": 7,
+    "nombre": "ARACELI GARCIA RICO",
+    "ubicacion": "GAM",
+    "foto": "img/mcalcaldes2024/Araceli Garcia Rico_ALCALDIA.jpg",
+    "porcentajeAnterior": 3.12,
+    "porcentaje": 9.42,
+    "incremento": 6.29,
+    "desempeno": 69.01
+  },
+  {
+    "id": 8,
+    "nombre": "JESUS SANCHEZ",
+    "ubicacion": "IZTACALCO",
+    "foto": "img/mcalcaldes2024/chuchosanchez.jpg",
+    "porcentajeAnterior": 2.93,
+    "porcentaje": 6.83,
+    "incremento": 3.89,
+    "desempeno": -8.42
+  },
+  {
+    "id": 9,
+    "nombre": "ALEX IRAN PICHARDO GARCIA",
+    "ubicacion": "IZTAPALAPA",
+    "foto": "img/mcalcaldes2024/FOTOGRAFIA  (1).png",
+    "porcentajeAnterior": 2.92,
+    "porcentaje": 6.7,
+    "incremento": 3.78,
+    "desempeno": -12.4
+  },
+  {
+    "id": 10,
+    "nombre": "DANIELA NITZA GARDUÑO ALVARADO",
+    "ubicacion": "LA MAGDALENA CONTRERAS",
+    "foto": "img/mcalcaldes2024/ALC LA MAG_DANIELA NITZA GARDUÑO ALVARADO.JPG",
+    "porcentajeAnterior": 3.01,
+    "porcentaje": 6.95,
+    "incremento": 3.94,
+    "desempeno": -6.66
+  },
+  {
+    "id": 11,
+    "nombre": "ANTONIO CARBIA GUTIERREZ",
+    "ubicacion": "MIGUEL HIDALGO",
+    "foto": "img/mcalcaldes2024/antoniocarbia.jpg",
+    "porcentajeAnterior": 1.9,
+    "porcentaje": 5.36,
+    "incremento": 3.45,
+    "desempeno": -36.16
+  },
+  {
+    "id": 12,
+    "nombre": "MAGALI ALVARADO ALVAREZ",
+    "ubicacion": "MILPA ALTA",
+    "foto": "img/mcalcaldes2024/MILPAA_ALCALDE_MAGALI ALVARADO ALVAREZ.jpg",
+    "porcentajeAnterior": 2.46,
+    "porcentaje": 13.27,
+    "incremento": 10.81,
+    "desempeno": 270.94
+  },
+  {
+    "id": 13,
+    "nombre": "LESVIA GOMEZ MELGAR",
+    "ubicacion": "TLAHUAC",
+    "foto": "img/mcalcaldes2024/TLAHUAC_ALCALDIA_LESVIA GOMEZ MELGAR.JPG",
+    "porcentajeAnterior": 2.2,
+    "porcentaje": 8.69,
+    "incremento": 6.48,
+    "desempeno": 106.44
+  },
+  {
+    "id": 14,
+    "nombre": "MARINA AURORA MARTI MEZA",
+    "ubicacion": "TLALPAN",
+    "foto": "img/mcalcaldes2024/ALC TLALPAN_MARINA AURORA MARTI MEZA.JPG",
+    "porcentajeAnterior": 10.71,
+    "porcentaje": 6.12,
+    "incremento": -4.58,
+    "desempeno": -81.48
+  },
+  {
+    "id": 15,
+    "nombre": "ZURISHADAY HERNANDEZ HERNANDEZ",
+    "ubicacion": "VENUSTIANO CARRANZA",
+    "foto": "img/mcalcaldes2024/VC_ALCALDIA_ZURISHADAY HERNANDEZ HERNANDEZ.JPG",
+    "porcentajeAnterior": 2.98,
+    "porcentaje": 7.87,
+    "incremento": 4.89,
+    "desempeno": 25.09
+  },
+  {
+    "id": 16,
+    "nombre": "Sin Candidato",
+    "ubicacion": "XOCHIMILCO",
+    "foto": "",
+    "porcentajeAnterior": 5.05,
+    "porcentaje": 7.66,
+    "incremento": 2.61,
+    "desempeno": -30.27
+  }
+]
