@@ -755,12 +755,13 @@ body {
 }
 
 /* Contenedor relativo para posicionar el emblema en la tarjeta */
+/* Contenedor relativo para posicionar el emblema en la tarjeta */
 .card-registro {
   position: relative;
 }
 
 /* ==========================================
-   BADGES Y ACCIONES AFIRMATIVAS (DISEÑO PÍLDORA)
+   BADGES Y ACCIONES AFIRMATIVAS (UNA SOLA LÍNEA CON ELLIPSIS)
    ========================================== */
 
 .emblema-accion-afirmativa {
@@ -769,16 +770,19 @@ body {
   right: auto !important;
   display: inline-flex !important;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   margin-top: 0.5rem;
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-size: 0.72rem;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 0.68rem;
   font-weight: 600;
-  letter-spacing: 0.2px;
-  cursor: pointer ; /* Forzado a 'pointer' para eliminar el signo de interrogación */
+  cursor: pointer !important;
   backdrop-filter: blur(4px);
   transition: all 0.2s ease-in-out;
+  
+  /* Restringe el badge para que NUNCA sea más ancho que la tarjeta */
+  max-width: 100% !important;
+  box-sizing: border-box;
 }
 
 .emblema-accion-afirmativa:hover {
@@ -786,16 +790,18 @@ body {
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
 }
 
-.emblema-accion-afirmativa svg {
-  flex-shrink: 0;
+.emblema-accion-afirmativa svg,
+.emblema-icono {
+  flex-shrink: 0; /* Impide que el ícono se aplaste cuando el texto se recorta */
   opacity: 0.9;
 }
 
 .emblema-texto {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 170px;
+  white-space: nowrap !important; /* Fuerza una sola línea */
+  overflow: hidden !important;     /* Oculta lo que no quepa */
+  text-overflow: ellipsis !important; /* Muestra '...' al final del texto cortado */
+  display: block;
+  max-width: 100%;                 /* Se adapta al ancho disponible */
 }
 
 /* PALETA DE COLORES SOFT / ELEGANTE */
