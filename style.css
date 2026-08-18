@@ -374,7 +374,7 @@ body {
   align-items: center;
   gap: 6px;
   margin-top: 0.5rem;
-  padding: 4px 10px;
+  padding: 3px 8px;
   border-radius: 20px; /* Redondeado suave tipo pill */
   font-size: 0.72rem;
   font-weight: 600;
@@ -382,6 +382,7 @@ body {
   cursor: pointer;
   backdrop-filter: blur(4px);
   transition: all 0.2s ease-in-out;
+  max-width: 100%;
 }
 
 .emblema-accion-afirmativa:hover {
