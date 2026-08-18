@@ -123,6 +123,7 @@ async function setupCandidatesModule(type, jsonFile, searchId, selectId, gridId)
   }
 }
 
+// Función para renderizar tarjetas con carga optimizada (lazy) y evento de ampliado
 function renderCards(list, container) {
   if (!container) return;
   container.innerHTML = '';
@@ -142,10 +143,10 @@ function renderCards(list, container) {
     const desClass = isDesPositive ? 'positive' : 'negative';
     const desSign = isDesPositive ? '+' : '';
 
-    // Manejo seguro para registros sin foto
+    // Fotografía con optimización loading="lazy" y función de Zoom
     const hasPhoto = item.foto && item.foto.trim() !== '';
     const avatarHTML = hasPhoto
-      ? `<img src="${item.foto}" alt="${item.nombre}" class="candidate-avatar" onerror="this.outerHTML='<div class=\\'candidate-avatar no-photo\\'>Sin foto</div>'">`
+      ? `<img src="${item.foto}" alt="${item.nombre}" class="candidate-avatar" loading="lazy" onclick="openImageModal('${item.foto}', '${item.nombre}', '${item.ubicacion}')" onerror="this.outerHTML='<div class=\\'candidate-avatar no-photo\\'>Sin foto</div>'">`
       : `<div class="candidate-avatar no-photo">Sin foto</div>`;
 
     const cardHTML = `
@@ -183,3 +184,36 @@ function renderCards(list, container) {
     container.insertAdjacentHTML('beforeend', cardHTML);
   });
 }
+
+// Funciones para abrir y cerrar la foto ampliada
+function openImageModal(src, name, location) {
+  const modal = document.getElementById('image-modal');
+  const modalImg = document.getElementById('modal-img');
+  const modalCaption = document.getElementById('modal-caption');
+
+  if (modal && modalImg && modalCaption) {
+    modalImg.src = src;
+    modalCaption.innerHTML = `${name}<br><small style="font-weight:600; color:var(--text-muted); font-size:0.85rem;">${location}</small>`;
+    modal.classList.add('show');
+  }
+}
+
+// Cerrar el modal al hacer clic en X o fuera de la foto
+document.addEventListener('DOMContentLoaded', () => {
+  const modal = document.getElementById('image-modal');
+  const closeBtn = document.getElementById('modal-close');
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      modal.classList.remove('show');
+    });
+  }
+
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('show');
+      }
+    });
+  }
+});
