@@ -18,22 +18,22 @@
     <div class="sidebar-header">
       <div class="brand">
         <span class="brand-icon">🗳️</span>
-        <span class="brand-title">Resultados</span>
+        <span class="brand-title">Electorales</span>
       </div>
       <button class="close-btn" id="close-sidebar" aria-label="Cerrar menú">✕</button>
     </div>
 
     <nav class="sidebar-nav">
-      <span class="nav-section-title">SELECCIONA UN REPORTE</span>
+      <span class="nav-section-title">SELECCIONA NIVEL</span>
       <ul>
         <li>
-          <button class="nav-btn active" data-target="embed-alcaldias" data-title="Resultados Alcaldías">
+          <button class="nav-btn active" data-target="seccion-alcaldias" data-title="Alcaldías">
             <span class="nav-icon">🏛️</span>
-            <span class="nav-text">Resultados Alcaldías</span>
+            <span class="nav-text">Alcaldías</span>
           </button>
         </li>
         <li>
-          <button class="nav-btn" data-target="embed-distritos" data-title="Resultados Distritos Locales">
+          <button class="nav-btn" data-target="seccion-distritos" data-title="Distritos Locales">
             <span class="nav-icon">🗺️</span>
             <span class="nav-text">Distritos Locales</span>
           </button>
@@ -48,23 +48,51 @@
       <button class="toggle-btn" id="toggle-sidebar" aria-label="Abrir menú">
         ☰
       </button>
-      <h1 class="report-title" id="current-title">Resultados Alcaldías</h1>
+      <h1 class="report-title" id="current-title">Alcaldías</h1>
     </header>
 
     <main class="content-area">
-      <div class="chart-card">
-        
-        <!-- DIV 1: Alcaldías -->
-        <div id="embed-alcaldias" class="report-container active">
-          <div class="flourish-embed flourish-chart" data-src="visualisation/29990496"></div>
+      
+      <!-- SECCIÓN: ALCALDÍAS -->
+      <div id="seccion-alcaldias" class="level-section active">
+        <!-- Pestañas de Módulos para Alcaldías -->
+        <div class="module-tabs">
+          <button class="tab-btn active" data-module="alcaldias-resultados">Resultados</button>
+          <button class="tab-btn" data-module="alcaldias-competitividad">Bloques de competitividad</button>
         </div>
 
-        <!-- DIV 2: Distritos Locales -->
-        <div id="embed-distritos" class="report-container">
-          <div class="flourish-embed flourish-chart" data-src="visualisation/29972342"></div>
+        <div class="chart-card">
+          <!-- Módulo Resultados Alcaldías -->
+          <div id="alcaldias-resultados" class="report-container active">
+            <div class="flourish-embed flourish-chart" data-src="visualisation/29990496"></div>
+          </div>
+          <!-- Módulo Competitividad Alcaldías -->
+          <div id="alcaldias-competitividad" class="report-container">
+            <div class="flourish-embed flourish-chart" data-src="visualisation/29971866"></div>
+          </div>
         </div>
-
       </div>
+
+      <!-- SECCIÓN: DISTRITOS LOCALES -->
+      <div id="seccion-distritos" class="level-section">
+        <!-- Pestañas de Módulos para Distritos Locales -->
+        <div class="module-tabs">
+          <button class="tab-btn active" data-module="distritos-resultados">Resultados</button>
+          <button class="tab-btn" data-module="distritos-competitividad">Bloques de competitividad</button>
+        </div>
+
+        <div class="chart-card">
+          <!-- Módulo Resultados Distritos -->
+          <div id="distritos-resultados" class="report-container active">
+            <div class="flourish-embed flourish-chart" data-src="visualisation/29972342"></div>
+          </div>
+          <!-- Módulo Competitividad Distritos -->
+          <div id="distritos-competitividad" class="report-container">
+            <div class="flourish-embed flourish-chart" data-src="visualisation/29970837"></div>
+          </div>
+        </div>
+      </div>
+
     </main>
   </div>
 
