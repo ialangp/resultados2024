@@ -226,9 +226,13 @@ window.openImageModal = function(src, name, location) {
 };
 
 function crearTarjetaRegistro(data) {
-  // Verificamos si existe la acción afirmativa
-  const tieneAccionAfirmativa = data.accionAfirmativa && data.accionAfirmativa !== 'Ninguna';
+  // Inspecciona en la consola de tu navegador (F12) qué trae este campo
+  console.log('Valor de accionAfirmativa:', data.accionAfirmativa);
 
+  // Asegúrate de considerar cadenas vacías o espacios
+  const tieneAccionAfirmativa = Boolean(data.accionAfirmativa) && 
+                                data.accionAfirmativa.toString().trim() !== '' && 
+                                data.accionAfirmativa !== 'Ninguna';
   const emblemaHTML = tieneAccionAfirmativa ? `
     <div class="emblema-accion-afirmativa" title="Acción Afirmativa: ${data.accionAfirmativa}">
       <svg viewBox="0 0 24 24">
