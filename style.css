@@ -619,15 +619,17 @@ body {
   transform: scale(1);
 }
 
+/* Ajuste de la imagen ampliada en el modal */
 .modal-img {
   width: 100%;
-  height: 280px;
-  object-fit: cover;
-  border-radius: 12px;
+  max-height: 70vh; /* Limita la altura máxima al 70% de la pantalla para evitar scroll */
+  height: auto;     /* Mantiene la proporción original de la imagen */
+  object-fit: contain; /* Garantiza que la foto se vea COMPLETA sin recortar bordes */
+  border-radius: 8px;
   border: 1px solid var(--border-color);
   display: block;
+  margin: 0 auto;
 }
-
 .modal-caption {
   margin-top: 0.85rem;
   font-weight: 800;
