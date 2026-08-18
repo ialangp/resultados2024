@@ -165,3 +165,57 @@ function renderCards(list, container) {
     container.insertAdjacentHTML('beforeend', cardHTML);
   });
 }
+function renderCards(list, container) {
+  if (!container) return;
+  container.innerHTML = '';
+
+  if (list.length === 0) {
+    container.innerHTML = '<p style="color: var(--text-muted); padding: 1rem;">No se encontraron candidatos con los criterios seleccionados.</p>';
+    return;
+  }
+
+  list.forEach(item => {
+    const incSign = item.incremento >= 0 ? '+' : '';
+    const incClass = item.incremento >= 0 ? 'positive' : 'negative';
+    const desClass = item.desempeno >= 0 ? 'positive' : 'negative';
+
+    const cardHTML = `
+      <div class="candidate-card">
+        <div class="candidate-header">
+          <img src="${item.foto}" alt="${item.nombre}" class="candidate-avatar" onerror="this.src='https://via.placeholder.com/60?text=Sin+Foto'">
+          <div class="candidate-info">
+            <h3>${item.nombre || 'Candidato Desconocido'}</h3>
+            <span class="location-badge">${item.ubicacion}</span>
+          </div>
+        </div>
+
+        <div class="performance-metric">
+          <div class="metric-row">
+            <span class="metric-label">Votación 2024:</span>
+            <span class="metric-number">${item.porcentaje}%</span>
+          </div>
+
+          <div class="progress-bar-bg" style="margin-bottom: 0.6rem;">
+            <div class="progress-bar-fill" style="width: ${Math.min(item.porcentaje, 100)}%;"></div>
+          </div>
+
+          <div class="metric-row">
+            <span class="metric-label">Votación 2021:</span>
+            <span style="font-weight: 600; font-size: 0.85rem;">${item.porcentajeAnterior}%</span>
+          </div>
+
+          <div class="metric-row">
+            <span class="metric-label">Incremento:</span>
+            <span class="metric-badge ${incClass}">${incSign}${item.incremento}%</span>
+          </div>
+
+          <div class="metric-row" style="margin-top: 0.2rem; border-top: 1px dashed var(--border-color); padding-top: 0.4rem;">
+            <span class="metric-label" style="font-weight: 700;">Desempeño:</span>
+            <span class="metric-badge ${desClass}">${item.desempeno}%</span>
+          </div>
+        </div>
+      </div>
+    `;
+    container.insertAdjacentHTML('beforeend', cardHTML);
+  });
+}
