@@ -347,7 +347,7 @@ body {
 .candidate-card {
   background: #ffffff !important;
   border: 1px solid var(--border-color) !important;
-  border-left: 5px solid #cbd5e1 !important; /* Color neutro por defecto */
+  border-left: 5px solid #cbd5e1 !important;
   border-radius: 12px !important;
   padding: 1.25rem !important;
   display: flex;
@@ -360,101 +360,12 @@ body {
   overflow: hidden;
 }
 
-/* Badge de Acción Afirmativa */
-/* ==========================================
-   BADGES Y ACCIONES AFIRMATIVAS (NUEVO DISEÑO)
-   ========================================== */
-
-/* Contenedor base del badge tipo píldora */
-.emblema-accion-afirmativa {
-  position: relative !important;
-  top: auto !important;
-  right: auto !important;
-  display: inline-flex !important;
-  align-items: center;
-  gap: 6px;
-  margin-top: 0.5rem;
-  padding: 3px 8px;
-  border-radius: 20px; /* Redondeado suave tipo pill */
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.2px;
-  cursor: pointer;
-  backdrop-filter: blur(4px);
-  transition: all 0.2s ease-in-out;
-  text-overflow: ellipsis;
-  max-width: 95%;
-}
-
-.emblema-accion-afirmativa:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
-}
-
-.emblema-accion-afirmativa svg {
-  flex-shrink: 0;
-  opacity: 0.9;
-}
-
-.emblema-texto {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 170px;
-}
-
-/* PALETA DE COLORES SOFT / ELEGANTE */
-
-/* Adultos Mayores: Tono Ámbar Caluroso */
-.badge-personas-adultas-mayores {
-  background-color: rgba(245, 158, 11, 0.12);
-  color: #b45309;
-  border: 1px solid rgba(245, 158, 11, 0.3);
-}
-
-/* Jóvenes: Verde Menta / Esmeralda */
-.badge-personas-jovenes {
-  background-color: rgba(16, 185, 129, 0.12);
-  color: #047857;
-  border: 1px solid rgba(16, 185, 129, 0.3);
-}
-
-/* Diversidad Sexual: Violeta sutil */
-.badge-personas-de-la-diversidad-sexual {
-  background-color: rgba(168, 85, 247, 0.12);
-  color: #7e22ce;
-  border: 1px solid rgba(168, 85, 247, 0.3);
-}
-
-/* Afromexicanas: Coral / Terracota */
-.badge-personas-afromexicanas {
-  background-color: rgba(249, 115, 22, 0.12);
-  color: #c2410c;
-  border: 1px solid rgba(249, 115, 22, 0.3);
-}
-
-/* Discapacidad: Azul Azulado Crisp */
-.badge-personas-con-discapacidad {
-  background-color: rgba(59, 130, 246, 0.12);
-  color: #1d4ed8;
-  border: 1px solid rgba(59, 130, 246, 0.3);
-}
-
-/* Pueblos y Barrios Originarios / Indígenas: Verde Bosque */
-.badge-persona-integrante-de-pueblos-y-barrios-originarios-y-comunidades-indigenas {
-  background-color: rgba(20, 184, 166, 0.12);
-  color: #0f766e;
-  border: 1px solid rgba(20, 184, 166, 0.3);
-  text-overflow: ellipsis;
-}
-
-/* Bordes laterales dinámicos según el rendimiento */
 .candidate-card.positive-card {
-  border-left-color: #10b981 !important; /* Verde */
+  border-left-color: #10b981 !important;
 }
 
 .candidate-card.negative-card {
-  border-left-color: #ef4444 !important; /* Rojo */
+  border-left-color: #ef4444 !important;
 }
 
 .candidate-card:hover {
@@ -467,6 +378,8 @@ body {
   display: flex;
   align-items: center;
   gap: 1rem;
+  width: 100%;
+  min-width: 0; /* Permite la contracción flex en contenedores estrictos */
 }
 
 .candidate-avatar {
@@ -478,6 +391,13 @@ body {
   box-shadow: 0 2px 8px rgba(0,0,0,0.12);
   background-color: var(--bg-main);
   flex-shrink: 0;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.candidate-avatar:hover {
+  transform: scale(1.08);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
 .candidate-avatar.no-photo {
@@ -495,10 +415,13 @@ body {
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
+/* FIX CLAVE: min-width: 0 permite que el contenedor contenga el texto */
 .candidate-info {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  flex: 1;
+  min-width: 0; 
 }
 
 .candidate-info h3 {
@@ -506,6 +429,10 @@ body {
   font-weight: 800;
   color: var(--text-primary);
   line-height: 1.25;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .location-badge {
@@ -519,6 +446,92 @@ body {
   border-radius: 20px;
   margin-top: 0.35rem;
   border: 1px solid #e2e8f0;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ==========================================
+   BADGES Y ACCIONES AFIRMATIVAS (ESTRICTO 100% ANCHO)
+   ========================================== */
+
+.emblema-accion-afirmativa {
+  position: relative !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px;
+  margin-top: 0.5rem;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  cursor: pointer !important;
+  backdrop-filter: blur(4px);
+  transition: all 0.2s ease-in-out;
+  
+  /* Límite estricto de ancho */
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+}
+
+.emblema-accion-afirmativa:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+}
+
+.emblema-accion-afirmativa svg,
+.emblema-icono {
+  flex-shrink: 0 !important;
+  opacity: 0.9;
+}
+
+.emblema-texto {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  display: block !important;
+  flex: 1 !important;
+  min-width: 0 !important;
+}
+
+/* PALETA DE COLORES SOFT / ELEGANTE */
+
+.badge-personas-adultas-mayores {
+  background-color: rgba(245, 158, 11, 0.12);
+  color: #b45309;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.badge-personas-jovenes {
+  background-color: rgba(16, 185, 129, 0.12);
+  color: #047857;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.badge-personas-de-la-diversidad-sexual {
+  background-color: rgba(168, 85, 247, 0.12);
+  color: #7e22ce;
+  border: 1px solid rgba(168, 85, 247, 0.3);
+}
+
+.badge-personas-afromexicanas {
+  background-color: rgba(249, 115, 22, 0.12);
+  color: #c2410c;
+  border: 1px solid rgba(249, 115, 22, 0.3);
+}
+
+.badge-personas-con-discapacidad {
+  background-color: rgba(59, 130, 246, 0.12);
+  color: #1d4ed8;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.badge-persona-integrante-de-pueblos-y-barrios-originarios-y-comunidades-indigenas {
+  background-color: rgba(20, 184, 166, 0.12);
+  color: #0f766e;
+  border: 1px solid rgba(20, 184, 166, 0.3);
 }
 
 /* --- BLOQUE DE MÉTRICAS VISUALES --- */
@@ -544,7 +557,6 @@ body {
   letter-spacing: 0.02em;
 }
 
-/* Insignias de Incremento (Verde / Rojo) */
 .metric-diff {
   font-size: 0.78rem;
   font-weight: 800;
@@ -584,7 +596,6 @@ body {
   font-weight: 600;
 }
 
-/* Barra de progreso coloreada */
 .progress-bar-bg {
   width: 100%;
   height: 8px;
@@ -660,17 +671,6 @@ body {
 /* ==========================================
    ESTILOS CORREGIDOS DEL MODAL (ZOOM FOTO)
    ========================================== */
-.candidate-avatar {
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.candidate-avatar:hover {
-  transform: scale(1.08);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-
-/* Modal Ventana Flotante */
 .image-modal {
   display: none;
   position: fixed;
@@ -707,17 +707,17 @@ body {
   transform: scale(1);
 }
 
-/* Ajuste de la imagen ampliada en el modal */
 .modal-img {
   width: 100%;
-  max-height: 70vh; /* Limita la altura máxima al 70% de la pantalla para evitar scroll */
-  height: auto;     /* Mantiene la proporción original de la imagen */
-  object-fit: contain; /* Garantiza que la foto se vea COMPLETA sin recortar bordes */
+  max-height: 70vh;
+  height: auto;
+  object-fit: contain;
   border-radius: 8px;
   border: 1px solid var(--border-color);
   display: block;
   margin: 0 auto;
 }
+
 .modal-caption {
   margin-top: 0.85rem;
   font-weight: 800;
@@ -726,7 +726,6 @@ body {
   line-height: 1.3;
 }
 
-/* Botón de Cierre (X) limpio */
 .modal-close {
   position: absolute;
   top: -12px;
@@ -754,98 +753,4 @@ body {
   background: #ef4444;
   color: #ffffff;
   border-color: #ef4444;
-}
-
-/* Contenedor relativo para posicionar el emblema en la tarjeta */
-/* Contenedor relativo para posicionar el emblema en la tarjeta */
-.card-registro {
-  position: relative;
-}
-
-/* ==========================================
-   BADGES Y ACCIONES AFIRMATIVAS (UNA SOLA LÍNEA CON ELLIPSIS)
-   ========================================== */
-
-.emblema-accion-afirmativa {
-  position: relative !important;
-  top: auto !important;
-  right: auto !important;
-  display: inline-flex !important;
-  align-items: center;
-  gap: 5px;
-  margin-top: 0.5rem;
-  padding: 3px 8px;
-  border-radius: 12px;
-  font-size: 0.68rem;
-  font-weight: 600;
-  cursor: pointer !important;
-  backdrop-filter: blur(4px);
-  transition: all 0.2s ease-in-out;
-  
-  /* Restringe el badge para que NUNCA sea más ancho que la tarjeta */
-  max-width: 100% !important;
-  box-sizing: border-box;
-}
-
-.emblema-accion-afirmativa:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
-}
-
-.emblema-accion-afirmativa svg,
-.emblema-icono {
-  flex-shrink: 0; /* Impide que el ícono se aplaste cuando el texto se recorta */
-  opacity: 0.9;
-}
-
-.emblema-texto {
-  white-space: nowrap !important; /* Fuerza una sola línea */
-  overflow: hidden !important;     /* Oculta lo que no quepa */
-  text-overflow: ellipsis !important; /* Muestra '...' al final del texto cortado */
-  display: block;
-  max-width: 100%;                 /* Se adapta al ancho disponible */
-}
-
-/* PALETA DE COLORES SOFT / ELEGANTE */
-
-/* Adultos Mayores */
-.badge-personas-adultas-mayores {
-  background-color: rgba(245, 158, 11, 0.12);
-  color: #b45309;
-  border: 1px solid rgba(245, 158, 11, 0.3);
-}
-
-/* Jóvenes */
-.badge-personas-jovenes {
-  background-color: rgba(16, 185, 129, 0.12);
-  color: #047857;
-  border: 1px solid rgba(16, 185, 129, 0.3);
-}
-
-/* Diversidad Sexual */
-.badge-personas-de-la-diversidad-sexual {
-  background-color: rgba(168, 85, 247, 0.12);
-  color: #7e22ce;
-  border: 1px solid rgba(168, 85, 247, 0.3);
-}
-
-/* Afromexicanas */
-.badge-personas-afromexicanas {
-  background-color: rgba(249, 115, 22, 0.12);
-  color: #c2410c;
-  border: 1px solid rgba(249, 115, 22, 0.3);
-}
-
-/* Discapacidad */
-.badge-personas-con-discapacidad {
-  background-color: rgba(59, 130, 246, 0.12);
-  color: #1d4ed8;
-  border: 1px solid rgba(59, 130, 246, 0.3);
-}
-
-/* Pueblos y Barrios Originarios / Indígenas */
-.badge-persona-integrante-de-pueblos-y-barrios-originarios-y-comunidades-indigenas {
-  background-color: rgba(20, 184, 166, 0.12);
-  color: #0f766e;
-  border: 1px solid rgba(20, 184, 166, 0.3);
 }
