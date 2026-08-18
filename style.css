@@ -175,15 +175,60 @@ body {
 }
 
 /* ==========================================
-   ÁREA DE CONTENIDO Y TARJETA DEL GRÁFICO
+   ÁREA DE CONTENIDO
    ========================================== */
 .content-area {
   flex-grow: 1;
   padding: 1.5rem;
   overflow-y: auto;
-  display: flex;
 }
 
+.level-section {
+  display: none;
+}
+
+.level-section.active {
+  display: block;
+}
+
+/* ==========================================
+   PESTAÑAS DE MÓDULOS
+   ========================================== */
+.module-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.5rem;
+}
+
+.tab-btn {
+  background: transparent;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.tab-btn:hover {
+  background: rgba(0, 0, 0, 0.04);
+  color: var(--text-primary);
+}
+
+.tab-btn.active {
+  background: #ffffff;
+  color: var(--sidebar-active);
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* ==========================================
+   TARJETA DEL GRÁFICO
+   ========================================== */
 .chart-card {
   width: 100%;
   background: var(--bg-card);
@@ -191,15 +236,12 @@ body {
   border: 1px solid var(--border-color);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   padding: 1.5rem;
-  margin: auto;
-  align-self: flex-start;
   min-height: 400px;
 }
 
 /* ==========================================
    MANEJO DE VISIBILIDAD DE FLOURISH
    ========================================== */
-/* Oculta el reporte inactivo manteniendo el ancho para cálculos del script */
 .report-container {
   height: 0;
   overflow: hidden;
@@ -208,7 +250,6 @@ body {
   transition: opacity 0.25s ease-in-out;
 }
 
-/* Muestra el reporte activo permitiendo el auto-ajuste de altura */
 .report-container.active {
   height: auto;
   overflow: visible;
@@ -216,7 +257,6 @@ body {
   pointer-events: auto;
 }
 
-/* Ajuste general para contenedores de Flourish */
 .flourish-embed {
   width: 100%;
 }
@@ -248,5 +288,9 @@ body {
 
   .chart-card {
     padding: 1rem;
+  }
+
+  .module-tabs {
+    flex-wrap: wrap;
   }
 }
