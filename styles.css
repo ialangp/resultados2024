@@ -215,12 +215,29 @@ body {
     padding: 1rem;
   }
 }
-/* Oculta los iframes por defecto */
-.flourish-report {
-  display: none;
+/* Contenedor relativo para apilar los reportes */
+.chart-card {
+  position: relative;
+  width: 100%;
+  min-height: 600px;
 }
 
-/* Muestra únicamente el iframe que tiene la clase active */
+/* Estado oculto: el iframe tiene dimensiones reales pero no es visible ni interactivo */
+.flourish-report {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity 0.2s ease-in-out;
+}
+
+/* Estado activo: se vuelve visible y recibe clics */
 .flourish-report.active {
-  display: block;
+  position: relative;
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
 }
