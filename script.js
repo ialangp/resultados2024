@@ -174,8 +174,23 @@ function renderCards(list, container) {
       ? `<img src="${item.foto}" alt="${item.nombre}" class="candidate-avatar" loading="lazy" onclick="openImageModal('${item.foto}', '${safeName}', '${safeLocation}')" onerror="this.outerHTML='<div class=\\'candidate-avatar no-photo\\'>Sin foto</div>'">`
       : `<div class="candidate-avatar no-photo">Sin foto</div>`;
 
+    // Lógica para evaluar y construir el badge de Acción Afirmativa
+    const tieneAccionAfirmativa = Boolean(item.accionAfirmativa) && 
+                                  item.accionAfirmativa.trim() !== "" && 
+                                  item.accionAfirmativa.toLowerCase() !== "ninguna";
+
+    const emblemaHTML = tieneAccionAfirmativa ? `
+      <div class="emblema-accion-afirmativa" title="Acción Afirmativa: ${item.accionAfirmativa}">
+        <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor">
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+        </svg>
+        <span>${item.accionAfirmativa}</span>
+      </div>
+    ` : '';
+
     const cardHTML = `
       <div class="candidate-card ${cardBorderClass}">
+        ${emblemaHTML}
         <div class="candidate-header">
           ${avatarHTML}
           <div class="candidate-info">
@@ -209,7 +224,6 @@ function renderCards(list, container) {
     container.insertAdjacentHTML('beforeend', cardHTML);
   });
 }
-
 // Función global para abrir la foto en el Modal
 window.openImageModal = function(src, name, location) {
   if (!src || src.trim() === '') return;
@@ -225,31 +239,3 @@ window.openImageModal = function(src, name, location) {
   }
 };
 
-function crearTarjetaRegistro(data) {
-  // Validamos que exista, no sea nulo, no sea "Ninguna" y que al quitar espacios no esté vacío
-  const tieneAccionAfirmativa = Boolean(data.accionAfirmativa) && 
-                                data.accionAfirmativa.trim() !== "" && 
-                                data.accionAfirmativa.toLowerCase() !== "ninguna";
-
-  // Renderizamos el HTML solo si la condición es verdadera
-  const emblemaHTML = tieneAccionAfirmativa ? `
-    <div class="emblema-accion-afirmativa" title="Acción Afirmativa: ${data.accionAfirmativa}">
-      <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
-        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-      </svg>
-      <span>${data.accionAfirmativa}</span>
-    </div>
-  ` : '';
-
-  return `
-    <div class="card-registro">
-      ${emblemaHTML}
-      <img src="${data.foto}" alt="${data.nombre}">
-      <div class="card-body">
-        <h3>${data.nombre}</h3>
-        <p><strong>Ubicación:</strong> ${data.ubicacion}</p>
-        <p><strong>Incremento:</strong> ${data.incremento}%</p>
-      </div>
-    </div>
-  `;
-}
