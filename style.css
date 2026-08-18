@@ -1,9 +1,194 @@
-/* Contenedor principal del gráfico */
+/* ==========================================
+   VARIABLES Y ESTILOS GENERALES
+   ========================================== */
+:root {
+  --bg-main: #f1f5f9;
+  --bg-card: #ffffff;
+  --sidebar-bg: #0f172a;
+  --sidebar-hover: #1e293b;
+  --sidebar-active: #2563eb;
+  --text-primary: #0f172a;
+  --text-muted: #64748b;
+  --text-sidebar: #94a3b8;
+  --border-color: #e2e8f0;
+  --sidebar-width: 260px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+body {
+  display: flex;
+  height: 100vh;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  overflow: hidden;
+}
+
+/* ==========================================
+   OVERLAY PARA DISPOSITIVOS MÓVILES
+   ========================================== */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(2px);
+  z-index: 40;
+}
+
+.sidebar-overlay.active {
+  display: block;
+}
+
+/* ==========================================
+   BARRA LATERAL (SIDEBAR)
+   ========================================== */
+.sidebar {
+  width: var(--sidebar-width);
+  background-color: var(--sidebar-bg);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 50;
+}
+
+.sidebar-header {
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: var(--text-sidebar);
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: none;
+}
+
+.sidebar-nav {
+  padding: 1.5rem 1rem;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.nav-section-title {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text-sidebar);
+  margin-bottom: 0.75rem;
+  padding-left: 0.75rem;
+}
+
+.sidebar-nav ul {
+  list-style: none;
+}
+
+.nav-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0.85rem;
+  margin-bottom: 0.35rem;
+  background: transparent;
+  border: none;
+  color: var(--text-sidebar);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.nav-btn:hover {
+  background-color: var(--sidebar-hover);
+  color: #fff;
+}
+
+.nav-btn.active {
+  background-color: var(--sidebar-active);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.35);
+}
+
+/* ==========================================
+   ESTRUCTURA PRINCIPAL Y BARRA SUPERIOR
+   ========================================== */
+.main-wrapper {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: 100vh;
+}
+
+.topbar {
+  height: 64px;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  padding: 0 1.5rem;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+.toggle-btn {
+  background: none;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 0.4rem 0.7rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: var(--text-primary);
+  display: none;
+}
+
+.report-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ==========================================
+   ÁREA DE CONTENIDO Y TARJETA DEL GRÁFICO
+   ========================================== */
+.content-area {
+  flex-grow: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+  display: flex;
+}
+
 .chart-card {
   width: 100%;
-  background: var(--bg-card, #ffffff);
+  background: var(--bg-card);
   border-radius: 12px;
-  border: 1px solid var(--border-color, #e2e8f0);
+  border: 1px solid var(--border-color);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   padding: 1.5rem;
   margin: auto;
@@ -11,7 +196,10 @@
   min-height: 400px;
 }
 
-/* Oculta el reporte inactivo sin perder sus propiedades de ancho */
+/* ==========================================
+   MANEJO DE VISIBILIDAD DE FLOURISH
+   ========================================== */
+/* Oculta el reporte inactivo manteniendo el ancho para cálculos del script */
 .report-container {
   height: 0;
   overflow: hidden;
@@ -20,10 +208,45 @@
   transition: opacity 0.25s ease-in-out;
 }
 
-/* Muestra el reporte activo con auto-ajuste de altura */
+/* Muestra el reporte activo permitiendo el auto-ajuste de altura */
 .report-container.active {
   height: auto;
   overflow: visible;
   opacity: 1;
   pointer-events: auto;
+}
+
+/* Ajuste general para contenedores de Flourish */
+.flourish-embed {
+  width: 100%;
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN (DISPOSITIVOS MÓVILES)
+   ========================================== */
+@media (max-width: 850px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .toggle-btn, 
+  .close-btn {
+    display: block;
+  }
+
+  .content-area {
+    padding: 1rem;
+  }
+
+  .chart-card {
+    padding: 1rem;
+  }
 }
