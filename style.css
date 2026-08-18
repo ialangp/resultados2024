@@ -361,82 +361,90 @@ body {
 }
 
 /* Badge de Acción Afirmativa */
+/* ==========================================
+   BADGES Y ACCIONES AFIRMATIVAS (NUEVO DISEÑO)
+   ========================================== */
+
+/* Contenedor base del badge tipo píldora */
 .emblema-accion-afirmativa {
-  display: inline-flex;
+  position: relative !important;
+  top: auto !important;
+  right: auto !important;
+  display: inline-flex !important;
   align-items: center;
-  gap: 5px;
-  margin-top: 6px;
-  padding: 3px 8px;
-  border-radius: 12px;
+  gap: 6px;
+  margin-top: 0.5rem;
+  padding: 4px 10px;
+  border-radius: 20px; /* Redondeado suave tipo pill */
   font-size: 0.72rem;
   font-weight: 600;
-  cursor: help; /* Muestra un cursor con signo de interrogación al pasar el mouse */
-  background-color: #f1f5f9;
-  color: #475569;
-  border: 1px solid #cbd5e1;
-  max-width: 100%;
-  transition: all 0.2s ease;
+  letter-spacing: 0.2px;
+  cursor: help;
+  backdrop-filter: blur(4px);
+  transition: all 0.2s ease-in-out;
 }
 
 .emblema-accion-afirmativa:hover {
   transform: translateY(-1px);
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
 }
 
 .emblema-accion-afirmativa svg {
   flex-shrink: 0;
+  opacity: 0.9;
 }
 
 .emblema-texto {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 140px; /* Recorta textos muy largos en pantallas pequeñas sin romper la tarjeta */
+  max-width: 170px;
 }
 
-/* Colores personalizados por grupo representativo */
+/* PALETA DE COLORES SOFT / ELEGANTE */
 
-/* Adultos Mayores (Tono Ámbar/Cálido) */
+/* Adultos Mayores: Tono Ámbar Caluroso */
 .badge-personas-adultas-mayores {
-  background-color: #fffbeb;
+  background-color: rgba(245, 158, 11, 0.12);
   color: #b45309;
-  border-color: #fde68a;
+  border: 1px solid rgba(245, 158, 11, 0.3);
 }
 
-/* Jóvenes (Tono Esmeralda/Energía) */
+/* Jóvenes: Verde Menta / Esmeralda */
 .badge-personas-jovenes {
-  background-color: #ecfdf5;
+  background-color: rgba(16, 185, 129, 0.12);
   color: #047857;
-  border-color: #a7f3d0;
+  border: 1px solid rgba(16, 185, 129, 0.3);
 }
 
-/* Diversidad Sexual (Tono Violeta/Orgullo) */
+/* Diversidad Sexual: Violeta sutil */
 .badge-personas-de-la-diversidad-sexual {
-  background-color: #fdf4ff;
-  color: #a21caf;
-  border-color: #f5d0fe;
+  background-color: rgba(168, 85, 247, 0.12);
+  color: #7e22ce;
+  border: 1px solid rgba(168, 85, 247, 0.3);
 }
 
-/* Afromexicanas (Tono Terracota/Tierra) */
+/* Afromexicanas: Coral / Terracota */
 .badge-personas-afromexicanas {
-  background-color: #fff7ed;
+  background-color: rgba(249, 115, 22, 0.12);
   color: #c2410c;
-  border-color: #ffedd5;
+  border: 1px solid rgba(249, 115, 22, 0.3);
 }
 
-/* Discapacidad (Tono Azul Accesibilidad) */
+/* Discapacidad: Azul Azulado Crisp */
 .badge-personas-con-discapacidad {
-  background-color: #eff6ff;
+  background-color: rgba(59, 130, 246, 0.12);
   color: #1d4ed8;
-  border-color: #bfdbfe;
+  border: 1px solid rgba(59, 130, 246, 0.3);
 }
 
-/* Pueblos y Barrios Originarios (Tono Verde Oliva/Naturaleza) */
+/* Pueblos y Barrios Originarios / Indígenas: Verde Bosque */
 .badge-persona-integrante-de-pueblos-y-barrios-originarios-y-comunidades-indigenas {
-  background-color: #f0fdf4;
-  color: #15803d;
-  border-color: #bbf7d0;
+  background-color: rgba(20, 184, 166, 0.12);
+  color: #0f766e;
+  border: 1px solid rgba(20, 184, 166, 0.3);
 }
+
 /* Bordes laterales dinámicos según el rendimiento */
 .candidate-card.positive-card {
   border-left-color: #10b981 !important; /* Verde */
