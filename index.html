@@ -58,7 +58,8 @@
         <!-- Pestañas de Módulos para Alcaldías -->
         <div class="module-tabs">
           <button class="tab-btn active" data-module="alcaldias-resultados">Resultados</button>
-          <button class="tab-btn" data-module="alcaldias-competitividad">Bloques de competitividad 2027</button>
+          <button class="tab-btn" data-module="alcaldias-competitividad">Bloques de competitividad</button>
+          <button class="tab-btn" data-module="alcaldias-candidatos">Candidatos</button>
         </div>
 
         <div class="chart-card">
@@ -70,6 +71,22 @@
           <div id="alcaldias-competitividad" class="report-container">
             <div class="flourish-embed flourish-chart" data-src="visualisation/29971866"></div>
           </div>
+          <!-- Módulo Candidatos Alcaldías -->
+          <div id="alcaldias-candidatos" class="report-container">
+            <div class="candidates-filters">
+              <div class="filter-group">
+                <label for="search-alcaldias">Buscar por nombre:</label>
+                <input type="text" id="search-alcaldias" placeholder="Escribe el nombre del candidato..." class="filter-input">
+              </div>
+              <div class="filter-group">
+                <label for="select-alcaldias">Filtrar por Alcaldía:</label>
+                <select id="select-alcaldias" class="filter-select">
+                  <option value="">Todas las Alcaldías</option>
+                </select>
+              </div>
+            </div>
+            <div id="grid-alcaldias" class="candidates-grid"></div>
+          </div>
         </div>
       </div>
 
@@ -78,7 +95,8 @@
         <!-- Pestañas de Módulos para Distritos Locales -->
         <div class="module-tabs">
           <button class="tab-btn active" data-module="distritos-resultados">Resultados</button>
-          <button class="tab-btn" data-module="distritos-competitividad">Bloques de competitividad 2027</button>
+          <button class="tab-btn" data-module="distritos-competitividad">Bloques de competitividad</button>
+          <button class="tab-btn" data-module="distritos-candidatos">Candidatos</button>
         </div>
 
         <div class="chart-card">
@@ -89,6 +107,22 @@
           <!-- Módulo Competitividad Distritos -->
           <div id="distritos-competitividad" class="report-container">
             <div class="flourish-embed flourish-chart" data-src="visualisation/29970837"></div>
+          </div>
+          <!-- Módulo Candidatos Distritos -->
+          <div id="distritos-candidatos" class="report-container">
+            <div class="candidates-filters">
+              <div class="filter-group">
+                <label for="search-distritos">Buscar por nombre:</label>
+                <input type="text" id="search-distritos" placeholder="Escribe el nombre del candidato..." class="filter-input">
+              </div>
+              <div class="filter-group">
+                <label for="select-distritos">Filtrar por Distrito:</label>
+                <select id="select-distritos" class="filter-select">
+                  <option value="">Todos los Distritos</option>
+                </select>
+              </div>
+            </div>
+            <div id="grid-distritos" class="candidates-grid"></div>
           </div>
         </div>
       </div>
