@@ -133,10 +133,14 @@ function renderCards(list, container) {
   }
 
   list.forEach(item => {
-    const incSign = item.incremento >= 0 ? '+' : '';
-    const incClass = item.incremento >= 0 ? 'positive' : 'negative';
-    const desClass = item.desempeno >= 0 ? 'positive' : 'negative';
-    const desSign = item.desempeno >= 0 ? '+' : '';
+    const isPositive = item.incremento >= 0;
+    const incSign = isPositive ? '▲ +' : '▼ ';
+    const incClass = isPositive ? 'positive' : 'negative';
+    const cardBorderClass = isPositive ? 'positive-card' : 'negative-card';
+
+    const isDesPositive = item.desempeno >= 0;
+    const desClass = isDesPositive ? 'positive' : 'negative';
+    const desSign = isDesPositive ? '+' : '';
 
     // Manejo seguro para registros sin foto
     const hasPhoto = item.foto && item.foto.trim() !== '';
@@ -145,32 +149,32 @@ function renderCards(list, container) {
       : `<div class="candidate-avatar no-photo">Sin foto</div>`;
 
     const cardHTML = `
-      <div class="candidate-card">
+      <div class="candidate-card ${cardBorderClass}">
         <div class="candidate-header">
           ${avatarHTML}
           <div class="candidate-info">
             <h3>${item.nombre || 'Sin Candidato'}</h3>
-            <span class="location-badge">${item.ubicacion}</span>
+            <span class="location-badge">🏛️ ${item.ubicacion}</span>
           </div>
         </div>
 
         <div class="performance-metric">
           <div class="metric-header-row">
-            <span class="metric-label">Porcentaje de Votación</span>
-            <span class="metric-diff ${incClass}">${incSign}${item.incremento}% vs 2021</span>
+            <span class="metric-label">Votación 2024</span>
+            <span class="metric-diff ${incClass}">${incSign}${item.incremento}%</span>
           </div>
 
           <div class="metric-value-row">
             <span class="metric-number">${item.porcentaje}%</span>
-            <span class="previous-votes">2021: ${item.porcentajeAnterior}%</span>
+            <span class="previous-votes">2021: <strong>${item.porcentajeAnterior}%</strong></span>
           </div>
 
           <div class="progress-bar-bg">
-            <div class="progress-bar-fill" style="width: ${Math.min(item.porcentaje, 100)}%;"></div>
+            <div class="progress-bar-fill ${incClass}" style="width: ${Math.min(item.porcentaje, 100)}%;"></div>
           </div>
 
           <div class="performance-footer">
-            <span class="footer-label">Desempeño general:</span>
+            <span class="footer-label">Desempeño</span>
             <span class="performance-badge ${desClass}">${desSign}${item.desempeno}%</span>
           </div>
         </div>
