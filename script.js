@@ -77,6 +77,26 @@ document.addEventListener('DOMContentLoaded', () => {
   // 3. Lógica para el módulo de Candidatos
   setupCandidatesModule('alcaldias', 'candidatos-alcaldias.json', 'search-alcaldias', 'select-alcaldias', 'grid-alcaldias');
   setupCandidatesModule('distritos', 'candidatos-distritos.json', 'search-distritos', 'select-distritos', 'grid-distritos');
+
+  // 4. Configurar eventos de cierre para el Modal de Imágenes
+  const modal = document.getElementById('image-modal');
+  const modalCloseBtn = document.getElementById('modal-close');
+
+  function closeModal() {
+    if (modal) modal.classList.remove('show');
+  }
+
+  if (modalCloseBtn) {
+    modalCloseBtn.addEventListener('click', closeModal);
+  }
+
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+  }
 });
 
 async function setupCandidatesModule(type, jsonFile, searchId, selectId, gridId) {
@@ -89,8 +109,10 @@ async function setupCandidatesModule(type, jsonFile, searchId, selectId, gridId)
     const selectFilter = document.getElementById(selectId);
     const grid = document.getElementById(gridId);
 
+    if (!searchInput || !selectFilter || !grid) return;
+
     // Poblar desplegable con las demarcaciones únicas
-    const locations = [...new Set(candidates.map(item => item.ubicacion))].sort();
+    const locations = [...new Set(candidates.map(item => item.ubicacion))].filter(Boolean).sort();
     locations.forEach(loc => {
       const option = document.createElement('option');
       option.value = loc;
@@ -104,7 +126,7 @@ async function setupCandidatesModule(type, jsonFile, searchId, selectId, gridId)
       const locationQuery = selectFilter.value;
 
       const filtered = candidates.filter(c => {
-        const matchesName = c.nombre.toLowerCase().includes(nameQuery);
+        const matchesName = (c.nombre || '').toLowerCase().includes(nameQuery);
         const matchesLocation = locationQuery === '' || c.ubicacion === locationQuery;
         return matchesName && matchesLocation;
       });
@@ -123,7 +145,7 @@ async function setupCandidatesModule(type, jsonFile, searchId, selectId, gridId)
   }
 }
 
-// Función para renderizar tarjetas con carga optimizada (lazy) y evento de ampliado
+// Renderizado de tarjetas de candidatos
 function renderCards(list, container) {
   if (!container) return;
   container.innerHTML = '';
@@ -143,10 +165,13 @@ function renderCards(list, container) {
     const desClass = isDesPositive ? 'positive' : 'negative';
     const desSign = isDesPositive ? '+' : '';
 
-    // Fotografía con optimización loading="lazy" y función de Zoom
+    const safeName = (item.nombre || 'Sin Candidato').replace(/'/g, "\\'");
+    const safeLocation = (item.ubicacion || '').replace(/'/g, "\\'");
+
+    // Fotografía con optimización loading="lazy" y evento onclick global
     const hasPhoto = item.foto && item.foto.trim() !== '';
     const avatarHTML = hasPhoto
-      ? `<img src="${item.foto}" alt="${item.nombre}" class="candidate-avatar" loading="lazy" onclick="openImageModal('${item.foto}', '${item.nombre}', '${item.ubicacion}')" onerror="this.outerHTML='<div class=\\'candidate-avatar no-photo\\'>Sin foto</div>'">`
+      ? `<img src="${item.foto}" alt="${item.nombre}" class="candidate-avatar" loading="lazy" onclick="openImageModal('${item.foto}', '${safeName}', '${safeLocation}')" onerror="this.outerHTML='<div class=\\'candidate-avatar no-photo\\'>Sin foto</div>'">`
       : `<div class="candidate-avatar no-photo">Sin foto</div>`;
 
     const cardHTML = `
@@ -185,35 +210,17 @@ function renderCards(list, container) {
   });
 }
 
-// Funciones para abrir y cerrar la foto ampliada
-function openImageModal(src, name, location) {
+// Función global para abrir la foto en el Modal
+window.openImageModal = function(src, name, location) {
+  if (!src || src.trim() === '') return;
+
   const modal = document.getElementById('image-modal');
   const modalImg = document.getElementById('modal-img');
   const modalCaption = document.getElementById('modal-caption');
 
   if (modal && modalImg && modalCaption) {
     modalImg.src = src;
-    modalCaption.innerHTML = `${name}<br><small style="font-weight:600; color:var(--text-muted); font-size:0.85rem;">${location}</small>`;
+    modalCaption.innerHTML = `${name}<br><span style="font-weight:600; color:var(--text-muted); font-size:0.85rem;">🏛️ ${location}</span>`;
     modal.classList.add('show');
   }
-}
-
-// Cerrar el modal al hacer clic en X o fuera de la foto
-document.addEventListener('DOMContentLoaded', () => {
-  const modal = document.getElementById('image-modal');
-  const closeBtn = document.getElementById('modal-close');
-
-  if (closeBtn) {
-    closeBtn.addEventListener('click', () => {
-      modal.classList.remove('show');
-    });
-  }
-
-  if (modal) {
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        modal.classList.remove('show');
-      }
-    });
-  }
-});
+};
