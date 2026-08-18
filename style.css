@@ -379,7 +379,7 @@ body {
   font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.2px;
-  cursor: help;
+  cursor: pointer;
   backdrop-filter: blur(4px);
   transition: all 0.2s ease-in-out;
 }
