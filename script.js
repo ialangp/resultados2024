@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 3. Lógica para el módulo de Candidatos
   setupCandidatesModule('alcaldias', 'candidatos-alcaldias.json', 'search-alcaldias', 'select-alcaldias', 'grid-alcaldias');
-  setupCandidatesModule('distritos', 'candidatos-distritos.json', 'search-distritos', 'select-distritos', 'grid-distritos');
+  setupCandidatesModule('distritos', 'candidatos-distritos.json', 'search-distritos', 'select-distritos', 'grid-distritos', 'select-acciones-distritos');
 
   // 4. Configurar eventos de cierre para el Modal de Imágenes
   const modal = document.getElementById('image-modal');
@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-async function setupCandidatesModule(type, jsonFile, searchId, selectId, gridId) {
+async function setupCandidatesModule(type, jsonFile, searchId, selectId, gridId, actionSelectId = null) {
   try {
     const response = await fetch(jsonFile);
     if (!response.ok) return;
@@ -107,11 +107,12 @@ async function setupCandidatesModule(type, jsonFile, searchId, selectId, gridId)
 
     const searchInput = document.getElementById(searchId);
     const selectFilter = document.getElementById(selectId);
+    const actionFilter = actionSelectId ? document.getElementById(actionSelectId) : null;
     const grid = document.getElementById(gridId);
 
     if (!searchInput || !selectFilter || !grid) return;
 
-    // Poblar desplegable con las demarcaciones únicas
+    // 1. Poblar desplegable de ubicaciones
     const locations = [...new Set(candidates.map(item => item.ubicacion))].filter(Boolean).sort();
     locations.forEach(loc => {
       const option = document.createElement('option');
@@ -120,22 +121,47 @@ async function setupCandidatesModule(type, jsonFile, searchId, selectId, gridId)
       selectFilter.appendChild(option);
     });
 
-    // Función de filtrado en tiempo real
+    // 2. Poblar desplegable de Acciones Afirmativas (si existe el elemento)
+    if (actionFilter) {
+      const actions = [...new Set(
+        candidates
+          .map(item => (item.accionAfirmativa || '').trim())
+          .filter(act => act !== '' && act.toLowerCase() !== 'ninguna')
+      )].sort();
+
+      actions.forEach(action => {
+        const option = document.createElement('option');
+        option.value = action;
+        option.textContent = action;
+        actionFilter.appendChild(option);
+      });
+    }
+
+    // 3. Función de filtrado combinada
     function applyFilters() {
       const nameQuery = searchInput.value.toLowerCase().trim();
       const locationQuery = selectFilter.value;
+      const actionQuery = actionFilter ? actionFilter.value : '';
 
       const filtered = candidates.filter(c => {
         const matchesName = (c.nombre || '').toLowerCase().includes(nameQuery);
         const matchesLocation = locationQuery === '' || c.ubicacion === locationQuery;
-        return matchesName && matchesLocation;
+        
+        const candidateAction = (c.accionAfirmativa || '').trim();
+        const matchesAction = actionQuery === '' || candidateAction === actionQuery;
+
+        return matchesName && matchesLocation && matchesAction;
       });
 
       renderCards(filtered, grid);
     }
 
+    // Event listeners
     searchInput.addEventListener('input', applyFilters);
     selectFilter.addEventListener('change', applyFilters);
+    if (actionFilter) {
+      actionFilter.addEventListener('change', applyFilters);
+    }
 
     // Carga inicial
     renderCards(candidates, grid);
