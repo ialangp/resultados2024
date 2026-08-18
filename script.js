@@ -226,6 +226,7 @@ window.openImageModal = function(src, name, location) {
 };
 
 function crearTarjetaRegistro(data) {
+  console.log("Datos de la tarjeta:", data);
   // Inspecciona en la consola de tu navegador (F12) qué trae este campo
   console.log('Valor de accionAfirmativa:', data.accionAfirmativa);
 
