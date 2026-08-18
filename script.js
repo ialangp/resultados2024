@@ -1,13 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const buttons = document.querySelectorAll('.nav-btn');
-  const reports = document.querySelectorAll('.report-container');
+  const navButtons = document.querySelectorAll('.nav-btn');
+  const levelSections = document.querySelectorAll('.level-section');
   const currentTitle = document.getElementById('current-title');
   const sidebar = document.getElementById('sidebar');
   const overlay = document.getElementById('sidebar-overlay');
   const toggleBtn = document.getElementById('toggle-sidebar');
   const closeBtn = document.getElementById('close-sidebar');
 
-  // Control de apertura/cierre de la barra lateral en móviles
+  // Disparar evento de resize a Flourish
+  function triggerFlourishResize() {
+    setTimeout(() => {
+      window.dispatchEvent(new Event('resize'));
+    }, 50);
+  }
+
+  // Menú Móvil
   function toggleSidebar() {
     if (sidebar) sidebar.classList.toggle('open');
     if (overlay) overlay.classList.toggle('active');
@@ -17,38 +24,55 @@ document.addEventListener('DOMContentLoaded', () => {
   if (closeBtn) closeBtn.addEventListener('click', toggleSidebar);
   if (overlay) overlay.addEventListener('click', toggleSidebar);
 
-  // Cambio de reporte
-  buttons.forEach(button => {
+  // 1. Cambio de Nivel (Menú Lateral: Alcaldías vs Distritos)
+  navButtons.forEach(button => {
     button.addEventListener('click', () => {
-      // 1. Botón activo en menú
-      buttons.forEach(btn => btn.classList.remove('active'));
+      navButtons.forEach(btn => btn.classList.remove('active'));
       button.classList.add('active');
 
-      // 2. Cambiar título
-      const newTitle = button.getAttribute('data-title');
-      if (newTitle && currentTitle) {
-        currentTitle.textContent = newTitle;
-      }
+      const title = button.getAttribute('data-title');
+      if (title && currentTitle) currentTitle.textContent = title;
 
-      // 3. Alternar reporte visible
-      const targetId = button.getAttribute('data-target');
-      reports.forEach(container => {
-        if (container.id === targetId) {
-          container.classList.add('active');
+      const targetSectionId = button.getAttribute('data-target');
+      levelSections.forEach(section => {
+        if (section.id === targetSectionId) {
+          section.classList.add('active');
         } else {
-          container.classList.remove('active');
+          section.classList.remove('active');
         }
       });
 
-      // 4. Notificar al script de Flourish para que recalcule las dimensiones exactas
-      setTimeout(() => {
-        window.dispatchEvent(new Event('resize'));
-      }, 50);
+      triggerFlourishResize();
 
-      // 5. Cerrar menú en móvil
       if (window.innerWidth <= 850 && sidebar && sidebar.classList.contains('open')) {
         toggleSidebar();
       }
+    });
+  });
+
+  // 2. Cambio de Módulo (Pestañas Superiores: Resultados vs Competitividad)
+  const tabButtons = document.querySelectorAll('.tab-btn');
+  tabButtons.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const parentSection = tab.closest('.level-section');
+      const sectionTabs = parentSection.querySelectorAll('.tab-btn');
+      const sectionReports = parentSection.querySelectorAll('.report-container');
+
+      // Alternar clase active en la pestaña
+      sectionTabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      // Alternar módulo visible dentro de la sección actual
+      const targetModuleId = tab.getAttribute('data-module');
+      sectionReports.forEach(report => {
+        if (report.id === targetModuleId) {
+          report.classList.add('active');
+        } else {
+          report.classList.remove('active');
+        }
+      });
+
+      triggerFlourishResize();
     });
   });
 });
