@@ -667,3 +667,33 @@ body {
   color: #ffffff;
   border-color: #ef4444;
 }
+
+/* Contenedor relativo para posicionar el emblema en la tarjeta */
+.card-registro {
+  position: relative;
+  /* Mantiene tus estilos actuales de tarjeta */
+}
+
+/* Badge / Emblema de Acción Afirmativa */
+.emblema-accion-afirmativa {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background-color: #eef2ff; /* Tono suave de énfasis */
+  color: #4f46e5;           /* Color primario/destacado */
+  border: 1px solid #c7d2fe;
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.emblema-accion-afirmativa svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
