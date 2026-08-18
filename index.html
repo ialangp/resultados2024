@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Panel de Reportes</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>Panel de Reportes Electorales</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Script oficial de Flourish -->
+  <script src="https://public.flourish.studio/resources/embed.js"></script>
 </head>
 <body>
 
@@ -25,13 +27,13 @@
       <span class="nav-section-title">SELECCIONA UN REPORTE</span>
       <ul>
         <li>
-          <button class="nav-btn active" data-target="iframe-alcaldias" data-title="Resultados Alcaldías">
+          <button class="nav-btn active" data-target="embed-alcaldias" data-title="Resultados Alcaldías">
             <span class="nav-icon">🏛️</span>
             <span class="nav-text">Resultados Alcaldías</span>
           </button>
         </li>
         <li>
-          <button class="nav-btn" data-target="iframe-distritos" data-title="Resultados Distritos Locales">
+          <button class="nav-btn" data-target="embed-distritos" data-title="Resultados Distritos Locales">
             <span class="nav-icon">🗺️</span>
             <span class="nav-text">Distritos Locales</span>
           </button>
@@ -52,29 +54,15 @@
     <main class="content-area">
       <div class="chart-card">
         
-        <!-- Iframe 1: Alcaldías (Visible por defecto) -->
-        <iframe 
-          id="iframe-alcaldias"
-          class="flourish-report active"
-          src="https://flo.uri.sh/visualisation/29990496/embed" 
-          title="Resultados Alcaldías" 
-          frameborder="0" 
-          scrolling="no" 
-          style="width:100%;height:600px;" 
-          sandbox="allow-same-origin allow-forms allow-scripts allow-downloads allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation">
-        </iframe>
+        <!-- DIV 1: Alcaldías -->
+        <div id="embed-alcaldias" class="report-container active">
+          <div class="flourish-embed flourish-chart" data-src="visualisation/29990496"></div>
+        </div>
 
-        <!-- Iframe 2: Distritos Locales (Oculto por defecto) -->
-        <iframe 
-          id="iframe-distritos"
-          class="flourish-report"
-          src="https://flo.uri.sh/visualisation/29972342/embed" 
-          title="Resultados Distritos Locales" 
-          frameborder="0" 
-          scrolling="no" 
-          style="width:100%;height:600px;" 
-          sandbox="allow-same-origin allow-forms allow-scripts allow-downloads allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation">
-        </iframe>
+        <!-- DIV 2: Distritos Locales -->
+        <div id="embed-distritos" class="report-container">
+          <div class="flourish-embed flourish-chart" data-src="visualisation/29972342"></div>
+        </div>
 
       </div>
     </main>
