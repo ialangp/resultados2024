@@ -7,7 +7,7 @@
     "porcentajeAnterior": 2.83,
     "porcentaje": 5.95,
     "incremento": 3.13,
-    "desempeno": -35.88
+    "desempeno": -16.44
   },
   {
     "id": 2,
@@ -17,7 +17,7 @@
     "porcentajeAnterior": 2.78,
     "porcentaje": 9.51,
     "incremento": 6.73,
-    "desempeno": 93.26
+    "desempeno": 35.79
   },
   {
     "id": 3,
@@ -27,7 +27,7 @@
     "porcentajeAnterior": 1.69,
     "porcentaje": 4.81,
     "incremento": 3.12,
-    "desempeno": -60.51
+    "desempeno": 13.06
   },
   {
     "id": 4,
@@ -37,7 +37,7 @@
     "porcentajeAnterior": 3.25,
     "porcentaje": 7.25,
     "incremento": 4.0,
-    "desempeno": -4.18
+    "desempeno": -11.38
   },
   {
     "id": 5,
@@ -47,7 +47,7 @@
     "porcentajeAnterior": 3.05,
     "porcentaje": 8.89,
     "incremento": 5.84,
-    "desempeno": 55.85
+    "desempeno": 15.71
   },
   {
     "id": 6,
@@ -57,7 +57,7 @@
     "porcentajeAnterior": 3.64,
     "porcentaje": 8.18,
     "incremento": 4.54,
-    "desempeno": 11.06
+    "desempeno": -10.80
   },
   {
     "id": 7,
@@ -67,7 +67,7 @@
     "porcentajeAnterior": 3.12,
     "porcentaje": 9.42,
     "incremento": 6.29,
-    "desempeno": 69.01
+    "desempeno": 19.7
   },
   {
     "id": 8,
@@ -77,7 +77,7 @@
     "porcentajeAnterior": 2.93,
     "porcentaje": 6.83,
     "incremento": 3.89,
-    "desempeno": -8.42
+    "desempeno": -7.65
   },
   {
     "id": 9,
@@ -87,7 +87,7 @@
     "porcentajeAnterior": 2.92,
     "porcentaje": 6.7,
     "incremento": 3.78,
-    "desempeno": -12.4
+    "desempeno": -8.9
   },
   {
     "id": 10,
@@ -97,7 +97,7 @@
     "porcentajeAnterior": 3.01,
     "porcentaje": 6.95,
     "incremento": 3.94,
-    "desempeno": -6.66
+    "desempeno": -8.39
   },
   {
     "id": 11,
@@ -107,7 +107,7 @@
     "porcentajeAnterior": 1.9,
     "porcentaje": 5.36,
     "incremento": 3.45,
-    "desempeno": -36.16
+    "desempeno": 11.62
   },
   {
     "id": 12,
@@ -117,7 +117,7 @@
     "porcentajeAnterior": 2.46,
     "porcentaje": 13.27,
     "incremento": 10.81,
-    "desempeno": 270.94
+    "desempeno": 113.97 
   },
   {
     "id": 13,
@@ -127,7 +127,7 @@
     "porcentajeAnterior": 2.2,
     "porcentaje": 8.69,
     "incremento": 6.48,
-    "desempeno": 106.44
+    "desempeno": 56.52
   },
   {
     "id": 14,
@@ -137,7 +137,7 @@
     "porcentajeAnterior": 10.71,
     "porcentaje": 6.12,
     "incremento": -4.58,
-    "desempeno": -81.48
+    "desempeno": -77.30
   },
   {
     "id": 15,
@@ -147,7 +147,7 @@
     "porcentajeAnterior": 2.98,
     "porcentaje": 7.87,
     "incremento": 4.89,
-    "desempeno": 25.09
+    "desempeno": 4.72
   },
   {
     "id": 16,
@@ -157,6 +157,6 @@
     "porcentajeAnterior": 5.05,
     "porcentaje": 7.66,
     "incremento": 2.61,
-    "desempeno": -30.27
+    "desempeno": -39.78
   }
 ]
