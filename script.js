@@ -104,6 +104,15 @@ async function setupCandidatesModule(type, jsonFile, searchId, selectId, gridId,
 
     if (!searchInput || !selectFilter || !grid) return;
 
+    // Helper para limpiar acentos y mayúsculas
+    function cleanText(str) {
+      return String(str || '')
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .trim();
+    }
+
     // Poblar desplegable de ubicaciones
     const locations = [...new Set(candidates.map(item => item.ubicacion))].filter(Boolean).sort();
     locations.forEach(loc => {
@@ -129,37 +138,45 @@ async function setupCandidatesModule(type, jsonFile, searchId, selectId, gridId,
       });
     }
 
-    // Función de filtrado
+    // Función de filtrado actualizada
     function applyFilters() {
-  const nameQuery = cleanText(searchInput.value);
-  const locationQuery = selectFilter.value;
-  const actionQuery = actionFilter ? actionFilter.value.trim() : '';
+      const query = cleanText(searchInput.value);
+      const locationQuery = selectFilter.value;
+      const actionQuery = actionFilter ? actionFilter.value.trim() : '';
 
-  const filtered = candidates.filter(c => {
-    const candidateName = cleanText(c.nombre);
-    const candidateLocation = cleanText(c.ubicacion);
+      const filtered = candidates.filter(c => {
+        // Evaluamos nombre, cabecera, distrito y ubicación completa
+        const nameText = cleanText(c.nombre);
+        const cabeceraText = cleanText(c.cabecera);
+        const distritoText = cleanText(c.distrito);
+        const ubicacionText = cleanText(c.ubicacion);
 
-    // Permite buscar tanto por nombre como por ubicación en el mismo input
-    const matchesQuery = candidateName.includes(nameQuery) || candidateLocation.includes(nameQuery);
-    
-    const matchesLocation = locationQuery === '' || c.ubicacion === locationQuery;
+        const matchesQuery = query === '' || 
+                             nameText.includes(query) || 
+                             cabeceraText.includes(query) || 
+                             distritoText.includes(query) || 
+                             ubicacionText.includes(query);
 
-    const candidateAction = (c.accionAfirmativa || '').trim();
-    const hasAction = candidateAction !== '' && candidateAction.toLowerCase() !== 'ninguna';
+        const matchesLocation = locationQuery === '' || c.ubicacion === locationQuery;
 
-    let matchesAction = true;
-    if (actionQuery === '__TODAS_ACCIONES__') {
-      matchesAction = hasAction;
-    } else if (actionQuery !== '') {
-      matchesAction = candidateAction === actionQuery;
+        const candidateAction = (c.accionAfirmativa || '').trim();
+        const hasAction = candidateAction !== '' && candidateAction.toLowerCase() !== 'ninguna';
+
+        let matchesAction = true;
+        if (actionQuery === '__TODAS_ACCIONES__') {
+          matchesAction = hasAction;
+        } else if (actionQuery !== '') {
+          matchesAction = candidateAction === actionQuery;
+        }
+
+        return matchesQuery && matchesLocation && matchesAction;
+      });
+
+      renderCards(filtered, grid);
     }
 
-    return matchesQuery && matchesLocation && matchesAction;
-  });
-
-  renderCards(filtered, grid);
-}
     searchInput.addEventListener('input', applyFilters);
+    searchInput.addEventListener('keyup', applyFilters);
     selectFilter.addEventListener('change', applyFilters);
     if (actionFilter) actionFilter.addEventListener('change', applyFilters);
 
