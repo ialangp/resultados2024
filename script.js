@@ -308,3 +308,72 @@ window.openImageModal = function(src, name, location) {
   }
 };
 
+async function setupRentabilidadModule(jsonFile, gridId, sortSelectId) {
+  try {
+    const response = await fetch(jsonFile);
+    if (!response.ok) return;
+    let data = await response.json();
+
+    const grid = document.getElementById(gridId);
+    const sortSelect = document.getElementById(sortSelectId);
+    if (!grid) return;
+
+    function renderRentabilidadCards(items) {
+      grid.innerHTML = '';
+      
+      items.forEach(item => {
+        const valorFormateado = new Intl.NumberFormat('es-MX', { 
+          style: 'currency', 
+          currency: 'MXN' 
+        }).format(item.Valor || 0);
+
+        const votosFormateados = new Intl.NumberFormat('es-MX').format(item.Votos || 0);
+
+        const cardHTML = `
+          <div class="candidate-card">
+            <div class="card-header">
+              <span class="location-badge">${item.Distrito} - ${item.Cabecera}</span>
+              <span class="badge-competitividad ${(item['Bloque de Competitividad'] || '').toUpperCase()}">
+                ${item['Bloque de Competitividad'] || 'N/A'}
+              </span>
+            </div>
+            <img src="${item.Fotografia}" alt="${item.Nombre}" class="candidate-img" onerror="this.src='img/default.jpg'">
+            <div class="candidate-info">
+              <h3>${item.Nombre}</h3>
+              <div class="rentabilidad-metrics">
+                <p><strong>Votos obtenidos:</strong> ${votosFormateados}</p>
+                <p class="valor-destacado"><strong>Valor estimado:</strong> ${valorFormateado}</p>
+              </div>
+            </div>
+          </div>
+        `;
+        grid.insertAdjacentHTML('beforeend', cardHTML);
+      });
+    }
+
+    function sortAndRender() {
+      const order = sortSelect ? sortSelect.value : 'desc';
+      
+      let sortedData = [...data];
+      if (order === 'desc') {
+        sortedData.sort((a, b) => b.Valor - a.Valor);
+      } else if (order === 'asc') {
+        sortedData.sort((a, b) => a.Valor - b.Valor);
+      } else if (order === 'votos-desc') {
+        sortedData.sort((a, b) => b.Votos - a.Votos);
+      }
+
+      renderRentabilidadCards(sortedData);
+    }
+
+    if (sortSelect) {
+      sortSelect.addEventListener('change', sortAndRender);
+    }
+
+    // Render inicial (ordenado de mayor a menor por defecto)
+    sortAndRender();
+
+  } catch (error) {
+    console.log(`Nota: Esperando archivo ${jsonFile} de Rentabilidad.`);
+  }
+}
