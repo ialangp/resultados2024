@@ -88,7 +88,20 @@
           </div>
 
           <div id="rentabilidad-alcaldias" class="report-container">
-            <!-- Contenedor para Rendimiento Alcaldías -->
+            <div class="candidates-filters">
+              <div class="filter-group">
+                <label for="search-rentabilidad-alcaldias">Buscar por nombre:</label>
+                <input type="text" id="search-rentabilidad-alcaldias" placeholder="Escribe el nombre..." class="filter-input">
+              </div>
+              <div class="filter-group">
+                <label for="sort-rentabilidad-alcaldias">Ordenar por Valor:</label>
+                <select id="sort-rentabilidad-alcaldias" class="filter-select">
+                  <option value="desc">Descendente (↓)</option>
+                  <option value="asc">Ascendente (↑)</option>
+                </select>
+              </div>
+            </div>
+            <div id="grid-rentabilidad-alcaldias" class="candidates-grid"></div>
           </div>
         </div>
       </div>
