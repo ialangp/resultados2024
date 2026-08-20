@@ -375,6 +375,12 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId, searchInp
           ? `<img src="${foto}" alt="${nombre}" class="candidate-avatar" loading="lazy" onclick="openImageModal('${foto}', '${nombre}', '${distrito}')" onerror="this.outerHTML='<div class=\\'candidate-avatar no-photo\\'>Sin foto</div>'">`
           : `<div class="candidate-avatar no-photo">Sin foto</div>`;
 
+                // Normalizar el bloque a slug (ej: "bloque-alto", "alto", "personas-jovenes")
+        const bloqueSlug = cleanText(bloque).replace(/[^a-z0-9]/g, '-');
+        
+        // Clase principal del badge según el valor
+        const badgeClass = `badge-competitividad badge-${bloqueSlug} ${bloqueSlug}`;
+        
         const cardContainer = document.createElement('div');
         cardContainer.className = 'candidate-card';
         cardContainer.innerHTML = `
@@ -383,17 +389,17 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId, searchInp
             <div class="candidate-info">
               <h3>${nombre}</h3>
               <span class="location-badge">🏛️ ${distrito} ${cabecera ? '- ' + cabecera : ''}</span>
-              <div class="emblema-accion-afirmativa ${bloqueClass}">
+              <div class="emblema-accion-afirmativa ${badgeClass}">
                 <span class="emblema-texto">${bloque}</span>
               </div>
             </div>
           </div>
-
+        
           <div class="performance-metric">
             <div class="metric-header-row">
               <span class="metric-label">Desglose de Rendimiento</span>
             </div>
-
+        
             <div class="rentabilidad-metric-grid">
               <div class="metric-data-item">
                 <span class="sub-label">Votos Obtenidos</span>
