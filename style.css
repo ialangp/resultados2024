@@ -809,6 +809,7 @@ body {
 .badge-competitividad.BAJO { background: #f8d7da; color: #721c24; }
 
 /* Grilla interna de métricas para Rentabilidad */
+/* Reutilización de grilla interna dentro de .performance-metric */
 .rentabilidad-metric-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
