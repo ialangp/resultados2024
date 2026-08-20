@@ -327,30 +327,51 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId) {
       items.forEach(item => {
         const val = item.valor ?? 0;
         const votos = item.votos ?? 0;
-        const nombre = item.nombre ?? 'Sin Nombre';
+        const nombre = (item.nombre ?? 'Sin Nombre').replace(/'/g, "\\'");
         const distrito = item.distrito ?? '';
         const cabecera = item.cabecera ?? '';
-        const foto = item.fotografia ?? 'img/default.jpg';
+        const foto = item.fotografia && item.fotografia.trim() !== '' ? item.fotografia : '';
         const bloque = item.bloqueCompetitividad ?? 'N/A';
 
         const valorFormateado = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(val);
         const votosFormateados = new Intl.NumberFormat('es-MX').format(votos);
 
+        // Clase dinámica para el bloque de competitividad
+        const bloqueClass = String(bloque).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]/g, '-');
+
+        // Avatar o reemplazo
+        const avatarHTML = foto
+          ? `<img src="${foto}" alt="${nombre}" class="candidate-avatar" loading="lazy" onerror="this.outerHTML='<div class=\\'candidate-avatar no-photo\\'>Sin foto</div>'">`
+          : `<div class="candidate-avatar no-photo">Sin foto</div>`;
+
         const cardContainer = document.createElement('div');
         cardContainer.className = 'candidate-card';
         cardContainer.innerHTML = `
-          <div class="card-header">
-            <span class="location-badge">${distrito} ${cabecera ? '- ' + cabecera : ''}</span>
-            <span class="badge-competitividad ${String(bloque).toUpperCase().replace(/\s+/g, '-')}">
-              ${bloque}
-            </span>
+          <div class="candidate-header">
+            ${avatarHTML}
+            <div class="candidate-info">
+              <h3>${nombre}</h3>
+              <span class="location-badge">🏛️ ${distrito} ${cabecera ? '- ' + cabecera : ''}</span>
+              <div class="emblema-accion-afirmativa badge-competitividad ${bloqueClass}">
+                <span class="emblema-texto">${bloque}</span>
+              </div>
+            </div>
           </div>
-          <img src="${foto}" alt="${nombre}" class="candidate-img" onerror="this.src='img/default.jpg'">
-          <div class="candidate-info">
-            <h3>${nombre}</h3>
-            <div class="rentabilidad-metrics">
-              <p><strong>Votos obtenidos:</strong> ${votosFormateados}</p>
-              <p class="valor-destacado"><strong>Valor estimado:</strong> ${valorFormateado}</p>
+
+          <div class="performance-metric">
+            <div class="metric-header-row">
+              <span class="metric-label">Métricas de Rentabilidad</span>
+            </div>
+
+            <div class="rentabilidad-metric-grid">
+              <div class="metric-data-item">
+                <span class="sub-label">Votos Obtenidos</span>
+                <span class="metric-number">${votosFormateados}</span>
+              </div>
+              <div class="metric-data-item highlight">
+                <span class="sub-label">Valor Estimado</span>
+                <span class="metric-number valor-destacado">${valorFormateado}</span>
+              </div>
             </div>
           </div>
         `;
@@ -359,7 +380,7 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId) {
 
       grid.appendChild(fragment);
     }
-
+    
     function sortAndRender() {
       const order = sortSelect ? sortSelect.value : 'desc';
       let sortedData = [...data];
