@@ -78,7 +78,10 @@ document.addEventListener('DOMContentLoaded', () => {
   setupCandidatesModule('alcaldias', 'candidatos-alcaldias.json', 'search-alcaldias', 'select-alcaldias', 'grid-alcaldias');
   setupCandidatesModule('distritos', 'candidatos-distritos.json', 'search-distritos', 'select-distritos', 'grid-distritos', 'select-acciones-distritos');
 
-  // 4. Configurar eventos de cierre para el Modal de Imágenes
+  // 4. Lógica para el módulo de Rentabilidad
+  setupRentabilidadModule('rentabilidad-distritos.json', 'grid-rentabilidad-distritos', 'sort-rentabilidad-distritos');
+  
+  // 5. Configurar eventos de cierre para el Modal de Imágenes
   const modal = document.getElementById('image-modal');
   const modalCloseBtn = document.getElementById('modal-close');
 
@@ -377,9 +380,4 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId) {
     console.log(`Nota: Esperando archivo ${jsonFile} de Rentabilidad.`);
   }
 }
-setupRentabilidadModule(
-  'rentabilidad-distritos.json', 
-  'grid-rentabilidad-distritos', 
-  'sort-rentabilidad-distritos'
-);
 
