@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+Fdocument.addEventListener('DOMContentLoaded', () => {
   const navButtons = document.querySelectorAll('.nav-btn');
   const levelSections = document.querySelectorAll('.level-section');
   const currentTitle = document.getElementById('current-title');
@@ -315,21 +315,36 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId) {
   try {
     const response = await fetch(jsonFile);
     
-    // 1. Verificación de respuesta HTTP
     if (!response.ok) {
-      console.error(`Error HTTP ${response.status}: No se pudo cargar el archivo "${jsonFile}". Revisa que el nombre y la ruta sean correctos.`);
+      console.error(`Error HTTP ${response.status}: No se pudo cargar "${jsonFile}".`);
       return;
     }
 
-    let data = await response.json();
+    const json = await response.json();
+    
+    // Extraer registros del objeto o usar el array directo en caso de compatibilidad
+    const data = json.registros || json; 
+    const kpis = json.kpis;
 
-    // 2. Verificación del contenedor en el DOM
     const grid = document.getElementById(gridId);
     const sortSelect = document.getElementById(sortSelectId);
 
     if (!grid) {
-      console.error(`No se encontró el elemento contenedor con id="${gridId}" en el HTML.`);
+      console.error(`No se encontró el contenedor con id="${gridId}".`);
       return;
+    }
+
+    // Actualizar KPIs dinámicamente si vienen en el JSON
+    if (kpis) {
+      const container = grid.closest('.report-container');
+      if (container) {
+        const kpiCards = container.querySelectorAll('.kpi-card .kpi-value');
+        if (kpiCards.length >= 3) {
+          kpiCards[0].textContent = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(kpis.presupuestoAnual);
+          kpiCards[1].textContent = new Intl.NumberFormat('es-MX').format(kpis.totalVotos);
+          kpiCards[2].textContent = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(kpis.valorVoto);
+        }
+      }
     }
 
     if (!Array.isArray(data) || data.length === 0) {
@@ -337,19 +352,18 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId) {
       return;
     }
 
-    // 3. Renderizado de tarjetas con soporte para mayúsculas/minúsculas
+    // Renderizado de las tarjetas
     function renderRentabilidadCards(items) {
       grid.innerHTML = '';
 
       items.forEach(item => {
-        // Tolerancia a las llaves del JSON (Mayúsculas/Minúsculas)
-        const val = item.Valor ?? item.valor ?? 0;
-        const votos = item.Votos ?? item.votos ?? 0;
-        const nombre = item.Nombre ?? item.nombre ?? 'Sin Candidato/Nombre';
-        const distrito = item.Distrito ?? item.distrito ?? '';
-        const cabecera = item.Cabecera ?? item.cabecera ?? '';
-        const foto = item.Fotografia ?? item.fotografia ?? item.foto ?? item.Foto ?? 'img/default.jpg';
-        const bloque = item['Bloque de Competitividad'] ?? item.bloqueCompetitividad ?? item.bloque ?? 'N/A';
+        const val = item.valor ?? item.Valor ?? 0;
+        const votos = item.votos ?? item.Votos ?? 0;
+        const nombre = item.nombre ?? item.Nombre ?? 'Sin Nombre';
+        const distrito = item.distrito ?? item.Distrito ?? '';
+        const cabecera = item.cabecera ?? item.Cabecera ?? '';
+        const foto = item.fotografia ?? item.Fotografia ?? 'img/default.jpg';
+        const bloque = item.bloqueCompetitividad ?? item['Bloque de Competitividad'] ?? 'N/A';
 
         const valorFormateado = new Intl.NumberFormat('es-MX', {
           style: 'currency',
@@ -380,17 +394,17 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId) {
       });
     }
 
-    // 4. Lógica de ordenamiento
+    // Lógica de ordenamiento
     function sortAndRender() {
       const order = sortSelect ? sortSelect.value : 'desc';
       let sortedData = [...data];
 
       if (order === 'desc') {
-        sortedData.sort((a, b) => (b.Valor ?? b.valor ?? 0) - (a.Valor ?? a.valor ?? 0));
+        sortedData.sort((a, b) => (b.valor ?? 0) - (a.valor ?? 0));
       } else if (order === 'asc') {
-        sortedData.sort((a, b) => (a.Valor ?? a.valor ?? 0) - (b.Valor ?? b.valor ?? 0));
+        sortedData.sort((a, b) => (a.valor ?? 0) - (b.valor ?? 0));
       } else if (order === 'votos-desc') {
-        sortedData.sort((a, b) => (b.Votos ?? b.votos ?? 0) - (a.Votos ?? a.votos ?? 0));
+        sortedData.sort((a, b) => (b.votos ?? 0) - (a.votos ?? 0));
       }
 
       renderRentabilidadCards(sortedData);
