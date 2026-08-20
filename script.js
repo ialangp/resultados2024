@@ -314,35 +314,61 @@ window.openImageModal = function(src, name, location) {
 async function setupRentabilidadModule(jsonFile, gridId, sortSelectId) {
   try {
     const response = await fetch(jsonFile);
-    if (!response.ok) return;
+    
+    // 1. Verificación de respuesta HTTP
+    if (!response.ok) {
+      console.error(`Error HTTP ${response.status}: No se pudo cargar el archivo "${jsonFile}". Revisa que el nombre y la ruta sean correctos.`);
+      return;
+    }
+
     let data = await response.json();
 
+    // 2. Verificación del contenedor en el DOM
     const grid = document.getElementById(gridId);
     const sortSelect = document.getElementById(sortSelectId);
-    if (!grid) return;
 
+    if (!grid) {
+      console.error(`No se encontró el elemento contenedor con id="${gridId}" en el HTML.`);
+      return;
+    }
+
+    if (!Array.isArray(data) || data.length === 0) {
+      grid.innerHTML = '<p style="color: var(--text-muted); padding: 1rem;">No se encontraron registros de rentabilidad.</p>';
+      return;
+    }
+
+    // 3. Renderizado de tarjetas con soporte para mayúsculas/minúsculas
     function renderRentabilidadCards(items) {
       grid.innerHTML = '';
-      
-      items.forEach(item => {
-        const valorFormateado = new Intl.NumberFormat('es-MX', { 
-          style: 'currency', 
-          currency: 'MXN' 
-        }).format(item.Valor || 0);
 
-        const votosFormateados = new Intl.NumberFormat('es-MX').format(item.Votos || 0);
+      items.forEach(item => {
+        // Tolerancia a las llaves del JSON (Mayúsculas/Minúsculas)
+        const val = item.Valor ?? item.valor ?? 0;
+        const votos = item.Votos ?? item.votos ?? 0;
+        const nombre = item.Nombre ?? item.nombre ?? 'Sin Candidato/Nombre';
+        const distrito = item.Distrito ?? item.distrito ?? '';
+        const cabecera = item.Cabecera ?? item.cabecera ?? '';
+        const foto = item.Fotografia ?? item.fotografia ?? item.foto ?? item.Foto ?? 'img/default.jpg';
+        const bloque = item['Bloque de Competitividad'] ?? item.bloqueCompetitividad ?? item.bloque ?? 'N/A';
+
+        const valorFormateado = new Intl.NumberFormat('es-MX', {
+          style: 'currency',
+          currency: 'MXN'
+        }).format(val);
+
+        const votosFormateados = new Intl.NumberFormat('es-MX').format(votos);
 
         const cardHTML = `
           <div class="candidate-card">
             <div class="card-header">
-              <span class="location-badge">${item.Distrito} - ${item.Cabecera}</span>
-              <span class="badge-competitividad ${(item['Bloque de Competitividad'] || '').toUpperCase()}">
-                ${item['Bloque de Competitividad'] || 'N/A'}
+              <span class="location-badge">${distrito} ${cabecera ? '- ' + cabecera : ''}</span>
+              <span class="badge-competitividad ${String(bloque).toUpperCase().replace(/\s+/g, '-')}">
+                ${bloque}
               </span>
             </div>
-            <img src="${item.Fotografia}" alt="${item.Nombre}" class="candidate-img" onerror="this.src='img/default.jpg'">
+            <img src="${foto}" alt="${nombre}" class="candidate-img" onerror="this.src='img/default.jpg'">
             <div class="candidate-info">
-              <h3>${item.Nombre}</h3>
+              <h3>${nombre}</h3>
               <div class="rentabilidad-metrics">
                 <p><strong>Votos obtenidos:</strong> ${votosFormateados}</p>
                 <p class="valor-destacado"><strong>Valor estimado:</strong> ${valorFormateado}</p>
@@ -354,16 +380,17 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId) {
       });
     }
 
+    // 4. Lógica de ordenamiento
     function sortAndRender() {
       const order = sortSelect ? sortSelect.value : 'desc';
-      
       let sortedData = [...data];
+
       if (order === 'desc') {
-        sortedData.sort((a, b) => b.Valor - a.Valor);
+        sortedData.sort((a, b) => (b.Valor ?? b.valor ?? 0) - (a.Valor ?? a.valor ?? 0));
       } else if (order === 'asc') {
-        sortedData.sort((a, b) => a.Valor - b.Valor);
+        sortedData.sort((a, b) => (a.Valor ?? a.valor ?? 0) - (b.Valor ?? b.valor ?? 0));
       } else if (order === 'votos-desc') {
-        sortedData.sort((a, b) => b.Votos - a.Votos);
+        sortedData.sort((a, b) => (b.Votos ?? b.votos ?? 0) - (a.Votos ?? a.votos ?? 0));
       }
 
       renderRentabilidadCards(sortedData);
@@ -373,11 +400,9 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId) {
       sortSelect.addEventListener('change', sortAndRender);
     }
 
-    // Render inicial (ordenado de mayor a menor por defecto)
     sortAndRender();
 
   } catch (error) {
-    console.log(`Nota: Esperando archivo ${jsonFile} de Rentabilidad.`);
+    console.error(`Error al procesar el módulo de rentabilidad (${jsonFile}):`, error);
   }
 }
-
