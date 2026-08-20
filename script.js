@@ -289,10 +289,7 @@ window.openImageModal = function(src, name, location) {
 async function setupRentabilidadModule(jsonFile, gridId, sortSelectId, searchInputId = null) {
   try {
     const response = await fetch(jsonFile);
-    if (!response.ok) {
-      console.error(`No se pudo cargar el archivo JSON: ${jsonFile}`);
-      return;
-    }
+    if (!response.ok) return;
 
     const json = await response.json();
     const data = json.registros || (Array.isArray(json) ? json : []);
@@ -302,14 +299,7 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId, searchInp
     const sortSelect = document.getElementById(sortSelectId);
     const searchInput = searchInputId ? document.getElementById(searchInputId) : null;
 
-    if (!grid) {
-      console.warn(`[Rentabilidad] No se encontró el contenedor con ID: "${gridId}"`);
-      return;
-    }
-
-    if (searchInputId && !searchInput) {
-      console.warn(`[Rentabilidad] ATENCIÓN: No se encontró el input buscador con ID: "${searchInputId}". Verifica tu HTML.`);
-    }
+    if (!grid) return;
 
     // Actualizar KPIs si existen
     if (kpis) {
@@ -324,12 +314,12 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId, searchInp
       }
     }
 
-    // Helper para obtener el nombre sin importar la clave del JSON
+    // Obtenemos la propiedad del nombre de forma flexible
     function getNombre(item) {
       return item.nombre || item.candidato || item.candidatoNombre || item.nombreCandidato || item.nombre_candidato || '';
     }
 
-    // Helper para limpiar acentos y diacríticos
+    // Normalizador para ignorar acentos/tildes y mayúsculas
     function cleanText(str) {
       return String(str || '')
         .toLowerCase()
@@ -401,6 +391,7 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId, searchInp
       grid.appendChild(fragment);
     }
 
+    // Lógica completa y cerrada de filtrado
     function applyFilterAndSort() {
       const searchQuery = searchInput ? cleanText(searchInput.value) : '';
       const order = sortSelect ? sortSelect.value : 'desc';
@@ -420,7 +411,7 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId, searchInp
       if (order === 'desc') {
         filtered.sort((a, b) => (b.valor ?? 0) - (a.valor ?? 0));
       } else if (order === 'asc') {
-        filtered.sort((a, b) => (a.valor ?? 0) - (b.valor ?? 0));
+        filtered.sort((a, b) => (a.valor ?? 0) - (a.valor ?? 0));
       } else if (order === 'votos-desc') {
         filtered.sort((a, b) => (b.votos ?? 0) - (a.votos ?? 0));
       }
