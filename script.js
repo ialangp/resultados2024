@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupCandidatesModule('distritos', 'candidatos-distritos.json', 'search-distritos', 'select-distritos', 'grid-distritos', 'select-acciones-distritos');
 
   // 4. Lógica para el módulo de Rentabilidad
-  setupRentabilidadModule('rentabilidad-distritos.json', 'grid-rentabilidad-distritos', 'sort-rentabilidad-distritos');
+  setupRentabilidadModule('rentabilidad-distritos.json', 'grid-rentabilidad-distritos', 'sort-rentabilidad-distritos','search-rentabilidad-distritos');
 
   // 5. Configurar eventos de cierre para el Modal de Imágenes
   const modal = document.getElementById('image-modal');
