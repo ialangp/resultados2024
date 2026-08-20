@@ -141,11 +141,39 @@
             </div>
             
             <!-- Modulo Rentabilidad Distritos Locales-->
-            <div id="rentabilidad-distritos" class="report-container">
-              <!-- Aquí insertas la visualización correspondiente a Distritos -->
-            
+            <div id="rentabilidad-distritos" class="report-container">   
+              <div class="kpi-container">
+                <div class="kpi-card">
+                  <span class="kpi-title">Presupuesto Anual</span>
+                  <span class="kpi-value">$72,996,690.00</span>
+                </div>
+                <div class="kpi-card">
+                  <span class="kpi-title">Total de Votos</span>
+                  <span class="kpi-value">526,835</span>
+                </div>
+                <div class="kpi-card highlight">
+                  <span class="kpi-title">Valor de cada Voto</span>
+                  <span class="kpi-value">$138.56</span>
+                </div>
+              </div>
+
+              <!-- BARRA DE FILTROS Y ORDENAMIENTO -->
+              <div class="controls-bar">
+                <div class="filter-group">
+                  <label for="sort-rentabilidad-distritos">Ordenar por Valor:</label>
+                  <select id="sort-rentabilidad-distritos" class="filter-select">
+                    <option value="desc">Mayor a Menor Valor (↓)</option>
+                    <option value="asc">Menor a Mayor Valor (↑)</option>
+                    <option value="votos-desc">Mayor a Menor Votos</option>
+                  </select>
+                </div>
+              </div>
+              <!-- GRID DE TARJETAS (Columnas A - H) -->
+              <div id="grid-rentabilidad-distritos" class="cards-grid"></div>      
             </div>
+            
             <div id="grid-distritos" class="candidates-grid"></div>
+            
           </div>
         </div>
       </div>
