@@ -872,30 +872,3 @@ body {
   color: #991b1b;
 }
 
-/* Compatibilidad general para los bloques dentro de emblema-accion-afirmativa */
-.emblema-accion-afirmativa.badge-bloque-alto,
-.emblema-accion-afirmativa.badge-alto,
-.emblema-accion-afirmativa.bloque-alto,
-.emblema-accion-afirmativa.alta {
-  background-color: #dcfce7 !important;
-  color: #166534 !important;
-  border: 1px solid #bbf7d0 !important;
-}
-
-.emblema-accion-afirmativa.badge-bloque-medio,
-.emblema-accion-afirmativa.badge-medio,
-.emblema-accion-afirmativa.bloque-medio,
-.emblema-accion-afirmativa.media {
-  background-color: #fef9c3 !important;
-  color: #854d0e !important;
-  border: 1px solid #fef08a !important;
-}
-
-.emblema-accion-afirmativa.badge-bloque-bajo,
-.emblema-accion-afirmativa.badge-bajo,
-.emblema-accion-afirmativa.bloque-bajo,
-.emblema-accion-afirmativa.baja {
-  background-color: #fee2e2 !important;
-  color: #991b1b !important;
-  border: 1px solid #fecaca !important;
-}
