@@ -377,3 +377,9 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId) {
     console.log(`Nota: Esperando archivo ${jsonFile} de Rentabilidad.`);
   }
 }
+setupRentabilidadModule(
+  'rentabilidad-distritos.json', 
+  'grid-rentabilidad-distritos', 
+  'sort-rentabilidad-distritos'
+);
+
