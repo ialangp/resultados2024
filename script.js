@@ -289,7 +289,10 @@ window.openImageModal = function(src, name, location) {
 async function setupRentabilidadModule(jsonFile, gridId, sortSelectId, searchInputId = null) {
   try {
     const response = await fetch(jsonFile);
-    if (!response.ok) return;
+    if (!response.ok) {
+      console.error(`No se pudo cargar el archivo JSON: ${jsonFile}`);
+      return;
+    }
 
     const json = await response.json();
     const data = json.registros || (Array.isArray(json) ? json : []);
@@ -299,7 +302,14 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId, searchInp
     const sortSelect = document.getElementById(sortSelectId);
     const searchInput = searchInputId ? document.getElementById(searchInputId) : null;
 
-    if (!grid) return;
+    if (!grid) {
+      console.warn(`[Rentabilidad] No se encontró el contenedor con ID: "${gridId}"`);
+      return;
+    }
+
+    if (searchInputId && !searchInput) {
+      console.warn(`[Rentabilidad] ATENCIÓN: No se encontró el input buscador con ID: "${searchInputId}". Verifica tu HTML.`);
+    }
 
     // Actualizar KPIs si existen
     if (kpis) {
@@ -314,9 +324,18 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId, searchInp
       }
     }
 
-    // Helper para obtener el nombre independientemente de cómo se llame la propiedad en el JSON
+    // Helper para obtener el nombre sin importar la clave del JSON
     function getNombre(item) {
-      return item.nombre || item.candidato || item.candidatoNombre || item.nombreCandidato || item.nombre_candidato || 'Sin Nombre';
+      return item.nombre || item.candidato || item.candidatoNombre || item.nombreCandidato || item.nombre_candidato || '';
+    }
+
+    // Helper para limpiar acentos y diacríticos
+    function cleanText(str) {
+      return String(str || '')
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .trim();
     }
 
     function renderRentabilidadCards(items) {
@@ -330,7 +349,8 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId, searchInp
       items.forEach(item => {
         const val = item.valor ?? 0;
         const votos = item.votos ?? 0;
-        const nombre = getNombre(item).replace(/'/g, "\\'");
+        const rawNombre = getNombre(item) || 'Sin Nombre';
+        const nombre = rawNombre.replace(/'/g, "\\'");
         const distrito = item.distrito ?? '';
         const cabecera = item.cabecera ?? '';
         const foto = item.fotografia && item.fotografia.trim() !== '' ? item.fotografia : '';
@@ -338,7 +358,7 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId, searchInp
 
         const valorFormateado = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(val);
         const votosFormateados = new Intl.NumberFormat('es-MX').format(votos);
-        const bloqueClass = 'badge-' + String(bloque).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]/g, '-');
+        const bloqueClass = 'badge-' + cleanText(bloque).replace(/[^a-z0-9]/g, '-');
 
         const avatarHTML = foto
           ? `<img src="${foto}" alt="${nombre}" class="candidate-avatar" loading="lazy" onclick="openImageModal('${foto}', '${nombre}', '${distrito}')" onerror="this.outerHTML='<div class=\\'candidate-avatar no-photo\\'>Sin foto</div>'">`
@@ -381,15 +401,16 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId, searchInp
       grid.appendChild(fragment);
     }
 
-    // Función de filtrado y ordenamiento corregida
     function applyFilterAndSort() {
-      const searchQuery = searchInput ? searchInput.value.toLowerCase().trim() : '';
+      const searchQuery = searchInput ? cleanText(searchInput.value) : '';
       const order = sortSelect ? sortSelect.value : 'desc';
 
       let filtered = data.filter(item => {
-        const nombreCandidato = getNombre(item).toLowerCase();
-        const distritoTexto = String(item.distrito || '').toLowerCase();
-        const cabeceraTexto = String(item.cabecera || '').toLowerCase();
+        if (!searchQuery) return true;
+
+        const nombreCandidato = cleanText(getNombre(item));
+        const distritoTexto = cleanText(item.distrito);
+        const cabeceraTexto = cleanText(item.cabecera);
 
         return nombreCandidato.includes(searchQuery) || 
                distritoTexto.includes(searchQuery) || 
@@ -408,7 +429,10 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId, searchInp
     }
 
     if (sortSelect) sortSelect.addEventListener('change', applyFilterAndSort);
-    if (searchInput) searchInput.addEventListener('input', applyFilterAndSort);
+    if (searchInput) {
+      searchInput.addEventListener('input', applyFilterAndSort);
+      searchInput.addEventListener('keyup', applyFilterAndSort);
+    }
 
     applyFilterAndSort();
 
