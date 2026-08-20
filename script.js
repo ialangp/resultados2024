@@ -316,54 +316,54 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId) {
     const response = await fetch(jsonFile);
     
     if (!response.ok) {
-      console.error(`Error HTTP ${response.status}: No se pudo cargar "${jsonFile}".`);
+      console.error(`Error HTTP ${response.status}: No se encontró el archivo "${jsonFile}".`);
       return;
     }
 
     const json = await response.json();
-    
-    // Extraer registros del objeto o usar el array directo en caso de compatibilidad
-    const data = json.registros || json; 
+
+    // ERROR CORREGIDO: Se extrae el arreglo 'registros' del objeto principal
+    const data = json.registros || (Array.isArray(json) ? json : []);
     const kpis = json.kpis;
 
     const grid = document.getElementById(gridId);
     const sortSelect = document.getElementById(sortSelectId);
 
     if (!grid) {
-      console.error(`No se encontró el contenedor con id="${gridId}".`);
+      console.error(`No se encontró el contenedor HTML con id="${gridId}".`);
       return;
     }
 
-    // Actualizar KPIs dinámicamente si vienen en el JSON
+    // Actualiza los KPIs si vienen en el JSON
     if (kpis) {
-      const container = grid.closest('.report-container');
-      if (container) {
-        const kpiCards = container.querySelectorAll('.kpi-card .kpi-value');
-        if (kpiCards.length >= 3) {
-          kpiCards[0].textContent = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(kpis.presupuestoAnual);
-          kpiCards[1].textContent = new Intl.NumberFormat('es-MX').format(kpis.totalVotos);
-          kpiCards[2].textContent = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(kpis.valorVoto);
+      const parentContainer = grid.closest('.report-container');
+      if (parentContainer) {
+        const kpiElements = parentContainer.querySelectorAll('.kpi-card .kpi-value');
+        if (kpiElements.length >= 3) {
+          kpiElements[0].textContent = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(kpis.presupuestoAnual);
+          kpiElements[1].textContent = new Intl.NumberFormat('es-MX').format(kpis.totalVotos);
+          kpiElements[2].textContent = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(kpis.valorVoto);
         }
       }
     }
 
-    if (!Array.isArray(data) || data.length === 0) {
+    if (data.length === 0) {
       grid.innerHTML = '<p style="color: var(--text-muted); padding: 1rem;">No se encontraron registros de rentabilidad.</p>';
       return;
     }
 
-    // Renderizado de las tarjetas
+    // Función para renderizar las tarjetas
     function renderRentabilidadCards(items) {
       grid.innerHTML = '';
 
       items.forEach(item => {
-        const val = item.valor ?? item.Valor ?? 0;
-        const votos = item.votos ?? item.Votos ?? 0;
-        const nombre = item.nombre ?? item.Nombre ?? 'Sin Nombre';
-        const distrito = item.distrito ?? item.Distrito ?? '';
-        const cabecera = item.cabecera ?? item.Cabecera ?? '';
-        const foto = item.fotografia ?? item.Fotografia ?? 'img/default.jpg';
-        const bloque = item.bloqueCompetitividad ?? item['Bloque de Competitividad'] ?? 'N/A';
+        const val = item.valor ?? 0;
+        const votos = item.votos ?? 0;
+        const nombre = item.nombre ?? 'Sin Nombre';
+        const distrito = item.distrito ?? '';
+        const cabecera = item.cabecera ?? '';
+        const foto = item.fotografia ?? 'img/default.jpg';
+        const bloque = item.bloqueCompetitividad ?? 'N/A';
 
         const valorFormateado = new Intl.NumberFormat('es-MX', {
           style: 'currency',
@@ -417,6 +417,13 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId) {
     sortAndRender();
 
   } catch (error) {
-    console.error(`Error al procesar el módulo de rentabilidad (${jsonFile}):`, error);
+    console.error(`Error al procesar la rentabilidad (${jsonFile}):`, error);
   }
 }
+document.addEventListener('DOMContentLoaded', () => {
+  setupRentabilidadModule(
+    'rentabilidad-distritos.json',
+    'grid-rentabilidad-distritos',
+    'sort-rentabilidad-distritos'
+  );
+});
