@@ -1,0 +1,339 @@
+{
+  "kpis": {
+    "presupuestoAnual": 72996685.34,
+    "totalVotos": 526835,
+    "valorVoto": 138.56
+  },
+  "registros": [
+    {
+      "id": 26,
+      "distrito": "DTO 26",
+      "cabecera": "COYOACAN",
+      "nombre": "PATRICIA URRIZA ARELLANO",
+      "fotografia": "img/mcDMR_Loc24/DTO26_ PATRICIA URRIZA.jpg",
+      "votos": 22496,
+      "valor": 3116978.62,
+      "bloqueCompetitividad": "ALTO"
+    },
+    {
+      "id": 3,
+      "distrito": "DTO 3",
+      "cabecera": "AZCAPOTZALCO",
+      "nombre": "LUISA FERNANDA LEDESMA ALPIZAR",
+      "fotografia": "img/mcDMR_Loc24/DTO 3 PROP_luisa fernanda ledesma alpizar.jpg",
+      "votos": 21733,
+      "valor": 3011259.62,
+      "bloqueCompetitividad": "ALTO"
+    },
+    {
+      "id": 4,
+      "distrito": "DTO 4",
+      "cabecera": "GAM",
+      "nombre": "CRISTIAN URIEL ROMERO GARCIA",
+      "fotografia": "img/mcDMR_Loc24/DTO 4 PROP_ CRISTIAN URIEL ROMERO GARCIA.jpg",
+      "votos": 21516,
+      "valor": 2981192.75,
+      "bloqueCompetitividad": "ALTO"
+    },
+    {
+      "id": 6,
+      "distrito": "DTO 6",
+      "cabecera": "GAM",
+      "nombre": "ALBERTO CASTRO ARRONA",
+      "fotografia": "img/mcDMR_Loc24/DTO 6 _PROPAlberto Castro Arrona.jpg",
+      "votos": 21182,
+      "valor": 2934914.71,
+      "bloqueCompetitividad": "MEDIO"
+    },
+    {
+      "id": 11,
+      "distrito": "DTO 11",
+      "cabecera": "V CARRANZA",
+      "nombre": "ALEJANDRA ORTIZ PITALUA",
+      "fotografia": "img/mcDMR_Loc24/DTO 11_ PROP_ Alejandra Pitalua.jpg",
+      "votos": 20953,
+      "valor": 2903185.15,
+      "bloqueCompetitividad": "ALTO"
+    },
+    {
+      "id": 2,
+      "distrito": "DTO 2",
+      "cabecera": "GAM",
+      "nombre": "KAREN ANDREA GONZALEZ ZAYAS",
+      "fotografia": "img/mcDMR_Loc24/DIP 2 PROP_KAREN ANDREA GONZALEZ ZAYAS.JPG",
+      "votos": 18682,
+      "valor": 2588522.17,
+      "bloqueCompetitividad": "MEDIO"
+    },
+    {
+      "id": 15,
+      "distrito": "DTO 15",
+      "cabecera": "IZTACALCO",
+      "nombre": "OSCAR HERNANDEZ FRIAS",
+      "fotografia": "img/mcDMR_Loc24/DIP 15 PROP OSCAR HERNANDEZ FRIAS.JPG",
+      "votos": 18504,
+      "valor": 2563859.02,
+      "bloqueCompetitividad": "ALTO"
+    },
+    {
+      "id": 30,
+      "distrito": "DTO 30",
+      "cabecera": "COYOACAN",
+      "nombre": "SILVANA CARRANZA NAVARRO",
+      "fotografia": "img/mcDMR_Loc24/DTO 30_ SILVANA CARRANZA.jpg",
+      "votos": 17794,
+      "valor": 2465483.54,
+      "bloqueCompetitividad": "BAJO"
+    },
+    {
+      "id": 8,
+      "distrito": "DTO 8",
+      "cabecera": "TLAHUAC",
+      "nombre": "ROBERTO ISAAC GARCIA MEJIA",
+      "fotografia": "img/mcDMR_Loc24/DTO 8 PROP_ROBERTO ISAC GARCIA MEJIA.jpg",
+      "votos": 17495,
+      "valor": 2424054.99,
+      "bloqueCompetitividad": "ALTO"
+    },
+    {
+      "id": 10,
+      "distrito": "DTO 10",
+      "cabecera": "V CARRANZA",
+      "nombre": "LEONARDO CAMACHO AMEZCUA",
+      "fotografia": "img/mcDMR_Loc24/DTO 10 PROP LEONARDO CAMACHO AMEZCUA.JPG",
+      "votos": 17253,
+      "valor": 2390524.19,
+      "bloqueCompetitividad": "MEDIO"
+    },
+    {
+      "id": 20,
+      "distrito": "DTO 20",
+      "cabecera": "ALVARO OBREGON / CUAJIMALPA",
+      "nombre": "EDMUNDO JOSEMARIA CRUZ COTERO",
+      "fotografia": "img/mcDMR_Loc24/DTO 20_Edmundo Cotero.jpg",
+      "votos": 17253,
+      "valor": 2390524.19,
+      "bloqueCompetitividad": "ALTO"
+    },
+    {
+      "id": 9,
+      "distrito": "DTO 9",
+      "cabecera": "CUAHTEMOC",
+      "nombre": "ERICK MICHEL ANGELLO DIEP GOMEZ",
+      "fotografia": "img/mcDMR_Loc24/DIP 9 PROP ANGELO DIEP.JPG",
+      "votos": 16914,
+      "valor": 2343553.36,
+      "bloqueCompetitividad": "MEDIO"
+    },
+    {
+      "id": 5,
+      "distrito": "DTO 5",
+      "cabecera": "AZCAPOTZALCO",
+      "nombre": "JUAN ANTONIO SALINAS ALMAGUER",
+      "fotografia": "img/mcDMR_Loc24/DTO 5_PROP_ JUAN ANTONIO SALINAS.jpg",
+      "votos": 16757,
+      "valor": 2321799.91,
+      "bloqueCompetitividad": "MEDIO"
+    },
+    {
+      "id": 25,
+      "distrito": "DTO 25",
+      "cabecera": "XOCHIMILCO",
+      "nombre": "RIZEL PICCINI GARCINI",
+      "fotografia": "img/mcDMR_Loc24/DTO25_PROP_RIZEL PICCINI GARCINI.jpg",
+      "votos": 16569,
+      "valor": 2295751.19,
+      "bloqueCompetitividad": "ALTO"
+    },
+    {
+      "id": 24,
+      "distrito": "DTO 24",
+      "cabecera": "IZTAPALAPA",
+      "nombre": "NATALIA FERNANDA PERALTA FLORES",
+      "fotografia": "img/mcDMR_Loc24/DIP24_PROP_NATALIA FERNANDA PERALTA FLORES.jpg",
+      "votos": 16249,
+      "valor": 2251412.95,
+      "bloqueCompetitividad": "MEDIO"
+    },
+    {
+      "id": 16,
+      "distrito": "DTO 16",
+      "cabecera": "TLALPAN",
+      "nombre": "PEDRO MARTIN GARCIA SILVA",
+      "fotografia": "img/mcDMR_Loc24/DTO 16 PEDRO MARTIN GARCIA SILVA PROP.JPG",
+      "votos": 15883,
+      "valor": 2200701.08,
+      "bloqueCompetitividad": "ALTO"
+    },
+    {
+      "id": 12,
+      "distrito": "DTO 12",
+      "cabecera": "CUAHTEMOC",
+      "nombre": "ESTEBAN ALEJANDRO BARRALES MAGDALENO",
+      "fotografia": "img/mcDMR_Loc24/DTO 12_PROP_ESTEBAN ALEJANDRO BARRALES MAGDALENO.jpg",
+      "votos": 15630,
+      "valor": 2165646.15,
+      "bloqueCompetitividad": "MEDIO"
+    },
+    {
+      "id": 1,
+      "distrito": "DTO 1",
+      "cabecera": "GAM",
+      "nombre": "ELDA ROSA DUARTE USCANGA",
+      "fotografia": "img/mcDMR_Loc24/DTO 1 PROP_ELDA ROSA DUARTE USCANGA.jpg",
+      "votos": 15612,
+      "valor": 2163152.13,
+      "bloqueCompetitividad": "ALTO"
+    },
+    {
+      "id": 32,
+      "distrito": "DTO 32",
+      "cabecera": "ALVARO OBREGON",
+      "nombre": "MARINA COLON SALAZAR",
+      "fotografia": "img/mcDMR_Loc24/DTO 32_ PROP _Marina Colon Salazar_YA.jpg",
+      "votos": 15271,
+      "valor": 2115904.19,
+      "bloqueCompetitividad": "MEDIO"
+    },
+    {
+      "id": 14,
+      "distrito": "DTO 14",
+      "cabecera": "TLALPAN",
+      "nombre": "NANCY NAVA VENEGAS",
+      "fotografia": "img/mcDMR_Loc24/DTO 14_ NANCY NAVA.jpg",
+      "votos": 15022,
+      "valor": 2081403.49,
+      "bloqueCompetitividad": "BAJO"
+    },
+    {
+      "id": 17,
+      "distrito": "DTO 17",
+      "cabecera": "BENITO JUAREZ",
+      "nombre": "LUIS MANUEL LEON HERNANDEZ",
+      "fotografia": "img/mcDMR_Loc24/DTO17_PROP_LUIS MANUEL LEON HERNANDEZ.jpg",
+      "votos": 14848,
+      "valor": 2057294.57,
+      "bloqueCompetitividad": "BAJO"
+    },
+    {
+      "id": 19,
+      "distrito": "DTO 19",
+      "cabecera": "TLALPAN / XOCHIMILCO",
+      "nombre": "ANGEL NOE MENDOZA ARZATE",
+      "fotografia": "img/mcDMR_Loc24/DTO 19_ Angel Noe Mendoza Arzate.jpg",
+      "votos": 14846,
+      "valor": 2057017.45,
+      "bloqueCompetitividad": "BAJO"
+    },
+    {
+      "id": 7,
+      "distrito": "DTO 7",
+      "cabecera": "MILPA ALTA / TLAHUAC",
+      "nombre": "ROSARIO ERICKA GOMEZ ROMERO",
+      "fotografia": "img/mcDMR_Loc24/DTO7_PROP_ROSARIO ERICKA GOMEZ ROMERO.jpg",
+      "votos": 14581,
+      "valor": 2020299.85,
+      "bloqueCompetitividad": "ALTO"
+    },
+    {
+      "id": 23,
+      "distrito": "DTO 23",
+      "cabecera": "ALVARO OBREGON",
+      "nombre": "LUCIA ALEJANDRA PUENTE GARCIA",
+      "fotografia": "img/mcDMR_Loc24/DTO 23_PROP- ALEJANDRA PUENTE.jpeg",
+      "votos": 14426,
+      "valor": 1998823.51,
+      "bloqueCompetitividad": "BAJO"
+    },
+    {
+      "id": 18,
+      "distrito": "DTO 18",
+      "cabecera": "ALVARO OBREGON / BJ",
+      "nombre": "MARIA DEL CARMEN SANTIAGO VASCONCELOS",
+      "fotografia": "img/mcDMR_Loc24/dto 18_prop_ maria del carmen santiago.jpg",
+      "votos": 14214,
+      "valor": 1969449.42,
+      "bloqueCompetitividad": "BAJO"
+    },
+    {
+      "id": 22,
+      "distrito": "DTO 22",
+      "cabecera": "IZTAPALAPA",
+      "nombre": "ANA LETICIA SOTO REYES",
+      "fotografia": "img/mcDMR_Loc24/DTO 22 PROP_ ANA LETICIA SOTO REYES.jpg",
+      "votos": 14109,
+      "valor": 1954900.93,
+      "bloqueCompetitividad": "MEDIO"
+    },
+    {
+      "id": 28,
+      "distrito": "DTO 28",
+      "cabecera": "IZTAPALAPA",
+      "nombre": "GUADALUPE TORRES QUEVEDO",
+      "fotografia": "img/mcDMR_Loc24/DTO 28 PROP_GUADALUPE TORRES QUEVEDO.jpg",
+      "votos": 13970,
+      "valor": 1935641.51,
+      "bloqueCompetitividad": "MEDIO"
+    },
+    {
+      "id": 33,
+      "distrito": "DTO 33",
+      "cabecera": "LA MAGDALENA CONTRERAS",
+      "nombre": "ARTURO GUILLEN GONZALEZ",
+      "fotografia": "img/mcDMR_Loc24/DTO33_PROP_ARTURO GUILLEN GONZALEZ.JPG",
+      "votos": 13853,
+      "valor": 1919430.34,
+      "bloqueCompetitividad": "MEDIO"
+    },
+    {
+      "id": 21,
+      "distrito": "DTO 21",
+      "cabecera": "IZTAPALAPA",
+      "nombre": "SAMUEL CARRILLO AMEZCUA",
+      "fotografia": "img/mcDMR_Loc24/DTO 21 PROP_SAMUEL CARRILLO AMEZCUA.jpg",
+      "votos": 12212,
+      "valor": 1692058.28,
+      "bloqueCompetitividad": "BAJO"
+    },
+    {
+      "id": 13,
+      "distrito": "DTO 13",
+      "cabecera": "MIGUEL HIDALGO",
+      "nombre": "LESLIE FERNANDA ROBLES RODRIGUEZ",
+      "fotografia": "img/mcDMR_Loc24/DMR13_PROP_LESLIE FERNANDA ROBLES RODRIGUEZ.jpg",
+      "votos": 11160,
+      "valor": 1546296.29,
+      "bloqueCompetitividad": "BAJO"
+    },
+    {
+      "id": 29,
+      "distrito": "DTO 29",
+      "cabecera": "IZTAPALAPA",
+      "nombre": "CAROL STEPHANY LUNA ALVARADO",
+      "fotografia": "img/mcDMR_Loc24/DTO 29_PROP CAROL LUNA.jpg",
+      "votos": 10968,
+      "valor": 1519693.35,
+      "bloqueCompetitividad": "BAJO"
+    },
+    {
+      "id": 27,
+      "distrito": "DTO 27",
+      "cabecera": "IZTAPALAPA",
+      "nombre": "SONIA OSORIO VAZQUEZ",
+      "fotografia": "img/mcDMR_Loc24/DTO 27 _PROP_Sonia Osorio Vazquez.jpg",
+      "votos": 9937,
+      "valor": 1376841.06,
+      "bloqueCompetitividad": "BAJO"
+    },
+    {
+      "id": 31,
+      "distrito": "DTO 31",
+      "cabecera": "IZTAPALAPA",
+      "nombre": "VICENTA HUERTA MARTINEZ",
+      "fotografia": "img/mcDMR_Loc24/DTO31_PROP_VICENTA HUERTA MARTINEZ.jpg",
+      "votos": 8943,
+      "valor": 1239115.39,
+      "bloqueCompetitividad": "BAJO"
+    }
+  ]
+}
