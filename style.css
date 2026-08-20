@@ -756,3 +756,54 @@ body {
   color: #ffffff;
   border-color: #ef4444;
 }
+
+
+/* Tarjetas de KPIs */
+.kpi-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.kpi-card {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 1.25rem;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.04);
+}
+
+.kpi-card.highlight {
+  border-color: #ff8c00;
+  background: #fff8f0;
+}
+
+.kpi-title {
+  display: block;
+  font-size: 0.85rem;
+  color: #666;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.kpi-value {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #1a1a1a;
+}
+
+/* Badges de Competitividad */
+.badge-competitividad {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.badge-competitividad.ALTO { background: #d4edda; color: #155724; }
+.badge-competitividad.MEDIO { background: #fff3cd; color: #856404; }
+.badge-competitividad.BAJO { background: #f8d7da; color: #721c24; }
