@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupCandidatesModule('distritos', 'candidatos-distritos.json', 'search-distritos', 'select-distritos', 'grid-distritos', 'select-acciones-distritos');
 
   // 4. Lógica para el módulo de Rentabilidad
-  setupRentabilidadModule('rentabilidad-distritos.json', 'grid-rentabilidad-distritos', 'sort-rentabilidad-distritos','search-rentabilidad-distritos');
+  setupRentabilidadModule('rentabilidad-distritos.json', 'grid-rentabilidad-distritos', 'sort-rentabilidad-distritos', 'search-rentabilidad-distritos');
 
   // 5. Configurar eventos de cierre para el Modal de Imágenes
   const modal = document.getElementById('image-modal');
@@ -91,6 +91,15 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+// Helper universal para limpiar texto y normalizar
+function cleanText(str) {
+  return String(str || '')
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim();
+}
+
 async function setupCandidatesModule(type, jsonFile, searchId, selectId, gridId, actionSelectId = null) {
   try {
     const response = await fetch(jsonFile);
@@ -103,15 +112,6 @@ async function setupCandidatesModule(type, jsonFile, searchId, selectId, gridId,
     const grid = document.getElementById(gridId);
 
     if (!searchInput || !selectFilter || !grid) return;
-
-    // Helper para limpiar acentos y mayúsculas
-    function cleanText(str) {
-      return String(str || '')
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .trim();
-    }
 
     // Poblar desplegable de ubicaciones
     const locations = [...new Set(candidates.map(item => item.ubicacion))].filter(Boolean).sort();
@@ -138,14 +138,12 @@ async function setupCandidatesModule(type, jsonFile, searchId, selectId, gridId,
       });
     }
 
-    // Función de filtrado actualizada
     function applyFilters() {
       const query = cleanText(searchInput.value);
       const locationQuery = selectFilter.value;
       const actionQuery = actionFilter ? actionFilter.value.trim() : '';
 
       const filtered = candidates.filter(c => {
-        // Evaluamos nombre, cabecera, distrito y ubicación completa
         const nameText = cleanText(c.nombre);
         const cabeceraText = cleanText(c.cabecera);
         const distritoText = cleanText(c.distrito);
@@ -242,7 +240,7 @@ function renderCards(list, container) {
       const claveAccion = accionTexto.toLowerCase();
       const pathSvg = iconMap[claveAccion] || '<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>';
       const tooltipTexto = tooltipMap[claveAccion] || `Acción Afirmativa: ${accionTexto}`;
-      const claseEspecial = 'badge-' + claveAccion.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]/g, '-');
+      const claseEspecial = 'badge-' + cleanText(claveAccion).replace(/[^a-z0-9]/g, '-');
 
       emblemaHTML = `
         <div class="emblema-accion-afirmativa ${claseEspecial}" title="${tooltipTexto}">
@@ -310,17 +308,32 @@ window.openImageModal = function(src, name, location) {
 async function setupRentabilidadModule(jsonFile, gridId, sortSelectId, searchInputId = null) {
   try {
     const response = await fetch(jsonFile);
-    if (!response.ok) return;
+    if (!response.ok) {
+      console.error(`Error al cargar ${jsonFile}: HTTP ${response.status}`);
+      return;
+    }
 
     const json = await response.json();
-    const data = json.registros || (Array.isArray(json) ? json : []);
-    const kpis = json.kpis;
+    
+    // Normalizar la lectura de datos: soporta si viene en 'registros', 'data', o es un Array directo
+    let data = [];
+    if (Array.isArray(json)) {
+      data = json;
+    } else if (json && Array.isArray(json.registros)) {
+      data = json.registros;
+    } else if (json && Array.isArray(json.data)) {
+      data = json.data;
+    }
 
+    const kpis = json.kpis;
     const grid = document.getElementById(gridId);
     const sortSelect = document.getElementById(sortSelectId);
     const searchInput = searchInputId ? document.getElementById(searchInputId) : null;
 
-    if (!grid) return;
+    if (!grid) {
+      console.warn(`No se encontró el contenedor con ID: ${gridId}`);
+      return;
+    }
 
     // Actualizar KPIs si existen
     if (kpis) {
@@ -335,23 +348,13 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId, searchInp
       }
     }
 
-    // Obtenemos la propiedad del nombre de forma flexible
     function getNombre(item) {
       return item.nombre || item.candidato || item.candidatoNombre || item.nombreCandidato || item.nombre_candidato || '';
     }
 
-    // Normalizador para ignorar acentos/tildes y mayúsculas
-    function cleanText(str) {
-      return String(str || '')
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .trim();
-    }
-
     function renderRentabilidadCards(items) {
       grid.innerHTML = '';
-      if (items.length === 0) {
+      if (!items || items.length === 0) {
         grid.innerHTML = '<p style="color: var(--text-muted); padding: 1rem;">No se encontraron registros con los criterios seleccionados.</p>';
         return;
       }
@@ -364,21 +367,17 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId, searchInp
         const nombre = rawNombre.replace(/'/g, "\\'");
         const distrito = item.distrito ?? '';
         const cabecera = item.cabecera ?? '';
-        const foto = item.fotografia && item.fotografia.trim() !== '' ? item.fotografia : '';
+        const foto = (item.fotografia || item.foto || '').trim();
         const bloque = item.bloqueCompetitividad ?? item.bloque ?? 'N/A';
 
         const valorFormateado = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(val);
         const votosFormateados = new Intl.NumberFormat('es-MX').format(votos);
-        const bloqueClass = 'badge-' + cleanText(bloque).replace(/[^a-z0-9]/g, '-');
 
         const avatarHTML = foto
           ? `<img src="${foto}" alt="${nombre}" class="candidate-avatar" loading="lazy" onclick="openImageModal('${foto}', '${nombre}', '${distrito}')" onerror="this.outerHTML='<div class=\\'candidate-avatar no-photo\\'>Sin foto</div>'">`
           : `<div class="candidate-avatar no-photo">Sin foto</div>`;
 
-                // Normalizar el bloque a slug (ej: "bloque-alto", "alto", "personas-jovenes")
         const bloqueSlug = cleanText(bloque).replace(/[^a-z0-9]/g, '-');
-        
-        // Clase principal del badge según el valor
         const badgeClass = `badge-competitividad badge-${bloqueSlug} ${bloqueSlug}`;
         
         const cardContainer = document.createElement('div');
@@ -387,7 +386,7 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId, searchInp
           <div class="candidate-header">
             ${avatarHTML}
             <div class="candidate-info">
-              <h3>${nombre}</h3>
+              <h3>${rawNombre}</h3>
               <span class="location-badge">🏛️ ${distrito} ${cabecera ? '- ' + cabecera : ''}</span>
               <div class="emblema-accion-afirmativa ${badgeClass}">
                 <span class="emblema-texto">${bloque}</span>
@@ -418,7 +417,6 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId, searchInp
       grid.appendChild(fragment);
     }
 
-    // Lógica completa y cerrada de filtrado
     function applyFilterAndSort() {
       const searchQuery = searchInput ? cleanText(searchInput.value) : '';
       const order = sortSelect ? sortSelect.value : 'desc';
@@ -438,7 +436,7 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId, searchInp
       if (order === 'desc') {
         filtered.sort((a, b) => (b.valor ?? 0) - (a.valor ?? 0));
       } else if (order === 'asc') {
-        filtered.sort((a, b) => (a.valor ?? 0) - (a.valor ?? 0));
+        filtered.sort((a, b) => (a.valor ?? 0) - (b.valor ?? 0));
       } else if (order === 'votos-desc') {
         filtered.sort((a, b) => (b.votos ?? 0) - (a.votos ?? 0));
       }
@@ -452,6 +450,7 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId, searchInp
       searchInput.addEventListener('keyup', applyFilterAndSort);
     }
 
+    // Renderizado inicial
     applyFilterAndSort();
 
   } catch (error) {
