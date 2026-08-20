@@ -131,30 +131,34 @@ async function setupCandidatesModule(type, jsonFile, searchId, selectId, gridId,
 
     // Función de filtrado
     function applyFilters() {
-      const nameQuery = searchInput.value.toLowerCase().trim();
-      const locationQuery = selectFilter.value;
-      const actionQuery = actionFilter ? actionFilter.value.trim() : '';
+  const nameQuery = cleanText(searchInput.value);
+  const locationQuery = selectFilter.value;
+  const actionQuery = actionFilter ? actionFilter.value.trim() : '';
 
-      const filtered = candidates.filter(c => {
-        const matchesName = (c.nombre || '').toLowerCase().includes(nameQuery);
-        const matchesLocation = locationQuery === '' || c.ubicacion === locationQuery;
+  const filtered = candidates.filter(c => {
+    const candidateName = cleanText(c.nombre);
+    const candidateLocation = cleanText(c.ubicacion);
 
-        const candidateAction = (c.accionAfirmativa || '').trim();
-        const hasAction = candidateAction !== '' && candidateAction.toLowerCase() !== 'ninguna';
+    // Permite buscar tanto por nombre como por ubicación en el mismo input
+    const matchesQuery = candidateName.includes(nameQuery) || candidateLocation.includes(nameQuery);
+    
+    const matchesLocation = locationQuery === '' || c.ubicacion === locationQuery;
 
-        let matchesAction = true;
-        if (actionQuery === '__TODAS_ACCIONES__') {
-          matchesAction = hasAction;
-        } else if (actionQuery !== '') {
-          matchesAction = candidateAction === actionQuery;
-        }
+    const candidateAction = (c.accionAfirmativa || '').trim();
+    const hasAction = candidateAction !== '' && candidateAction.toLowerCase() !== 'ninguna';
 
-        return matchesName && matchesLocation && matchesAction;
-      });
-
-      renderCards(filtered, grid);
+    let matchesAction = true;
+    if (actionQuery === '__TODAS_ACCIONES__') {
+      matchesAction = hasAction;
+    } else if (actionQuery !== '') {
+      matchesAction = candidateAction === actionQuery;
     }
 
+    return matchesQuery && matchesLocation && matchesAction;
+  });
+
+  renderCards(filtered, grid);
+}
     searchInput.addEventListener('input', applyFilters);
     selectFilter.addEventListener('change', applyFilters);
     if (actionFilter) actionFilter.addEventListener('change', applyFilters);
