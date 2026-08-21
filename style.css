@@ -759,7 +759,7 @@ body {
 
 
 /* ==========================================
-   TARJETAS DE KPIS (FORZADO EN DESKTOP Y MÓVIL)
+   TARJETAS DE KPIS
    ========================================== */
 .kpi-container {
   display: grid;
@@ -768,33 +768,26 @@ body {
   margin-bottom: 2rem;
 }
 
-/* Tarjetas estándar: Presupuesto y Votos (Naranja) */
-.report-container .kpi-card,
 .kpi-card {
-  background: #ffffff !important;
-  border: 1px solid var(--border-color) !important;
-  border-top: none !important; /* Remueve la línea azul superior en desktop */
-  border-left: 5px solid #f97316 !important; /* Línea lateral naranja */
-  border-radius: 12px !important;
-  padding: 1.25rem !important;
-  text-align: left !important;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03) !important;
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-left: 5px solid #f97316; /* Acabado lateral naranja */
+  border-radius: 12px;
+  padding: 1.25rem;
+  text-align: left;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.report-container .kpi-card:hover,
 .kpi-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
 }
 
-/* Tarjeta destacada: Valor de cada Voto (Verde) */
-.report-container .kpi-card.highlight,
 .kpi-card.highlight {
-  background: #ffffff !important;
-  border: 1px solid #bbf7d0 !important;
-  border-top: none !important;
-  border-left: 5px solid #10b981 !important; /* Línea lateral verde */
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+  border-left-color: #10b981; /* Acabado lateral verde */
 }
 
 .kpi-title {
@@ -815,7 +808,7 @@ body {
 }
 
 .kpi-card.highlight .kpi-value {
-  color: #047857 !important;
+  color: #047857;
 }
 
 /* Badges de Competitividad */
