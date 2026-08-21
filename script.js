@@ -433,3 +433,7 @@ function closeImageModal() {
     modal.classList.remove('show');
   }
 }
+
+// Asignar al objeto window para resolver eventos onclick en HTML dinámico
+window.openImageModal = openImageModal;
+window.closeImageModal = closeImageModal;
