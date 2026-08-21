@@ -538,10 +538,11 @@ body {
 
 /* --- BLOQUE DE MÉTRICAS VISUALES --- */
 .performance-metric {
-  background: #f8fafc !important;
-  padding: 1rem !important;
-  border-radius: 10px !important;
-  border: 1px solid #f1f5f9;
+ background-color: #f8fafc;
+  border-radius: 10px;
+  padding: 1rem;
+  border-left: 4px solid var(--accent-color, #10b981); /* Línea de acento lateral */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .metric-header-row {
