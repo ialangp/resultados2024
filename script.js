@@ -414,26 +414,26 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId, searchInp
   }
 }
 
-function openImageModal(src, nombre, distrito) {
-  const modal = document.getElementById('image-modal');
-  const img = document.getElementById('modal-img');
-  const caption = document.getElementById('modal-caption');
+// Abrir modal con validación y formato HTML en la leyenda
+window.openImageModal = function(src, name, location) {
+  if (!src || src.trim() === '') return;
 
-  if (modal && img && caption) {
-    img.src = src;
-    img.alt = nombre;
-    caption.textContent = `${nombre} (${distrito})`;
+  const modal = document.getElementById('image-modal');
+  const modalImg = document.getElementById('modal-img');
+  const modalCaption = document.getElementById('modal-caption');
+
+  if (modal && modalImg && modalCaption) {
+    modalImg.src = src;
+    modalImg.alt = name || '';
+    modalCaption.innerHTML = `${name}<br><span style="font-weight:600; color:var(--text-muted); font-size:0.85rem;">🏛️ ${location}</span>`;
     modal.classList.add('show');
   }
-}
+};
 
-function closeImageModal() {
+// Cerrar modal
+window.closeImageModal = function() {
   const modal = document.getElementById('image-modal');
   if (modal) {
     modal.classList.remove('show');
   }
-}
-
-// Asignar al objeto window para resolver eventos onclick en HTML dinámico
-window.openImageModal = openImageModal;
-window.closeImageModal = closeImageModal;
+};
