@@ -335,8 +335,9 @@ async function setupRendimientoModule(jsonFile, gridId, sortSelectId, searchInpu
 
         const valorFormateado = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(val);
         const votosFormateados = new Intl.NumberFormat('es-MX').format(votos);
-        const bloqueClass = 'badge-' + String(bloque).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]/g, '-');
-
+        const bloqueLimpio = String(bloque).toLowerCase().trim();
+        const bloqueClass = `badge-bloque-${bloqueLimpio} badge-${bloqueLimpio}`;
+        
         const avatarHTML = foto
           ? `<img src="${foto}" alt="${nombre}" class="candidate-avatar" loading="lazy" onclick="openImageModal('${foto}', '${nombre}', '${distrito}')" onerror="this.outerHTML='<div class=\\'candidate-avatar no-photo\\'>Sin foto</div>'">`
           : `<div class="candidate-avatar no-photo">Sin foto</div>`;
