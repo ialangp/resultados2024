@@ -759,42 +759,59 @@ body {
 
 
 /* Tarjetas de KPIs */
+/* ==========================================
+   TARJETAS DE KPIS (MODERNO Y ELEGANTE)
+   ========================================== */
 .kpi-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1rem;
+  gap: 1.25rem;
   margin-bottom: 2rem;
 }
 
 .kpi-card {
   background: #ffffff;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--border-color);
+  border-top: 4px solid var(--sidebar-active, #2563eb); /* Acabado superior en azul institucional */
   border-radius: 12px;
   padding: 1.25rem;
-  text-align: center;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.04);
+  text-align: left;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.kpi-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
+}
+
+/* Tarjeta destacada (Valor de cada Voto) */
 .kpi-card.highlight {
-  border-color: #ff8c00;
-  background: #fff8f0;
+  background: #f0fdf4 !important; /* Fondo verde esmeralda muy tenue */
+  border: 1px solid #bbf7d0 !important;
+  border-top: 4px solid #10b981 !important; /* Acento verde esmeralda */
 }
 
 .kpi-title {
   display: block;
-  font-size: 0.85rem;
-  color: #666;
+  font-size: 0.75rem;
+  color: var(--text-muted);
   text-transform: uppercase;
   font-weight: 700;
-  margin-bottom: 0.5rem;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.4rem;
 }
 
 .kpi-value {
-  font-size: 1.6rem;
+  font-size: 1.65rem;
   font-weight: 800;
-  color: #1a1a1a;
+  color: var(--text-primary);
+  line-height: 1.2;
 }
 
+.kpi-card.highlight .kpi-value {
+  color: #047857; /* Verde oscuro para el número destacado */
+}
 /* Badges de Competitividad */
 .badge-competitividad {
   display: inline-block;
