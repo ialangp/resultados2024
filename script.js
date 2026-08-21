@@ -317,68 +317,69 @@ async function setupRendimientoModule(jsonFile, gridId, sortSelectId, searchInpu
     }
 
     function renderRendimientoCards(items) {
-      grid.innerHTML = '';
-      if (items.length === 0) {
-        grid.innerHTML = '<p style="color: var(--text-muted); padding: 1rem;">No se encontraron registros con los criterios seleccionados.</p>';
-        return;
-      }
+  grid.innerHTML = '';
+  if (items.length === 0) {
+    grid.innerHTML = '<p style="color: var(--text-muted); padding: 1rem;">No se encontraron registros con los criterios seleccionados.</p>';
+    return;
+  }
 
-      const fragment = document.createDocumentFragment();
-      items.forEach(item => {
-        const val = item.valor ?? 0;
-        const votos = item.votos ?? 0;
-        const nombre = getNombre(item).replace(/'/g, "\\'");
-        const distrito = item.distrito ?? '';
-        const cabecera = item.cabecera ?? '';
-        const foto = item.fotografia && item.fotografia.trim() !== '' ? item.fotografia : '';
-        const bloque = item.bloqueCompetitividad ?? item.bloque ?? 'N/A';
+  const fragment = document.createDocumentFragment();
+  items.forEach(item => {
+    const val = item.valor ?? 0;
+    const votos = item.votos ?? 0;
+    const nombre = getNombre(item).replace(/'/g, "\\'");
+    const distrito = item.distrito ?? '';
+    const cabecera = item.cabecera ?? '';
+    const foto = item.fotografia && item.fotografia.trim() !== '' ? item.fotografia : '';
+    const bloque = item.bloqueCompetitividad ?? item.bloque ?? 'N/A';
 
-        const valorFormateado = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(val);
-        const votosFormateados = new Intl.NumberFormat('es-MX').format(votos);
-        const bloqueLimpio = String(bloque).toLowerCase().trim();
-        const bloqueClass = `badge-bloque-${bloqueLimpio} badge-${bloqueLimpio}`;
-        
-        const avatarHTML = foto
-          ? `<img src="${foto}" alt="${nombre}" class="candidate-avatar" loading="lazy" onclick="openImageModal('${foto}', '${nombre}', '${distrito}')" onerror="this.outerHTML='<div class=\\'candidate-avatar no-photo\\'>Sin foto</div>'">`
-          : `<div class="candidate-avatar no-photo">Sin foto</div>`;
+    const valorFormateado = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(val);
+    const votosFormateados = new Intl.NumberFormat('es-MX').format(votos);
 
-        const cardContainer = document.createElement('div');
-        cardContainer.className = 'candidate-card positive-card';
-        cardContainer.innerHTML = `
-          <div class="candidate-header">
-            ${avatarHTML}
-            <div class="candidate-info">
-              <h3>${nombre}</h3>
-              <span class="location-badge">🏛️ ${distrito} ${cabecera ? '- ' + cabecera : ''}</span>
-              <div class="emblema-accion-afirmativa ${bloqueClass}">
-                <span class="emblema-texto">${bloque}</span>
-              </div>
-            </div>
+    // Mapeo preciso para coincidir con tu CSS (.bloque-alto, .bloque-medio, .bloque-bajo)
+    const bloqueLimpio = String(bloque).toLowerCase().trim();
+    const subClaseBloque = `bloque-${bloqueLimpio}`; 
+
+    const avatarHTML = foto
+      ? `<img src="${foto}" alt="${nombre}" class="candidate-avatar" loading="lazy" onclick="openImageModal('${foto}', '${nombre}', '${distrito}')" onerror="this.outerHTML='<div class=\\'candidate-avatar no-photo\\'>Sin foto</div>'">`
+      : `<div class="candidate-avatar no-photo">Sin foto</div>`;
+
+    const cardContainer = document.createElement('div');
+    cardContainer.className = 'candidate-card positive-card';
+    cardContainer.innerHTML = `
+      <div class="candidate-header">
+        ${avatarHTML}
+        <div class="candidate-info">
+          <h3>${nombre}</h3>
+          <span class="location-badge">🏛️ ${distrito} ${cabecera ? '- ' + cabecera : ''}</span>
+          <div class="badge-competitividad ${subClaseBloque}">
+            <span>Bloque ${bloque}</span>
           </div>
+        </div>
+      </div>
 
-          <div class="performance-metric">
-            <div class="metric-header-row">
-              <span class="metric-label">Desglose de Rendimiento</span>
-            </div>
+      <div class="performance-metric">
+        <div class="metric-header-row">
+          <span class="metric-label">Desglose de Rendimiento</span>
+        </div>
 
-            <div class="rendimiento-metric-grid">
-              <div class="metric-data-item">
-                <span class="sub-label">Votos Obtenidos</span>
-                <span class="metric-number">${votosFormateados}</span>
-              </div>
-              <div class="metric-data-item highlight">
-                <span class="sub-label">Valor Estimado</span>
-                <span class="metric-number valor-destacado">${valorFormateado}</span>
-              </div>
-            </div>
+        <div class="rendimiento-metric-grid">
+          <div class="metric-data-item">
+            <span class="sub-label">Votos Obtenidos</span>
+            <span class="metric-number">${votosFormateados}</span>
           </div>
-        `;
-        fragment.appendChild(cardContainer);
-      });
+          <div class="metric-data-item highlight">
+            <span class="sub-label">Valor Estimado</span>
+            <span class="metric-number valor-destacado">${valorFormateado}</span>
+          </div>
+        </div>
+      </div>
+    `;
+    fragment.appendChild(cardContainer);
+  });
 
-      grid.appendChild(fragment);
-    }
-
+  grid.appendChild(fragment);
+}
     // Función de filtrado y ordenamiento corregida
     function applyFilterAndSort() {
       const searchQuery = searchInput ? searchInput.value.toLowerCase().trim() : '';
