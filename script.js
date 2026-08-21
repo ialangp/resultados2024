@@ -413,3 +413,23 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId, searchInp
     console.error(`Error al procesar el módulo de Rendimiento (${jsonFile}):`, error);
   }
 }
+
+function openImageModal(src, nombre, distrito) {
+  const modal = document.getElementById('image-modal');
+  const img = document.getElementById('modal-img');
+  const caption = document.getElementById('modal-caption');
+
+  if (modal && img && caption) {
+    img.src = src;
+    img.alt = nombre;
+    caption.textContent = `${nombre} (${distrito})`;
+    modal.classList.add('show');
+  }
+}
+
+function closeImageModal() {
+  const modal = document.getElementById('image-modal');
+  if (modal) {
+    modal.classList.remove('show');
+  }
+}
