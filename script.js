@@ -129,14 +129,14 @@ async function setupCandidatesModule(type, jsonFile, searchId, selectId, gridId,
       });
     }
 
-    // Función de filtrado
+    // Función de filtrado con búsqueda multicampo
     function applyFilters() {
       const searchQuery = searchInput.value.toLowerCase().trim();
       const locationQuery = selectFilter.value;
       const actionQuery = actionFilter ? actionFilter.value.trim() : '';
 
       const filtered = candidates.filter(c => {
-        // Coincidencia amplia: Nombre, Cabecera, Distrito o Ubicación
+        // Coincidencia amplia en la barra de texto
         const nombreTexto = String(c.nombre || '').toLowerCase();
         const cabeceraTexto = String(c.cabecera || '').toLowerCase();
         const distritoTexto = String(c.distrito || '').toLowerCase();
@@ -216,7 +216,8 @@ function renderCards(list, container) {
     const desSign = isDesPositive ? '+' : '';
 
     const safeName = (item.nombre || 'Sin Candidato').replace(/'/g, "\\'");
-    const safeLocation = (item.ubicacion || '').replace(/'/g, "\\'");
+    // SE CORRIGE LA DECLARACIÓN DE UBICACIÓN
+    const safeLocation = (item.ubicacion || `${item.distrito || ''} ${item.cabecera ? '- ' + item.cabecera : ''}`).replace(/'/g, "\\'");
 
     const hasPhoto = item.foto && item.foto.trim() !== '';
     const avatarHTML = hasPhoto
@@ -250,7 +251,7 @@ function renderCards(list, container) {
         ${avatarHTML}
         <div class="candidate-info">
           <h3>${item.nombre || 'Sin Candidato'}</h3>
-          <span class="location-badge">🏛️ ${item.ubicacion}</span>
+          <span class="location-badge">🏛️ ${item.ubicacion || (item.distrito + (item.cabecera ? ' - ' + item.cabecera : ''))}</span>
           ${emblemaHTML}
         </div>
       </div>
@@ -281,20 +282,6 @@ function renderCards(list, container) {
 
   container.appendChild(fragment);
 }
-
-window.openImageModal = function(src, name, location) {
-  if (!src || src.trim() === '') return;
-
-  const modal = document.getElementById('image-modal');
-  const modalImg = document.getElementById('modal-img');
-  const modalCaption = document.getElementById('modal-caption');
-
-  if (modal && modalImg && modalCaption) {
-    modalImg.src = src;
-    modalCaption.innerHTML = `${name}<br><span style="font-weight:600; color:var(--text-muted); font-size:0.85rem;">🏛️ ${location}</span>`;
-    modal.classList.add('show');
-  }
-};
 
 async function setupRentabilidadModule(jsonFile, gridId, sortSelectId, searchInputId = null) {
   try {
