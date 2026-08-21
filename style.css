@@ -760,7 +760,7 @@ body {
 
 /* Tarjetas de KPIs */
 /* ==========================================
-   TARJETAS DE KPIS (MODERNO Y ELEGANTE)
+   TARJETAS DE KPIS (SOMBRA/ACENTO IZQUIERDO)
    ========================================== */
 .kpi-container {
   display: grid;
@@ -769,10 +769,11 @@ body {
   margin-bottom: 2rem;
 }
 
+/* Estilo base para tarjetas estándar (Presupuesto y Votos) */
 .kpi-card {
   background: #ffffff;
   border: 1px solid var(--border-color);
-  border-top: 4px solid var(--sidebar-active, #2563eb); /* Acabado superior en azul institucional */
+  border-left: 5px solid #f97316 !important; /* Línea/Acento lateral naranja */
   border-radius: 12px;
   padding: 1.25rem;
   text-align: left;
@@ -785,11 +786,11 @@ body {
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
 }
 
-/* Tarjeta destacada (Valor de cada Voto) */
+/* Tarjeta destacada (Valor de cada Voto en Verde Esmeralda) */
 .kpi-card.highlight {
-  background: #f0fdf4 !important; /* Fondo verde esmeralda muy tenue */
+  background: #f0fdf4 !important;
   border: 1px solid #bbf7d0 !important;
-  border-top: 4px solid #10b981 !important; /* Acento verde esmeralda */
+  border-left: 5px solid #10b981 !important; /* Línea lateral verde */
 }
 
 .kpi-title {
@@ -810,8 +811,9 @@ body {
 }
 
 .kpi-card.highlight .kpi-value {
-  color: #047857; /* Verde oscuro para el número destacado */
+  color: #047857; /* Texto del valor en verde oscuro */
 }
+
 /* Badges de Competitividad */
 .badge-competitividad {
   display: inline-block;
