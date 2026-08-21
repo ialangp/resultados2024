@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const toggleBtn = document.getElementById('toggle-sidebar');
   const closeBtn = document.getElementById('close-sidebar');
 
-  // Disparar evento de resize para gráficos
+  // Disparar evento de resize para gráficos de Flourish
   function triggerFlourishResize() {
     setTimeout(() => {
       window.dispatchEvent(new Event('resize'));
@@ -69,11 +69,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 3. Cargas aisladas e independientes
+  // 3. Cargas aisladas e independientes de candidatos
   setupCandidatesModule('alcaldias', 'candidatos-alcaldias.json', 'search-alcaldias', 'select-alcaldias', 'grid-alcaldias');
   setupCandidatesModule('distritos', 'candidatos-distritos.json', 'search-distritos', 'select-distritos', 'grid-distritos', 'select-acciones-distritos');
   
-  // Módulo de Rentabilidad / Rendimiento
+  // Módulos de Rentabilidad / Rendimiento (Ambos niveles activados)
+  setupRentabilidadModule('rentabilidad-alcaldias.json', 'grid-rentabilidad-alcaldias', 'sort-rentabilidad-alcaldias', 'search-rentabilidad-alcaldias');
   setupRentabilidadModule('rentabilidad-distritos.json', 'grid-rentabilidad-distritos', 'sort-rentabilidad-distritos', 'search-rentabilidad-distritos');
 
   // 4. Configurar Modal de Imágenes
@@ -259,7 +260,7 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId, searchInp
   try {
     const response = await fetch(jsonFile);
     if (!response.ok) {
-      grid.innerHTML = `<p style="color:var(--text-muted); padding:1rem; grid-column:1/-1;">Error HTTP ${response.status}: No se pudo cargar ${jsonFile}</p>`;
+      grid.innerHTML = `<p style="color:var(--text-muted); padding:1rem; grid-column:1/-1;">Error HTTP ${response.status}: No se pudo cargar el archivo ${jsonFile}</p>`;
       return;
     }
 
@@ -275,6 +276,8 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId, searchInp
       data = json.data;
     } else if (json && Array.isArray(json.candidatos)) {
       data = json.candidatos;
+    } else if (json && Array.isArray(json.distritos)) {
+      data = json.distritos;
     }
 
     if (data.length === 0) {
@@ -282,10 +285,8 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId, searchInp
       return;
     }
 
+    // Actualización dinámica de KPIs
     const kpis = json.kpis;
-    const sortSelect = document.getElementById(sortSelectId);
-    const searchInput = searchInputId ? document.getElementById(searchInputId) : null;
-
     if (kpis) {
       const parentContainer = grid.closest('.report-container');
       if (parentContainer) {
@@ -298,8 +299,24 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId, searchInp
       }
     }
 
-    function getNombre(item) {
-      return item.nombre || item.candidato || item.candidatoNombre || item.nombreCandidato || item.nombre_candidato || '';
+    const sortSelect = document.getElementById(sortSelectId);
+    const searchInput = searchInputId ? document.getElementById(searchInputId) : null;
+
+    // Extracción tolerante a múltiples llaves en JSON
+    function getItemValor(item) {
+      return Number(item.valor ?? item.valorEstimado ?? item.valor_estimado ?? item.monto ?? 0);
+    }
+
+    function getItemVotos(item) {
+      return Number(item.votos ?? item.votosObtenidos ?? item.votos_obtenidos ?? item.votosTotales ?? 0);
+    }
+
+    function getItemNombre(item) {
+      return String(item.nombre || item.candidato || item.candidatoNombre || item.nombreCandidato || item.nombre_candidato || '');
+    }
+
+    function getItemUbicacion(item) {
+      return String(item.distrito ?? item.ubicacion ?? item.alcaldia ?? item.cabecera ?? '');
     }
 
     function renderRentabilidadCards(items) {
@@ -311,20 +328,20 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId, searchInp
 
       const fragment = document.createDocumentFragment();
       items.forEach(item => {
-        const val = item.valor ?? item.valorEstimado ?? 0;
-        const votos = item.votos ?? item.votosObtenidos ?? 0;
-        const rawNombre = getNombre(item) || 'Sin Nombre';
-        const nombre = rawNombre.replace(/'/g, "\\'");
-        const distrito = item.distrito ?? item.ubicacion ?? '';
-        const cabecera = item.cabecera ?? '';
+        const val = getItemValor(item);
+        const votos = getItemVotos(item);
+        const rawNombre = getItemNombre(item) || 'Sin Nombre';
+        const nombreModal = rawNombre.replace(/'/g, "\\'");
+        const distrito = getItemUbicacion(item);
+        const cabecera = item.cabecera ? String(item.cabecera) : '';
         const foto = (item.fotografia || item.foto || '').trim();
-        const bloque = item.bloqueCompetitividad ?? item.bloque ?? 'N/A';
+        const bloque = String(item.bloqueCompetitividad ?? item.bloque ?? item.competitividad ?? 'N/A');
 
         const valorFormateado = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(val);
         const votosFormateados = new Intl.NumberFormat('es-MX').format(votos);
 
         const avatarHTML = foto
-          ? `<img src="${foto}" alt="${nombre}" class="candidate-avatar" loading="lazy" onclick="openImageModal('${foto}', '${nombre}', '${distrito}')" onerror="this.outerHTML='<div class=\\'candidate-avatar no-photo\\'>Sin foto</div>'">`
+          ? `<img src="${foto}" alt="${nombreModal}" class="candidate-avatar" loading="lazy" onclick="openImageModal('${foto}', '${nombreModal}', '${distrito}')" onerror="this.outerHTML='<div class=\\'candidate-avatar no-photo\\'>Sin foto</div>'">`
           : `<div class="candidate-avatar no-photo">Sin foto</div>`;
 
         const bloqueSlug = cleanText(bloque).replace(/[^a-z0-9]/g, '-');
@@ -373,8 +390,8 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId, searchInp
 
       let filtered = data.filter(item => {
         if (!searchQuery) return true;
-        const nombreCandidato = cleanText(getNombre(item));
-        const distritoTexto = cleanText(item.distrito);
+        const nombreCandidato = cleanText(getItemNombre(item));
+        const distritoTexto = cleanText(getItemUbicacion(item));
         const cabeceraTexto = cleanText(item.cabecera);
 
         return nombreCandidato.includes(searchQuery) || 
@@ -382,11 +399,11 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId, searchInp
                cabeceraTexto.includes(searchQuery);
       });
 
-      if (order === 'desc') {
-        filtered.sort((a, b) => (b.valor ?? b.valorEstimado ?? 0) - (a.valor ?? a.valorEstimado ?? 0));
-      } else if (order === 'asc') {
-        filtered.sort((a, b) => (a.valor ?? a.valorEstimado ?? 0) - (b.valor ?? b.valorEstimado ?? 0));
-      }
+      filtered.sort((a, b) => {
+        const valA = getItemValor(a);
+        const valB = getItemValor(b);
+        return order === 'desc' ? valB - valA : valA - valB;
+      });
 
       renderRentabilidadCards(filtered);
     }
@@ -399,5 +416,6 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId, searchInp
 
   } catch (error) {
     console.error(`Error procesando JSON de rendimiento (${jsonFile}):`, error);
+    grid.innerHTML = `<p style="color:var(--text-muted); padding:1rem; grid-column:1/-1;">Error al procesar el archivo ${jsonFile}. Revisa la consola o asegúrate de estar corriendo el proyecto mediante un servidor local (HTTP).</p>`;
   }
 }
