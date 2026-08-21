@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const toggleBtn = document.getElementById('toggle-sidebar');
   const closeBtn = document.getElementById('close-sidebar');
 
-  // Disparar evento de resize para gráficos de Flourish
+  // Disparar evento de resize para gráficos
   function triggerFlourishResize() {
     setTimeout(() => {
       window.dispatchEvent(new Event('resize'));
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 2. Cambio de Módulo (Resultados vs Competitividad vs Candidatos vs Rendimiento)
+  // 2. Cambio de Módulo / Pestañas
   const tabButtons = document.querySelectorAll('.tab-btn');
   tabButtons.forEach(tab => {
     tab.addEventListener('click', () => {
@@ -69,14 +69,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 3. Lógica para el módulo de Candidatos
+  // 3. Cargas aisladas e independientes
   setupCandidatesModule('alcaldias', 'candidatos-alcaldias.json', 'search-alcaldias', 'select-alcaldias', 'grid-alcaldias');
   setupCandidatesModule('distritos', 'candidatos-distritos.json', 'search-distritos', 'select-distritos', 'grid-distritos', 'select-acciones-distritos');
-
-  // 4. Lógica para el módulo de Rentabilidad / Rendimiento
+  
+  // Módulo de Rentabilidad / Rendimiento
   setupRentabilidadModule('rentabilidad-distritos.json', 'grid-rentabilidad-distritos', 'sort-rentabilidad-distritos', 'search-rentabilidad-distritos');
 
-  // 5. Configurar Modal de Imágenes
+  // 4. Configurar Modal de Imágenes
   const modal = document.getElementById('image-modal');
   const modalCloseBtn = document.getElementById('modal-close');
 
@@ -112,15 +112,17 @@ async function setupCandidatesModule(type, jsonFile, searchId, selectId, gridId,
     const actionFilter = actionSelectId ? document.getElementById(actionSelectId) : null;
     const grid = document.getElementById(gridId);
 
-    if (!searchInput || !selectFilter || !grid) return;
+    if (!grid) return;
 
-    const locations = [...new Set(candidates.map(item => item.ubicacion))].filter(Boolean).sort();
-    locations.forEach(loc => {
-      const option = document.createElement('option');
-      option.value = loc;
-      option.textContent = loc;
-      selectFilter.appendChild(option);
-    });
+    if (selectFilter) {
+      const locations = [...new Set(candidates.map(item => item.ubicacion))].filter(Boolean).sort();
+      locations.forEach(loc => {
+        const option = document.createElement('option');
+        option.value = loc;
+        option.textContent = loc;
+        selectFilter.appendChild(option);
+      });
+    }
 
     if (actionFilter) {
       const actions = [...new Set(
@@ -138,8 +140,8 @@ async function setupCandidatesModule(type, jsonFile, searchId, selectId, gridId,
     }
 
     function applyFilters() {
-      const query = cleanText(searchInput.value);
-      const locationQuery = selectFilter.value;
+      const query = searchInput ? cleanText(searchInput.value) : '';
+      const locationQuery = selectFilter ? selectFilter.value : '';
       const actionQuery = actionFilter ? actionFilter.value.trim() : '';
 
       const filtered = candidates.filter(c => {
@@ -172,8 +174,8 @@ async function setupCandidatesModule(type, jsonFile, searchId, selectId, gridId,
       renderCards(filtered, grid);
     }
 
-    searchInput.addEventListener('input', applyFilters);
-    selectFilter.addEventListener('change', applyFilters);
+    if (searchInput) searchInput.addEventListener('input', applyFilters);
+    if (selectFilter) selectFilter.addEventListener('change', applyFilters);
     if (actionFilter) actionFilter.addEventListener('change', applyFilters);
 
     renderCards(candidates, grid);
@@ -249,18 +251,21 @@ window.openImageModal = function(src, name, location) {
 
 async function setupRentabilidadModule(jsonFile, gridId, sortSelectId, searchInputId = null) {
   const grid = document.getElementById(gridId);
-  if (!grid) return;
+  if (!grid) {
+    console.error(`[Rentabilidad] No existe el contenedor DOM con ID: #${gridId}`);
+    return;
+  }
 
   try {
     const response = await fetch(jsonFile);
     if (!response.ok) {
-      grid.innerHTML = `<p style="color:var(--text-muted); padding:1rem; grid-column:1/-1;">Error al cargar datos (${response.status})</p>`;
+      grid.innerHTML = `<p style="color:var(--text-muted); padding:1rem; grid-column:1/-1;">Error HTTP ${response.status}: No se pudo cargar ${jsonFile}</p>`;
       return;
     }
 
     const json = await response.json();
 
-    // Extraer registros de forma segura según la estructura del JSON
+    // Extraer array sin importar la llave del objeto raíz
     let data = [];
     if (Array.isArray(json)) {
       data = json;
@@ -268,13 +273,19 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId, searchInp
       data = json.registros;
     } else if (json && Array.isArray(json.data)) {
       data = json.data;
+    } else if (json && Array.isArray(json.candidatos)) {
+      data = json.candidatos;
+    }
+
+    if (data.length === 0) {
+      grid.innerHTML = '<p style="color: var(--text-muted); padding: 1rem; grid-column: 1/-1;">El archivo JSON no contiene una lista de registros válida.</p>';
+      return;
     }
 
     const kpis = json.kpis;
     const sortSelect = document.getElementById(sortSelectId);
     const searchInput = searchInputId ? document.getElementById(searchInputId) : null;
 
-    // Actualizar KPIs si existen en el JSON
     if (kpis) {
       const parentContainer = grid.closest('.report-container');
       if (parentContainer) {
@@ -383,7 +394,7 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId, searchInp
     if (sortSelect) sortSelect.addEventListener('change', applyFilterAndSort);
     if (searchInput) searchInput.addEventListener('input', applyFilterAndSort);
 
-    // Ejecutar renderizado inicial
+    // Renderizado inicial
     applyFilterAndSort();
 
   } catch (error) {
