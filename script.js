@@ -131,12 +131,22 @@ async function setupCandidatesModule(type, jsonFile, searchId, selectId, gridId,
 
     // Función de filtrado
     function applyFilters() {
-      const nameQuery = searchInput.value.toLowerCase().trim();
+      const searchQuery = searchInput.value.toLowerCase().trim();
       const locationQuery = selectFilter.value;
       const actionQuery = actionFilter ? actionFilter.value.trim() : '';
 
       const filtered = candidates.filter(c => {
-        const matchesName = (c.nombre || '').toLowerCase().includes(nameQuery);
+        // Coincidencia amplia: Nombre, Cabecera, Distrito o Ubicación
+        const nombreTexto = String(c.nombre || '').toLowerCase();
+        const cabeceraTexto = String(c.cabecera || '').toLowerCase();
+        const distritoTexto = String(c.distrito || '').toLowerCase();
+        const ubicacionTexto = String(c.ubicacion || '').toLowerCase();
+
+        const matchesSearch = nombreTexto.includes(searchQuery) ||
+                              cabeceraTexto.includes(searchQuery) ||
+                              distritoTexto.includes(searchQuery) ||
+                              ubicacionTexto.includes(searchQuery);
+
         const matchesLocation = locationQuery === '' || c.ubicacion === locationQuery;
 
         const candidateAction = (c.accionAfirmativa || '').trim();
@@ -149,7 +159,7 @@ async function setupCandidatesModule(type, jsonFile, searchId, selectId, gridId,
           matchesAction = candidateAction === actionQuery;
         }
 
-        return matchesName && matchesLocation && matchesAction;
+        return matchesSearch && matchesLocation && matchesAction;
       });
 
       renderCards(filtered, grid);
