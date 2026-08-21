@@ -72,8 +72,8 @@ document.addEventListener('DOMContentLoaded', () => {
   setupCandidatesModule('alcaldias', 'candidatos-alcaldias.json', 'search-alcaldias', 'select-alcaldias', 'grid-alcaldias');
   setupCandidatesModule('distritos', 'candidatos-distritos.json', 'search-distritos', 'select-distritos', 'grid-distritos', 'select-acciones-distritos');
 
-  // 4. Lógica para el módulo de Rentabilidad
-  setupRentabilidadModule('rentabilidad-distritos.json', 'grid-rentabilidad-distritos', 'sort-rentabilidad-distritos','search-rentabilidad-distritos');
+  // 4. Lógica para el módulo de Rendimiento
+  setupRendimientoModule('rendimiento-distritos.json', 'grid-rendimiento-distritos', 'sort-rendimiento-distritos','search-rendimiento-distritos');
 
   // 5. Configurar eventos de cierre para el Modal de Imágenes
   const modal = document.getElementById('image-modal');
@@ -283,7 +283,7 @@ function renderCards(list, container) {
   container.appendChild(fragment);
 }
 
-async function setupRentabilidadModule(jsonFile, gridId, sortSelectId, searchInputId = null) {
+async function setupRendimientoModule(jsonFile, gridId, sortSelectId, searchInputId = null) {
   try {
     const response = await fetch(jsonFile);
     if (!response.ok) return;
@@ -316,7 +316,7 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId, searchInp
       return item.nombre || item.candidato || item.candidatoNombre || item.nombreCandidato || item.nombre_candidato || 'Sin Nombre';
     }
 
-    function renderRentabilidadCards(items) {
+    function renderRendimientoCards(items) {
       grid.innerHTML = '';
       if (items.length === 0) {
         grid.innerHTML = '<p style="color: var(--text-muted); padding: 1rem;">No se encontraron registros con los criterios seleccionados.</p>';
@@ -360,7 +360,7 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId, searchInp
               <span class="metric-label">Desglose de Rendimiento</span>
             </div>
 
-            <div class="rentabilidad-metric-grid">
+            <div class="rendimiento-metric-grid">
               <div class="metric-data-item">
                 <span class="sub-label">Votos Obtenidos</span>
                 <span class="metric-number">${votosFormateados}</span>
@@ -401,7 +401,7 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId, searchInp
         filtered.sort((a, b) => (b.votos ?? 0) - (a.votos ?? 0));
       }
 
-      renderRentabilidadCards(filtered);
+      renderRendimientoCards(filtered);
     }
 
     if (sortSelect) sortSelect.addEventListener('change', applyFilterAndSort);
