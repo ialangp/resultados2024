@@ -187,18 +187,8 @@ body {
   display: none;
 }
 
-/* Asegura que los contenedores dentro de secciones activas sean visibles */
-.level-section.active .report-container.active {
-  height: auto !important;
-  overflow: visible !important;
-  opacity: 1 !important;
-  pointer-events: auto !important;
-}
-
-/* Evita que la grilla colapse si el JS inyecta datos dinámicamente */
-.grid-rentabilidad,
-.candidates-grid {
-  min-height: 100px;
+.level-section.active {
+  display: block;
 }
 
 /* ==========================================
@@ -819,7 +809,6 @@ body {
 .badge-competitividad.BAJO { background: #f8d7da; color: #721c24; }
 
 /* Grilla interna de métricas para Rentabilidad */
-/* Reutilización de grilla interna dentro de .performance-metric */
 .rentabilidad-metric-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -881,4 +870,3 @@ body {
   background-color: #fee2e2;
   color: #991b1b;
 }
-
