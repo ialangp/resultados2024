@@ -342,7 +342,7 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId, searchInp
           : `<div class="candidate-avatar no-photo">Sin foto</div>`;
 
         const cardContainer = document.createElement('div');
-        cardContainer.className = 'candidate-card';
+        cardContainer.className = 'candidate-card positive-card';
         cardContainer.innerHTML = `
           <div class="candidate-header">
             ${avatarHTML}
