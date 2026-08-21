@@ -758,9 +758,8 @@ body {
 }
 
 
-/* Tarjetas de KPIs */
 /* ==========================================
-   TARJETAS DE KPIS (SOMBRA/ACENTO IZQUIERDO)
+   TARJETAS DE KPIS (FORZADO EN DESKTOP Y MÓVIL)
    ========================================== */
 .kpi-container {
   display: grid;
@@ -769,27 +768,32 @@ body {
   margin-bottom: 2rem;
 }
 
-/* Estilo base para tarjetas estándar (Presupuesto y Votos) */
+/* Tarjetas estándar: Presupuesto y Votos (Naranja) */
+.report-container .kpi-card,
 .kpi-card {
-  background: #ffffff;
-  border: 1px solid var(--border-color);
-  border-left: 5px solid #f97316 !important; /* Línea/Acento lateral naranja */
-  border-radius: 12px;
-  padding: 1.25rem;
-  text-align: left;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  background: #ffffff !important;
+  border: 1px solid var(--border-color) !important;
+  border-top: none !important; /* Remueve la línea azul superior en desktop */
+  border-left: 5px solid #f97316 !important; /* Línea lateral naranja */
+  border-radius: 12px !important;
+  padding: 1.25rem !important;
+  text-align: left !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03) !important;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.report-container .kpi-card:hover,
 .kpi-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08) !important;
 }
 
-/* Tarjeta destacada (Valor de cada Voto en Verde Esmeralda) */
+/* Tarjeta destacada: Valor de cada Voto (Verde) */
+.report-container .kpi-card.highlight,
 .kpi-card.highlight {
-  background: #f0fdf4 !important;
+  background: #ffffff !important;
   border: 1px solid #bbf7d0 !important;
+  border-top: none !important;
   border-left: 5px solid #10b981 !important; /* Línea lateral verde */
 }
 
@@ -811,7 +815,7 @@ body {
 }
 
 .kpi-card.highlight .kpi-value {
-  color: #047857; /* Texto del valor en verde oscuro */
+  color: #047857 !important;
 }
 
 /* Badges de Competitividad */
