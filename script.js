@@ -321,65 +321,65 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId) {
     }
 
     function renderRentabilidadCards(items) {
-      grid.innerHTML = '';
-      const fragment = document.createDocumentFragment();
+  grid.innerHTML = '';
+  const fragment = document.createDocumentFragment();
 
-      items.forEach(item => {
-        const val = item.valor ?? 0;
-        const votos = item.votos ?? 0;
-        const nombre = (item.nombre ?? 'Sin Nombre').replace(/'/g, "\\'");
-        const distrito = item.distrito ?? '';
-        const cabecera = item.cabecera ?? '';
-        const foto = item.fotografia && item.fotografia.trim() !== '' ? item.fotografia : '';
-        const bloque = item.bloqueCompetitividad ?? 'N/A';
+  items.forEach(item => {
+    const val = item.valor ?? 0;
+    const votos = item.votos ?? 0;
+    const nombre = (item.nombre ?? 'Sin Nombre').replace(/'/g, "\\'");
+    const distrito = item.distrito ?? '';
+    const cabecera = item.cabecera ?? '';
+    const foto = item.fotografia && item.fotografia.trim() !== '' ? item.fotografia : '';
+    const bloque = item.bloqueCompetitividad ?? 'N/A';
 
-        const valorFormateado = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(val);
-        const votosFormateados = new Intl.NumberFormat('es-MX').format(votos);
+    const valorFormateado = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(val);
+    const votosFormateados = new Intl.NumberFormat('es-MX').format(votos);
 
-        // Clase dinámica para el bloque de competitividad
-        const bloqueClass = String(bloque).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]/g, '-');
+    // Normalización de clase para el badge de competitividad
+    const bloqueClass = 'badge-' + String(bloque).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]/g, '-');
 
-        // Avatar o reemplazo
-        const avatarHTML = foto
-          ? `<img src="${foto}" alt="${nombre}" class="candidate-avatar" loading="lazy" onerror="this.outerHTML='<div class=\\'candidate-avatar no-photo\\'>Sin foto</div>'">`
-          : `<div class="candidate-avatar no-photo">Sin foto</div>`;
+    // Avatar reutilizando las mismas clases de candidato
+    const avatarHTML = foto
+      ? `<img src="${foto}" alt="${nombre}" class="candidate-avatar" loading="lazy" onclick="openImageModal('${foto}', '${nombre}', '${distrito}')" onerror="this.outerHTML='<div class=\\'candidate-avatar no-photo\\'>Sin foto</div>'">`
+      : `<div class="candidate-avatar no-photo">Sin foto</div>`;
 
-        const cardContainer = document.createElement('div');
-        cardContainer.className = 'candidate-card';
-        cardContainer.innerHTML = `
-          <div class="candidate-header">
-            ${avatarHTML}
-            <div class="candidate-info">
-              <h3>${nombre}</h3>
-              <span class="location-badge">🏛️ ${distrito} ${cabecera ? '- ' + cabecera : ''}</span>
-              <div class="emblema-accion-afirmativa badge-competitividad ${bloqueClass}">
-                <span class="emblema-texto">${bloque}</span>
-              </div>
-            </div>
+    const cardContainer = document.createElement('div');
+    cardContainer.className = 'candidate-card';
+    cardContainer.innerHTML = `
+      <div class="candidate-header">
+        ${avatarHTML}
+        <div class="candidate-info">
+          <h3>${nombre}</h3>
+          <span class="location-badge">🏛️ ${distrito} ${cabecera ? '- ' + cabecera : ''}</span>
+          <div class="emblema-accion-afirmativa ${bloqueClass}">
+            <span class="emblema-texto">${bloque}</span>
           </div>
+        </div>
+      </div>
 
-          <div class="performance-metric">
-            <div class="metric-header-row">
-              <span class="metric-label">Métricas de Rentabilidad</span>
-            </div>
+      <div class="performance-metric">
+        <div class="metric-header-row">
+          <span class="metric-label">Desglose de Rentabilidad</span>
+        </div>
 
-            <div class="rentabilidad-metric-grid">
-              <div class="metric-data-item">
-                <span class="sub-label">Votos Obtenidos</span>
-                <span class="metric-number">${votosFormateados}</span>
-              </div>
-              <div class="metric-data-item highlight">
-                <span class="sub-label">Valor Estimado</span>
-                <span class="metric-number valor-destacado">${valorFormateado}</span>
-              </div>
-            </div>
+        <div class="rentabilidad-metric-grid">
+          <div class="metric-data-item">
+            <span class="sub-label">Votos Obtenidos</span>
+            <span class="metric-number">${votosFormateados}</span>
           </div>
-        `;
-        fragment.appendChild(cardContainer);
-      });
+          <div class="metric-data-item highlight">
+            <span class="sub-label">Valor Estimado</span>
+            <span class="metric-number valor-destacado">${valorFormateado}</span>
+          </div>
+        </div>
+      </div>
+    `;
+    fragment.appendChild(cardContainer);
+  });
 
-      grid.appendChild(fragment);
-    }
+  grid.appendChild(fragment);
+}
     
     function sortAndRender() {
       const order = sortSelect ? sortSelect.value : 'desc';
@@ -406,3 +406,4 @@ async function setupRentabilidadModule(jsonFile, gridId, sortSelectId) {
     console.error(`Error al procesar la rentabilidad (${jsonFile}):`, error);
   }
 }
+
