@@ -187,8 +187,18 @@ body {
   display: none;
 }
 
-.level-section.active {
-  display: block;
+/* Asegura que los contenedores dentro de secciones activas sean visibles */
+.level-section.active .report-container.active {
+  height: auto !important;
+  overflow: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+/* Evita que la grilla colapse si el JS inyecta datos dinámicamente */
+.grid-rentabilidad,
+.candidates-grid {
+  min-height: 100px;
 }
 
 /* ==========================================
