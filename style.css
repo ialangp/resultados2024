@@ -893,20 +893,22 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  margin-top: 1rem;
+  width: 100%;
 }
 
+/* Fila de ranking en pantalla de Escritorio / Desktop */
 .ranking-row {
-  display: grid;
-  grid-template-columns: 80px 1fr auto;
+  display: flex;
   align-items: center;
-  background: var(--bg-card, #ffffff);
-  border: 1px solid var(--border-color, #e5e7eb);
-  border-radius: 10px;
-  padding: 0.85rem 1.2rem;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  justify-content: space-between;
+  background-color: var(--bg-card, #ffffff);
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-radius: 12px;
+  padding: 0.85rem 1.25rem;
+  gap: 1rem;
+  width: 100%;
+  box-sizing: border-box;
 }
-
 .ranking-row:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -944,7 +946,7 @@ body {
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding-left: 1rem;
+  flex: 1;
 }
 
 .ranking-candidate-info h3 {
@@ -965,6 +967,7 @@ body {
   display: flex;
   align-items: center;
   gap: 1.5rem;
+  margin-left: auto;
 }
 
 .metric-sub-item {
