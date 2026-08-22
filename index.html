@@ -87,9 +87,30 @@
             <div id="grid-alcaldias" class="candidates-grid"></div>
           </div>
 
+          
+          <!-- Módulo Contribución Alcaldías -->
           <div id="contribucion-alcaldias" class="report-container">
-            <!-- Contenedor para contribucion Alcaldías -->
+            
+            <!-- Controles de ordenamiento (Tabla de posiciones) -->
+            <div class="controls-bar">
+              <div class="search-box">
+                <input type="text" id="search-contribucion-alcaldias" placeholder="Buscar por alcaldía o candidato...">
+              </div>
+              
+              <div class="filter-group">
+                <label for="sort-contribucion-alcaldias">🏆 Ordenar Posición por:</label>
+                <select id="sort-contribucion-alcaldias" class="custom-select">
+                  <option value="competitividad">Posición Bloque Competitividad (Resultado %)</option>
+                  <option value="contribucion" selected>Posición Contribución Global (Votos %)</option>
+                </select>
+              </div>
+            </div>
+          
+            <!-- Contenedor del Ranking -->
+            <div id="grid-contribucion-alcaldias" class="ranking-container"></div>
           </div>
+
+          
         </div>
       </div>
 
