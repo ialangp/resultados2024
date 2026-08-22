@@ -6,7 +6,6 @@
     "votos": 10072,
     "resultado2024": 13.27,
     "bloque": "ALTO",
-    "listadonominal": 119675,
     "posicionCompetitividad": 1,
     "posicionContribucion": 16,
     "porcentajeContribucion": 2.54
@@ -18,7 +17,6 @@
     "votos": 25876,
     "resultado2024": 9.51,
     "bloque": "ALTO",
-    "listadonominal": 384044,
     "posicionCompetitividad": 2,
     "posicionContribucion": 9,
     "porcentajeContribucion": 6.52
@@ -30,7 +28,6 @@
     "votos": 67163,
     "resultado2024": 9.42,
     "bloque": "ALTO",
-    "listadonominal": 67163,
     "posicionCompetitividad": 3,
     "posicionContribucion": 2,
     "porcentajeContribucion": 16.93
@@ -42,7 +39,6 @@
     "votos": 11914,
     "resultado2024": 8.89,
     "bloque": "ALTO",
-    "listadonominal": 188127,
     "posicionCompetitividad": 4,
     "posicionContribucion": 15,
     "porcentajeContribucion": 3.00
@@ -54,7 +50,6 @@
     "votos": 16862,
     "resultado2024": 8.69,
     "bloque": "ALTO",
-    "listadonominal": 318695,
     "posicionCompetitividad": 5,
     "posicionContribucion": 13,
     "porcentajeContribucion": 4.25
@@ -66,7 +61,6 @@
     "votos": 26880,
     "resultado2024": 8.18,
     "bloque": "ALTO",
-    "listadonominal": 493555,
     "posicionCompetitividad": 6,
     "posicionContribucion": 6,
     "porcentajeContribucion": 6.78
@@ -78,7 +72,6 @@
     "votos": 21688,
     "resultado2024": 7.87,
     "bloque": "MEDIO",
-    "listadonominal": 404600,
     "posicionCompetitividad": 7,
     "posicionContribucion": 7,
     "porcentajeContribucion": 5.47
@@ -90,7 +83,6 @@
     "votos": 18073,
     "resultado2024": 7.66,
     "bloque": "MEDIO",
-    "listadonominal": 368019,
     "posicionCompetitividad": 8,
     "posicionContribucion": 10,
     "porcentajeContribucion": 4.56
@@ -102,7 +94,6 @@
     "votos": 29584,
     "resultado2024": 7.25,
     "bloque": "MEDIO",
-    "listadonominal": 569848,
     "posicionCompetitividad": 9,
     "posicionContribucion": 5,
     "porcentajeContribucion": 7.46
@@ -114,7 +105,6 @@
     "votos": 10016,
     "resultado2024": 6.95,
     "bloque": "MEDIO",
-    "listadonominal": 207715,
     "posicionCompetitividad": 10,
     "posicionContribucion": 14,
     "porcentajeContribucion": 2.53
@@ -126,7 +116,6 @@
     "votos": 16225,
     "resultado2024": 6.83,
     "bloque": "MEDIO",
-    "listadonominal": 364050,
     "posicionCompetitividad": 11,
     "posicionContribucion": 11,
     "porcentajeContribucion": 4.09
@@ -134,11 +123,10 @@
 {
     "alcaldia": "IZTAPALAPA",
     "nombre": "ALEX IRAN PICHARDO GARCIA",
-    "fotografia": "img/mcalcaldes2024/FOTOGRAFIA (1).png",
+    "fotografia": "img/mcalcaldes2024/FOTOGRAFIA  (1).png",
     "votos": 65868,
     "resultado2024": 6.70,
     "bloque": "BAJO",
-    "listadonominal": 1526203,
     "posicionCompetitividad": 12,
     "posicionContribucion": 1,
     "porcentajeContribucion": 16.61
@@ -150,7 +138,6 @@
     "votos": 24278,
     "resultado2024": 6.12,
     "bloque": "BAJO",
-    "listadonominal": 578802,
     "posicionCompetitividad": 13,
     "posicionContribucion": 4,
     "porcentajeContribucion": 6.12
@@ -162,7 +149,6 @@
     "votos": 25505,
     "resultado2024": 5.95,
     "bloque": "BAJO",
-    "listadonominal": 618345,
     "posicionCompetitividad": 14,
     "posicionContribucion": 3,
     "porcentajeContribucion": 6.43
@@ -174,7 +160,6 @@
     "votos": 12663,
     "resultado2024": 5.36,
     "bloque": "BAJO",
-    "listadonominal": 329179,
     "posicionCompetitividad": 15,
     "posicionContribucion": 12,
     "porcentajeContribucion": 3.19
@@ -187,7 +172,6 @@
     "votos": 13954,
     "resultado2024": 4.81,
     "bloque": "BAJO",
-    "listadonominal": 384081,
     "posicionCompetitividad": 16,
     "posicionContribucion": 8,
     "porcentajeContribucion": 3.52
