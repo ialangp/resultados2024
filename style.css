@@ -1036,3 +1036,19 @@ body {
   }
 }
 
+/* Corrección para que el Leaderboard ocupe todo el ancho en web */
+#grid-contribucion-alcaldias {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.75rem !important;
+  width: 100% !important;
+}
+
+/* Restablece las filas para que se distribuyan en renglón completo */
+#grid-contribucion-alcaldias .ranking-row {
+  display: grid;
+  grid-template-columns: 80px 1fr auto;
+  align-items: center;
+  width: 100%;
+}
+
