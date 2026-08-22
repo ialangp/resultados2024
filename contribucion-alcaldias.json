@@ -1,0 +1,178 @@
+[
+  {
+    "alcaldia": "MILPA ALTA",
+    "nombre": "MAGALI ALVARADO ALVAREZ",
+    "fotografia": "img/mcalcaldes2024/MILPAA_ALCALDE_MAGALI ALVARADO ALVAREZ.jpg",
+    "votos": 10072,
+    "resultado2024": 13.27,
+    "bloque": "ALTO",
+    "posicionCompetitividad": 1,
+    "posicionContribucion": 16,
+    "porcentajeContribucion": 2.54
+  },
+  {
+    "alcaldia": "AZCAPOTZALCO",
+    "nombre": "LUISA YANIRA ALPIZAR CASTELLANOS",
+    "fotografia": "img/mcalcaldes2024/Luisa Alpizar_YA.jpg",
+    "votos": 25876,
+    "resultado2024": 9.51,
+    "bloque": "ALTO",
+    "posicionCompetitividad": 2,
+    "posicionContribucion": 9,
+    "porcentajeContribucion": 6.52
+  },
+  {
+    "alcaldia": "GAM",
+    "nombre": "ARACELI GARCIA RICO",
+    "fotografia": "img/mcalcaldes2024/Araceli Garcia Rico_ALCALDIA.jpg",
+    "votos": 67163,
+    "resultado2024": 9.42,
+    "bloque": "ALTO",
+    "posicionCompetitividad": 3,
+    "posicionContribucion": 2,
+    "porcentajeContribucion": 16.93
+  },
+  {
+    "alcaldia": "CUAJIMALPA",
+    "nombre": "VIRIDIANA PEREZ ROJAS",
+    "fotografia": "img/mcalcaldes2024/Viridiana Perez Rojas_YA.jpg",
+    "votos": 11914,
+    "resultado2024": 8.89,
+    "bloque": "ALTO",
+    "posicionCompetitividad": 4,
+    "posicionContribucion": 15,
+    "porcentajeContribucion": 3.00
+  },
+  {
+    "alcaldia": "TLAHUAC",
+    "nombre": "LESVIA GOMEZ MELGAR",
+    "fotografia": "img/mcalcaldes2024/TLAHUAC_ALCALDIA_LESVIA GOMEZ MELGAR.JPG",
+    "votos": 16862,
+    "resultado2024": 8.69,
+    "bloque": "ALTO",
+    "posicionCompetitividad": 5,
+    "posicionContribucion": 13,
+    "porcentajeContribucion": 4.25
+  },
+  {
+    "alcaldia": "XOCHIMILCO",
+    "nombre": "ADRIANA ROSAS BADILLO",
+    "fotografia": "img/mcalcaldes2024/XOCHIMILCO_ALCALDIA_ADRIANA ROSAS BADILLO.JPG",
+    "votos": 17296,
+    "resultado2024": 8.35,
+    "bloque": "MEDIO",
+    "posicionCompetitividad": 6,
+    "posicionContribucion": 12,
+    "porcentajeContribucion": 4.36
+  },
+  {
+    "alcaldia": "IZTACALCO",
+    "nombre": "PABLO RAUL MORENO CARRILLO",
+    "fotografia": "img/mcalcaldes2024/PABLO RAUL MORENO CARRILLO_IZTACALCO.png",
+    "votos": 22262,
+    "resultado2024": 8.13,
+    "bloque": "MEDIO",
+    "posicionCompetitividad": 7,
+    "posicionContribucion": 10,
+    "porcentajeContribucion": 5.61
+  },
+  {
+    "alcaldia": "COYOACAN",
+    "nombre": "PABLO MORENO MEJIA",
+    "fotografia": "img/mcalcaldes2024/COYOACAN_PABLO MORENO MEJIA.jpg",
+    "votos": 32679,
+    "resultado2024": 7.96,
+    "bloque": "MEDIO",
+    "posicionCompetitividad": 8,
+    "posicionContribucion": 5,
+    "porcentajeContribucion": 8.24
+  },
+  {
+    "alcaldia": "ALVARO OBREGON",
+    "nombre": "ESTHER MEJIA BOLAÑOS",
+    "fotografia": "img/mcalcaldes2024/ESTHER MEJIA BOLAÑOS.png",
+    "votos": 27552,
+    "resultado2024": 6.27,
+    "bloque": "MEDIO",
+    "posicionCompetitividad": 9,
+    "posicionContribucion": 8,
+    "porcentajeContribucion": 6.95
+  },
+  {
+    "alcaldia": "IZTAPALAPA",
+    "nombre": "ALEX AURELIO MORALES VICENTE",
+    "fotografia": "img/mcalcaldes2024/IZTAPALAPA_ALCALDIA_ALEX AURELIO MORALES VICENTE.jpg",
+    "votos": 73801,
+    "resultado2024": 6.26,
+    "bloque": "MEDIO",
+    "posicionCompetitividad": 10,
+    "posicionContribucion": 1,
+    "porcentajeContribucion": 18.61
+  },
+  {
+    "alcaldia": "M. HILDALGO",
+    "nombre": "ANTONIO CARABIAS CAICERO",
+    "fotografia": "img/mcalcaldes2024/MIGUEL H_ALCALDIA_ANTONIO CARABIAS CAICERO.jpg",
+    "votos": 19688,
+    "resultado2024": 6.22,
+    "bloque": "BAJO",
+    "posicionCompetitividad": 11,
+    "posicionContribucion": 11,
+    "porcentajeContribucion": 4.96
+  },
+  {
+    "alcaldia": "TLALPAN",
+    "nombre": "LOURDES VALDEZ CUEVAS",
+    "fotografia": "img/mcalcaldes2024/Lourdes Valdez Cuevas.png",
+    "votos": 31393,
+    "resultado2024": 6.20,
+    "bloque": "BAJO",
+    "posicionCompetitividad": 12,
+    "posicionContribucion": 6,
+    "porcentajeContribucion": 7.91
+  },
+  {
+    "alcaldia": "MAGDALENA CONTRERAS",
+    "nombre": "DANIELA NITZA GARDUÑO MONROY",
+    "fotografia": "img/mcalcaldes2024/MAGDALENA_ALCALDIA_DANIELA NITZA GARDUÑO MONROY.JPG",
+    "votos": 12693,
+    "resultado2024": 6.07,
+    "bloque": "BAJO",
+    "posicionCompetitividad": 13,
+    "posicionContribucion": 14,
+    "porcentajeContribucion": 3.20
+  },
+  {
+    "alcaldia": "CUAUHTEMOC",
+    "nombre": "HERSON ADRIAN VALDES GONZALEZ",
+    "fotografia": "img/mcalcaldes2024/CUAUHTEMOC_ALCALDIA_HERSON ADRIAN VALDES GONZALEZ.jpg",
+    "votos": 30200,
+    "resultado2024": 5.92,
+    "bloque": "BAJO",
+    "posicionCompetitividad": 14,
+    "posicionContribucion": 7,
+    "porcentajeContribucion": 7.61
+  },
+  {
+    "alcaldia": "BENITO JUAREZ",
+    "nombre": "RODRIGO CORDERA THACKER",
+    "fotografia": "img/mcalcaldes2024/BENITO J_ALCALDIA_RODRIGO CORDERA THACKER.jpg",
+    "votos": 33177,
+    "resultado2024": 5.61,
+    "bloque": "BAJO",
+    "posicionCompetitividad": 15,
+    "posicionContribucion": 4,
+    "porcentajeContribucion": 8.36
+  },
+  {
+    "alcaldia": "VENUSTIANO CARRANZA",
+    "nombre": "ZURIEL RUIZ FLORES",
+    "fotografia": "img/mcalcaldes2024/V_CARRANZA_ALCALDIA_ZURIEL RUIZ FLORES.JPG",
+    "votos": 26685,
+    "resultado2024": 5.09,
+    "bloque": "BAJO",
+    "posicionCompetitividad": 16,
+    "posicionContribucion": 3,
+    "porcentajeContribucion": 6.73
+  }
+]
