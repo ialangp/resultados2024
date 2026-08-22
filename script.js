@@ -72,9 +72,12 @@ document.addEventListener('DOMContentLoaded', () => {
   setupCandidatesModule('alcaldias', 'candidatos-alcaldias.json', 'search-alcaldias', 'select-alcaldias', 'grid-alcaldias');
   setupCandidatesModule('distritos', 'candidatos-distritos.json', 'search-distritos', 'select-distritos', 'grid-distritos', 'select-acciones-distritos');
 
-  // 4. Lógica para el módulo de contribucion
+  // 4. Lógica para el módulo de contribucion DTOS
   setupcontribucionModule('contribucion-distritos.json', 'grid-contribucion-distritos', 'sort-contribucion-distritos','search-contribucion-distritos');
-
+  // Lógica para el módulo de contribución Alcaldías
+  setupContribucionAlcaldiasModule('contribucion-alcaldias.json', 'grid-contribucion-alcaldias', 'sort-contribucion-alcaldias', 'search-contribucion-alcaldias');
+  
+  
   // 5. Configurar eventos de cierre para el Modal de Imágenes
   const modal = document.getElementById('image-modal');
   const modalCloseBtn = document.getElementById('modal-close');
@@ -283,6 +286,136 @@ function renderCards(list, container) {
   container.appendChild(fragment);
 }
 
+
+//Función contribución Alcaldías
+async function setupContribucionAlcaldiasModule(jsonFile, gridId, sortSelectId, searchInputId) {
+  try {
+    const response = await fetch(jsonFile);
+    if (!response.ok) return;
+    const data = await response.json();
+
+    const grid = document.getElementById(gridId);
+    const sortSelect = document.getElementById(sortSelectId);
+    const searchInput = document.getElementById(searchInputId);
+
+    if (!grid) return;
+
+    function renderRanking(items, viewMode) {
+      grid.innerHTML = '';
+      if (items.length === 0) {
+        grid.innerHTML = '<p style="color: var(--text-muted); padding: 1rem;">No se encontraron alcaldías.</p>';
+        return;
+      }
+
+      const fragment = document.createDocumentFragment();
+
+      items.forEach((item) => {
+        const isContrib = viewMode === 'contribucion';
+        
+        // Determinar qué posición se muestra como principal
+        const rankNumber = isContrib ? item.posicionContribucion : item.posicionCompetitividad;
+        const rankDiff = item.posicionCompetitividad - item.posicionContribucion; // Variación de lugares
+
+        const bloqueClass = `bloque-${item.bloque.toLowerCase()}`;
+        const safeName = item.nombre.replace(/'/g, "\\'");
+        const foto = item.fotografia && item.fotografia.trim() !== '' ? item.fotografia : '';
+
+        const avatarHTML = foto
+          ? `<img src="${foto}" alt="${safeName}" class="candidate-avatar" loading="lazy" onclick="openImageModal('${foto}', '${safeName}', '${item.alcaldia}')" onerror="this.outerHTML='<div class=\\'candidate-avatar no-photo\\'>Sin foto</div>'">`
+          : `<div class="candidate-avatar no-photo">Sin foto</div>`;
+
+        // Indicador de cambio de posición (Subió / Bajó)
+        let rankBadgeHTML = '';
+        if (isContrib) {
+          if (rankDiff > 0) {
+            rankBadgeHTML = `<span class="rank-shift up" title="Subió ${rankDiff} posiciones respecto a su competitividad">▲ +${rankDiff}</span>`;
+          } else if (rankDiff < 0) {
+            rankBadgeHTML = `<span class="rank-shift down" title="Bajó ${Math.abs(rankDiff)} posiciones respecto a su competitividad">▼ ${rankDiff}</span>`;
+          } else {
+            rankBadgeHTML = `<span class="rank-shift same" title="Mantiene su misma posición">=</span`;
+          }
+        }
+
+        // Bloque del Porcentaje Destacado (SOLO cuando se ordena por contribución)
+        const contribHighlightHTML = isContrib
+          ? `
+            <div class="contrib-highlight-box">
+              <span class="contrib-label">CONTRIBUCIÓN GLOBAL</span>
+              <span class="contrib-value">${item.porcentajeContribucion}%</span>
+            </div>
+          `
+          : '';
+
+        const row = document.createElement('div');
+        row.className = `ranking-row ${isContrib ? 'view-contrib' : 'view-comp'}`;
+        row.innerHTML = `
+          <div class="rank-position-box">
+            <span class="rank-number">#${rankNumber}</span>
+            ${rankBadgeHTML}
+          </div>
+
+          <div class="ranking-candidate-info">
+            ${avatarHTML}
+            <div class="candidate-details">
+              <h3>${item.nombre}</h3>
+              <div class="location-and-badge">
+                <span class="location-badge">🏛️ ${item.alcaldia}</span>
+                <span class="badge-competitividad ${bloqueClass}">Bloque ${item.bloque}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="ranking-metrics-group">
+            <div class="metric-sub-item">
+              <span class="m-label">Resultado 2024</span>
+              <span class="m-val">${item.resultado2024}%</span>
+            </div>
+            <div class="metric-sub-item">
+              <span class="m-label">Votos Obtenidos</span>
+              <span class="m-val">${new Intl.NumberFormat('es-MX').format(item.votos)}</span>
+            </div>
+            ${contribHighlightHTML}
+          </div>
+        `;
+
+        fragment.appendChild(row);
+      });
+
+      grid.appendChild(fragment);
+    }
+
+    function applyFilterAndSort() {
+      const searchQuery = searchInput ? searchInput.value.toLowerCase().trim() : '';
+      const viewMode = sortSelect ? sortSelect.value : 'contribucion';
+
+      let filtered = data.filter(item => {
+        return item.alcaldia.toLowerCase().includes(searchQuery) ||
+               item.nombre.toLowerCase().includes(searchQuery);
+      });
+
+      // Ordenar según la selección
+      filtered.sort((a, b) => {
+        if (viewMode === 'contribucion') {
+          return a.posicionContribucion - b.posicionContribucion;
+        } else {
+          return a.posicionCompetitividad - b.posicionCompetitividad;
+        }
+      });
+
+      renderRanking(filtered, viewMode);
+    }
+
+    if (sortSelect) sortSelect.addEventListener('change', applyFilterAndSort);
+    if (searchInput) searchInput.addEventListener('input', applyFilterAndSort);
+
+    applyFilterAndSort();
+
+  } catch (error) {
+    console.error(`Error al procesar la Contribución de Alcaldías (${jsonFile}):`, error);
+  }
+}
+
+// Función Contribución DTOS
 async function setupcontribucionModule(jsonFile, gridId, sortSelectId, searchInputId = null) {
   try {
     const response = await fetch(jsonFile);
