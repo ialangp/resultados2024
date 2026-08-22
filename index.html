@@ -87,13 +87,10 @@
             <div id="grid-alcaldias" class="candidates-grid"></div>
           </div>
 
-          
           <!-- Módulo Contribución Alcaldías -->
           <div id="contribucion-alcaldias" class="report-container">
-            
             <!-- Controles de filtrado y ordenamiento -->
             <div class="candidates-filters">
-              
               <!-- Buscador -->
               <div class="filter-group">
                 <label for="search-contribucion-alcaldias">Buscar por alcaldía o candidato:</label>
@@ -113,22 +110,16 @@
                   <option value="contribucion" selected>Posición Contribución Global (Votos %)</option>
                 </select>
               </div>
-          
             </div>
           
-            <!-- Contenedor del Ranking (SÓLO UNO Y CON LA CLASE CORRECTA) -->
+            <!-- Contenedor del Ranking -->
             <div id="grid-contribucion-alcaldias" class="ranking-container">
               <!-- Aquí se renderiza la información dinámicamente -->
             </div>
-          
-          </div>          
-            <!-- Contenedor del Ranking -->
-            <div id="grid-contribucion-alcaldias" class="ranking-container"></div>
           </div>
 
-          
-        </div>
-      </div>
+        </div> <!-- Fin de .chart-card en Alcaldías -->
+      </div> <!-- Fin de #seccion-alcaldias -->
 
       <!-- SECCIÓN: DISTRITOS LOCALES -->
       <div id="seccion-distritos" class="level-section">
@@ -171,7 +162,7 @@
             <div id="grid-distritos" class="candidates-grid"></div>
           </div>
 
-          <!-- MÓDULO contribucion DISTRITOS -->
+          <!-- MÓDULO CONTRIBUCIÓN DISTRITOS -->
           <div id="contribucion-distritos" class="report-container">   
             <div class="kpi-container">
               <div class="kpi-card">
@@ -203,24 +194,25 @@
               </div>
             </div>
 
-            <!-- Grilla integrada dentro del contenedor del módulo -->
+            <!-- Grilla de Distritos -->
             <div id="grid-contribucion-distritos" class="candidates-grid"></div>     
           </div>
           
-        </div>
-      </div>
+        </div> <!-- Fin de .chart-card en Distritos -->
+      </div> <!-- Fin de #seccion-distritos -->
 
     </main>
+  </div> <!-- Fin de .main-wrapper -->
 
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 
-    <!-- MODAL PARA AMPLIAR IMAGEN -->
-    <div id="image-modal" class="image-modal" onclick="closeImageModal()">
-      <div class="modal-content-wrapper" onclick="event.stopPropagation()">
-        <button class="modal-close" onclick="closeImageModal()">&times;</button>
-        <img id="modal-img" src="" alt="" class="modal-img">
-        <div id="modal-caption" class="modal-caption"></div>
-      </div>
+  <!-- MODAL PARA AMPLIAR IMAGEN -->
+  <div id="image-modal" class="image-modal" onclick="closeImageModal()">
+    <div class="modal-content-wrapper" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeImageModal()">&times;</button>
+      <img id="modal-img" src="" alt="" class="modal-img">
+      <div id="modal-caption" class="modal-caption"></div>
     </div>
-  </body>
+  </div>
+</body>
 </html>
