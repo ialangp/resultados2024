@@ -1039,19 +1039,83 @@ body {
   }
 }
 
-/* Corrección para que el Leaderboard ocupe todo el ancho en web */
+/* ==========================================
+   AJUSTE DE ANCHO Y ESTRUCTURA DEL RANKING
+   ========================================== */
+
 #grid-contribucion-alcaldias {
   display: flex !important;
   flex-direction: column !important;
   gap: 0.75rem !important;
-  width: 100% !important;
+  width: 100 % !important;
 }
 
-/* Restablece las filas para que se distribuyan en renglón completo */
+/* Regla base (Escritorio/Pantallas grandes) */
 #grid-contribucion-alcaldias .ranking-row {
   display: grid;
   grid-template-columns: 80px 1fr auto;
   align-items: center;
   width: 100%;
+  box-sizing: border-box;
+  background-color: var(--bg-card, #ffffff);
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-radius: 12px;
+  padding: 0.85rem 1.25rem;
+  gap: 1rem;
 }
 
+/* ==========================================
+   CORRECCIÓN RESPONSIVA PARA MÓVILES
+   ========================================== */
+@media (max-width: 768px) {
+  /* Se usa la misma especificidad de ID para sobrescribir las 3 columnas */
+  #grid-contribucion-alcaldias .ranking-row {
+    grid-template-columns: 1fr !important; /* Pasa todo a una sola columna */
+    gap: 0.85rem;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .rank-position-box {
+    border-right: none !important;
+    border-bottom: 1px solid var(--border-color, #e2e8f0);
+    padding-right: 0 !important;
+    padding-bottom: 0.6rem;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .ranking-candidate-info {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+  }
+
+  .location-and-badge {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* Distribución adaptable para las métricas en móviles */
+  .ranking-metrics-group {
+    flex-direction: column !important; /* Apila el bloque de % y métricas si es necesario */
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    margin-left: 0 !important;
+    gap: 0.75rem !important;
+    border-top: 1px dashed var(--border-color, #cbd5e1);
+    padding-top: 0.75rem;
+  }
+
+  .metric-sub-item {
+    align-items: center !important; /* Centra los valores en móvil */
+  }
+
+  .contrib-highlight-box {
+    width: 100% !important; /* Hace que el destello de porcentaje ocupe todo el ancho */
+    max-width: 220px;
+  }
+}
