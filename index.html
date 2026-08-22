@@ -91,20 +91,37 @@
           <!-- Módulo Contribución Alcaldías -->
           <div id="contribucion-alcaldias" class="report-container">
             
-            <!-- Controles de ordenamiento (Tabla de posiciones) -->
-            <div class="controls-bar">
-              <div class="search-box">
-                <input type="text" id="search-contribucion-alcaldias" placeholder="Buscar por alcaldía o candidato...">
+            <!-- Controles de filtrado y ordenamiento (mismo estilo que Candidatos) -->
+            <div class="candidates-filters">
+              
+              <!-- Buscador -->
+              <div class="filter-group">
+                <label for="search-contribucion-alcaldias">Buscar por alcaldía o candidato:</label>
+                <input 
+                  type="text" 
+                  id="search-contribucion-alcaldias" 
+                  placeholder="Escribe la alcaldía o candidato..." 
+                  class="filter-input"
+                >
               </div>
               
+              <!-- Ordenamiento -->
               <div class="filter-group">
                 <label for="sort-contribucion-alcaldias">🏆 Ordenar Posición por:</label>
-                <select id="sort-contribucion-alcaldias" class="custom-select">
+                <select id="sort-contribucion-alcaldias" class="filter-select">
                   <option value="competitividad">Posición Bloque Competitividad (Resultado %)</option>
                   <option value="contribucion" selected>Posición Contribución Global (Votos %)</option>
                 </select>
               </div>
+          
             </div>
+          
+            <!-- Contenedor para tarjetas/tabla -->
+            <div id="grid-contribucion-alcaldias" class="candidates-grid">
+              <!-- Aquí se renderiza la información dinámicamente -->
+            </div>
+          
+          </div>
           
             <!-- Contenedor del Ranking -->
             <div id="grid-contribucion-alcaldias" class="ranking-container"></div>
