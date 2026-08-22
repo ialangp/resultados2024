@@ -332,7 +332,7 @@ async function setupContribucionAlcaldiasModule(jsonFile, gridId, sortSelectId, 
           } else if (rankDiff < 0) {
             rankBadgeHTML = `<span class="rank-shift down" title="Bajó ${Math.abs(rankDiff)} posiciones respecto a su competitividad">▼ ${rankDiff}</span>`;
           } else {
-            rankBadgeHTML = `<span class="rank-shift same" title="Mantiene su misma posición">=</span`;
+            rankBadgeHTML = `<span class="rank-shift same" title="Mantiene su misma posición">=</span>`;
           }
         }
 
