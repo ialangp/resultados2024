@@ -386,7 +386,7 @@ async function setupContribucionAlcaldiasModule(jsonFile, gridId, sortSelectId, 
 
     function applyFilterAndSort() {
       const searchQuery = searchInput ? searchInput.value.toLowerCase().trim() : '';
-      const viewMode = sortSelect ? sortSelect.value : 'contribucion';
+      const viewMode = sortSelect ? sortSelect.value : 'competitividad';
 
       let filtered = data.filter(item => {
         return item.alcaldia.toLowerCase().includes(searchQuery) ||
