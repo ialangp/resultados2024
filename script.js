@@ -316,12 +316,12 @@ async function setupContribucionAlcaldiasModule(jsonFile, gridId, sortSelectId, 
         const rankNumber = isContrib ? item.posicionContribucion : item.posicionCompetitividad;
         const rankDiff = item.posicionCompetitividad - item.posicionContribucion; // Variación de lugares
 
-        const bloqueClass = `bloque-${item.bloque.toLowerCase()}`;
-        const safeName = item.nombre.replace(/'/g, "\\'");
+        const bloqueClass = item.bloque ? `bloque-${item.bloque.toLowerCase()}` : '';
+        const safeName = (item.nombre || '').replace(/'/g, "\\'");
         const foto = item.fotografia && item.fotografia.trim() !== '' ? item.fotografia : '';
 
         const avatarHTML = foto
-          ? `<img src="${foto}" alt="${safeName}" class="candidate-avatar" loading="lazy" onclick="openImageModal('${foto}', '${safeName}', '${item.alcaldia}')" onerror="this.outerHTML='<div class=\\'candidate-avatar no-photo\\'>Sin foto</div>'">`
+          ? `<img src="${foto}" alt="${safeName}" class="candidate-avatar" loading="lazy" onclick="openImageModal('${foto}', '${safeName}', '${item.alcaldia}')" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'50\\' height=\\'50\\' viewBox=\\'0 0 24 24\\' fill=\\'none\\' stroke=\\'%2394a3b8\\' stroke-width=\\'2\\'><path d=\\'M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2\\'/><circle cx=\\'12\\' cy=\\'7\\' r=\\'4\\'/></svg>'; this.classList.add('no-photo');">`
           : `<div class="candidate-avatar no-photo">Sin foto</div>`;
 
         // Indicador de cambio de posición (Subió / Bajó)
@@ -386,6 +386,7 @@ async function setupContribucionAlcaldiasModule(jsonFile, gridId, sortSelectId, 
 
     function applyFilterAndSort() {
       const searchQuery = searchInput ? searchInput.value.toLowerCase().trim() : '';
+      // CAMBIO AQUÍ: 'competitividad' por defecto
       const viewMode = sortSelect ? sortSelect.value : 'competitividad';
 
       let filtered = data.filter(item => {
