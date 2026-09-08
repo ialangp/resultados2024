@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Panel de Reportes Electorales</title>
+  <title>Metis React - Panel de Reportes Electorales</title>
   <link rel="stylesheet" href="style.css">
   <!-- Script oficial de Flourish -->
   <script src="https://public.flourish.studio/resources/embed.js"></script>
@@ -45,10 +45,18 @@
   <!-- Área Principal -->
   <div class="main-wrapper">
     <header class="topbar">
-      <button class="toggle-btn" id="toggle-sidebar" aria-label="Abrir menú">
-        ☰
-      </button>
-      <h1 class="report-title" id="current-title">Alcaldías</h1>
+      <div class="topbar-left">
+        <button class="toggle-btn" id="toggle-sidebar" aria-label="Abrir menú">
+          ☰
+        </button>
+        <h1 class="report-title" id="current-title">Alcaldías</h1>
+      </div>
+
+      <!-- AQUÍ VA EL LOGO Y NOMBRE -->
+      <div class="topbar-brand">
+        <span class="system-brand-name">Metis React</span>
+        <img src="img/Metis.png" alt="Metis" class="topbar-logo">
+      </div>
     </header>
 
     <main class="content-area">
