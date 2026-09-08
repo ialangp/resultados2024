@@ -145,13 +145,13 @@ body {
 }
 
 .topbar {
-  min-height: 90px; /* Aumentamos la altura de la barra para acomodar un logo más grande */
+  min-height: 120px; /* Ampliado para acomodar el logo 50% más grande */
   background: var(--bg-card);
   border-bottom: 1px solid var(--border-color);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.5rem 1.5rem;
+  padding: 0.5rem 2rem;
   flex-shrink: 0;
 }
 
@@ -175,7 +175,7 @@ body {
 }
 
 .report-title {
-  font-size: 1.25rem;
+  font-size: 1.35rem;
   font-weight: 600;
   white-space: nowrap;
   overflow: hidden;
@@ -190,31 +190,31 @@ body {
 }
 
 .topbar-logo {
-  height: 72px; /* Incrementado a 72px para mayor presencia en desktop */
+  height: 108px; /* +50% de tamaño (de 72px a 108px) */
   width: auto;
   object-fit: contain;
   display: block;
 }
 
-/* Ajustes responsivos para tabletas y móviles */
+/* Ajustes responsivos para evitar desbordamientos en pantallas pequeñas */
 @media (max-width: 768px) {
   .topbar {
-    min-height: 70px;
-    padding: 0.4rem 1rem;
+    min-height: 80px;
+    padding: 0.5rem 1rem;
   }
 
   .topbar-logo {
-    height: 50px; /* Tamaño adaptado para pantallas intermedias */
+    height: 60px; /* Reducción proporcional para pantallas medianas */
   }
 }
 
 @media (max-width: 576px) {
   .topbar {
-    min-height: 60px;
+    min-height: 65px;
   }
 
   .topbar-logo {
-    height: 40px; /* Tamaño compacto para móviles */
+    height: 45px; /* Reducción para pantallas móviles */
   }
 }
 /* ==========================================
