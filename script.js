@@ -397,9 +397,12 @@ async function setupContribucionAlcaldiasModule(jsonFile, gridId, sortSelectId, 
       // Ordenar según la selección
       filtered.sort((a, b) => {
         if (viewMode === 'contribucion') {
-          return a.posicionContribucion - b.posicionContribucion;
+          // ORDENAMIENTO CORREGIDO: Por total de votos (de mayor a menor)
+          // Usamos Number() por si en el JSON viene como cadena de texto
+          return Number(b.votos) - Number(a.votos); 
         } else {
-          return a.posicionCompetitividad - b.posicionCompetitividad;
+          // Ordena por posición de competitividad (de menor a mayor: 1, 2, 3...)
+          return Number(a.posicionCompetitividad) - Number(b.posicionCompetitividad);
         }
       });
 
