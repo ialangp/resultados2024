@@ -145,7 +145,7 @@ body {
 }
 
 .topbar {
-  min-height: 120px; /* Ampliado para acomodar el logo 50% más grande */
+  min-height: 100px; /* Ampliado para acomodar el logo 50% más grande */
   background: var(--bg-card);
   border-bottom: 1px solid var(--border-color);
   display: flex;
@@ -190,7 +190,7 @@ body {
 }
 
 .topbar-logo {
-  height: 108px; /* +50% de tamaño (de 72px a 108px) */
+  height: 90px; /* +50% de tamaño (de 72px a 108px) */
   width: auto;
   object-fit: contain;
   display: block;
