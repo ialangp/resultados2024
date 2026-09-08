@@ -145,7 +145,7 @@ body {
 }
 
 .topbar {
-  min-height: 100px; /* Ajustado proporcionalmente al nuevo tamaño del logo */
+  min-height: 85px; /* Ajustado proporcionalmente para los 75px del logo */
   background: var(--bg-card);
   border-bottom: 1px solid var(--border-color);
   display: flex;
@@ -175,7 +175,7 @@ body {
 }
 
 .report-title {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-weight: 600;
   white-space: nowrap;
   overflow: hidden;
@@ -190,21 +190,21 @@ body {
 }
 
 .topbar-logo {
-  height: 90px; /* +25% de incremento sobre el tamaño base (72px -> 90px) */
+  height: 75px; /* Ajustado exactamente a 75px */
   width: auto;
   object-fit: contain;
   display: block;
 }
 
-/* Ajustes responsivos para pantallas medianas y móviles */
+/* Ajustes responsivos para pantallas pequeñas */
 @media (max-width: 768px) {
   .topbar {
-    min-height: 75px;
-    padding: 0.5rem 1rem;
+    min-height: 70px;
+    padding: 0.4rem 1rem;
   }
 
   .topbar-logo {
-    height: 55px;
+    height: 50px;
   }
 }
 
@@ -214,7 +214,7 @@ body {
   }
 
   .topbar-logo {
-    height: 42px;
+    height: 40px;
   }
 }
 /* ==========================================
