@@ -145,12 +145,12 @@ body {
 }
 
 .topbar {
-  height: 64px;
+  height: 72px;
   background: var(--bg-card);
   border-bottom: 1px solid var(--border-color);
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Mantiene la sección izquierda a la izq y el logo a la derecha */
+  justify-content: space-between;
   padding: 0 1.5rem;
   flex-shrink: 0;
 }
@@ -182,35 +182,24 @@ body {
   text-overflow: ellipsis;
 }
 
-/* Agrupador del lado derecho (Metis React + Logo) */
+/* Contenedor e imagen del logo (Derecha) */
 .topbar-brand {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
   flex-shrink: 0;
 }
 
-.system-brand-name {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  letter-spacing: -0.01em;
-}
-
 .topbar-logo {
-  height: 38px;
+  height: 52px;
   width: auto;
   object-fit: contain;
   display: block;
 }
 
-/* Opcional: Ocultar texto en móviles para priorizar espacio */
+/* Ajuste sutil para pantallas pequeñas */
 @media (max-width: 576px) {
-  .system-brand-name {
-    display: none;
-  }
   .topbar-logo {
-    height: 30px;
+    height: 40px;
   }
 }
 /* ==========================================
