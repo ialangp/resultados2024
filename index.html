@@ -228,25 +228,32 @@
       <!-- SECCIÓN: PRESENTACIONES -->
       <div id="seccion-presentaciones" class="level-section">
         <div class="module-tabs">
-          <button class="tab-btn active" data-module="pres-1">Presentación 1</button>
-          <button class="tab-btn" data-module="pres-2">Presentación 2</button>
+          <button class="tab-btn active" data-module="pres-1">2024 Bajo la lupa</button>
+          <button class="tab-btn" data-module="pres-2">Proyección MC 2027</button>
         </div>
-
+      
         <div class="chart-card">
           <!-- Contenedor Presentación 1 -->
-          <div id="pres-1" class="report-container active" style="height: 70vh;">
-             <!-- Aquí irá el iframe cuando me pases el link -->
-             <p style="text-align: center; padding: 2rem; color: var(--text-muted);">Cargando visor...</p>
+          <div id="pres-1" class="report-container active">
+            <iframe 
+              src="https://view.officeapps.live.com/op/embed.aspx?src=AQUI_TU_LINK_PPTX_1" 
+              class="pptx-viewer" 
+              frameborder="0" 
+              allowfullscreen="true">
+            </iframe>
           </div>
           
           <!-- Contenedor Presentación 2 -->
-          <div id="pres-2" class="report-container" style="height: 70vh;">
-             <!-- Aquí irá el iframe cuando me pases el link -->
-             <p style="text-align: center; padding: 2rem; color: var(--text-muted);">Cargando visor...</p>
+          <div id="pres-2" class="report-container">
+            <iframe 
+              src="https://view.officeapps.live.com/op/embed.aspx?src=AQUI_TU_LINK_PPTX_2" 
+              class="pptx-viewer" 
+              frameborder="0" 
+              allowfullscreen="true">
+            </iframe>
           </div>
         </div>
       </div>
-
       
     </main>
   </div> <!-- Fin de .main-wrapper -->
