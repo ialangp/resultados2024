@@ -49,6 +49,12 @@
             <span class="nav-text">Distritos Locales</span>
           </button>
         </li>
+        <li>
+          <button class="nav-btn" data-target="seccion-presentaciones" data-title="Presentaciones">
+            <span class="nav-icon">📊</span>
+            <span class="nav-text">Presentaciones</span>
+          </button>
+        </li>
       </ul>
     </nav>
   </aside>
@@ -219,6 +225,29 @@
         </div> <!-- Fin de .chart-card en Distritos -->
       </div> <!-- Fin de #seccion-distritos -->
 
+      <!-- SECCIÓN: PRESENTACIONES -->
+      <div id="seccion-presentaciones" class="level-section">
+        <div class="module-tabs">
+          <button class="tab-btn active" data-module="pres-1">Presentación 1</button>
+          <button class="tab-btn" data-module="pres-2">Presentación 2</button>
+        </div>
+
+        <div class="chart-card">
+          <!-- Contenedor Presentación 1 -->
+          <div id="pres-1" class="report-container active" style="height: 70vh;">
+             <!-- Aquí irá el iframe cuando me pases el link -->
+             <p style="text-align: center; padding: 2rem; color: var(--text-muted);">Cargando visor...</p>
+          </div>
+          
+          <!-- Contenedor Presentación 2 -->
+          <div id="pres-2" class="report-container" style="height: 70vh;">
+             <!-- Aquí irá el iframe cuando me pases el link -->
+             <p style="text-align: center; padding: 2rem; color: var(--text-muted);">Cargando visor...</p>
+          </div>
+        </div>
+      </div>
+
+      
     </main>
   </div> <!-- Fin de .main-wrapper -->
 
