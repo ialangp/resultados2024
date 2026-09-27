@@ -7,7 +7,7 @@
     "resultado2024": 13.27,
     "bloque": "ALTO",
     "posicionCompetitividad": 1,
-    "posicionContribucion": 16,
+    "posicionContribucion": 15,
     "porcentajeContribucion": 2.54
   },
   {
@@ -18,7 +18,7 @@
     "resultado2024": 9.51,
     "bloque": "ALTO",
     "posicionCompetitividad": 2,
-    "posicionContribucion": 9,
+    "posicionContribucion": 5,
     "porcentajeContribucion": 6.52
   },
   {
@@ -29,7 +29,7 @@
     "resultado2024": 9.42,
     "bloque": "ALTO",
     "posicionCompetitividad": 3,
-    "posicionContribucion": 2,
+    "posicionContribucion": 1,
     "porcentajeContribucion": 16.93
   },
   {
@@ -40,7 +40,7 @@
     "resultado2024": 8.89,
     "bloque": "ALTO",
     "posicionCompetitividad": 4,
-    "posicionContribucion": 15,
+    "posicionContribucion": 14,
     "porcentajeContribucion": 3.00
   },
   {
@@ -51,7 +51,7 @@
     "resultado2024": 8.69,
     "bloque": "ALTO",
     "posicionCompetitividad": 5,
-    "posicionContribucion": 13,
+    "posicionContribucion": 10,
     "porcentajeContribucion": 4.25
   },
 {
@@ -62,7 +62,7 @@
     "resultado2024": 8.18,
     "bloque": "ALTO",
     "posicionCompetitividad": 6,
-    "posicionContribucion": 6,
+    "posicionContribucion": 4,
     "porcentajeContribucion": 6.78
   },
 {
@@ -73,7 +73,7 @@
     "resultado2024": 7.87,
     "bloque": "MEDIO",
     "posicionCompetitividad": 7,
-    "posicionContribucion": 7,
+    "posicionContribucion": 8,
     "porcentajeContribucion": 5.47
   },
   {
@@ -84,7 +84,7 @@
     "resultado2024": 7.66,
     "bloque": "MEDIO",
     "posicionCompetitividad": 8,
-    "posicionContribucion": 10,
+    "posicionContribucion": 9,
     "porcentajeContribucion": 4.56
   },
 {
@@ -95,7 +95,7 @@
     "resultado2024": 7.25,
     "bloque": "MEDIO",
     "posicionCompetitividad": 9,
-    "posicionContribucion": 5,
+    "posicionContribucion": 3,
     "porcentajeContribucion": 7.46
   },
   {
@@ -106,7 +106,7 @@
     "resultado2024": 6.95,
     "bloque": "MEDIO",
     "posicionCompetitividad": 10,
-    "posicionContribucion": 14,
+    "posicionContribucion": 16,
     "porcentajeContribucion": 2.53
   },
   {
@@ -128,7 +128,7 @@
     "resultado2024": 6.70,
     "bloque": "BAJO",
     "posicionCompetitividad": 12,
-    "posicionContribucion": 1,
+    "posicionContribucion": 2,
     "porcentajeContribucion": 16.61
   },
 {
@@ -139,7 +139,7 @@
     "resultado2024": 6.12,
     "bloque": "BAJO",
     "posicionCompetitividad": 13,
-    "posicionContribucion": 4,
+    "posicionContribucion": 7,
     "porcentajeContribucion": 6.12
   },
   {
@@ -150,7 +150,7 @@
     "resultado2024": 5.95,
     "bloque": "BAJO",
     "posicionCompetitividad": 14,
-    "posicionContribucion": 3,
+    "posicionContribucion": 6,
     "porcentajeContribucion": 6.43
   },
     {
@@ -161,7 +161,7 @@
     "resultado2024": 5.36,
     "bloque": "BAJO",
     "posicionCompetitividad": 15,
-    "posicionContribucion": 12,
+    "posicionContribucion": 13,
     "porcentajeContribucion": 3.19
   },
   
@@ -173,7 +173,7 @@
     "resultado2024": 4.81,
     "bloque": "BAJO",
     "posicionCompetitividad": 16,
-    "posicionContribucion": 8,
+    "posicionContribucion": 12,
     "porcentajeContribucion": 3.52
   }
   ]
