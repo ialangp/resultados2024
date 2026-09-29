@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Metis React - Panel de Reportes Electorales</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="mapa-electoral-integracion.css">
   <!-- Script oficial de Flourish -->
   <script src="https://public.flourish.studio/resources/embed.js"></script>
 </head>
@@ -55,6 +56,12 @@
             <span class="nav-text">Presentaciones</span>
           </button>
         </li>
+        <li>
+          <button class="nav-btn" data-target="seccion-mapa-electoral" data-title="Mapa electoral">
+            <span class="nav-icon" aria-hidden="true">🧭</span>
+            <span class="nav-text">Mapa electoral</span>
+          </button>
+        </li>
       </ul>
     </nav>
   </aside>
@@ -67,6 +74,7 @@
           ☰
         </button>
         <h1 class="report-title" id="current-title">Alcaldías</h1>
+        <button id="ampliar-mapa" type="button" aria-pressed="false">Ampliar mapa</button>
       </div>
 
       <!-- LOGO ÚNICAMENTE (MÁS GRANDE Y SIN TEXTO ESCRITO) -->
@@ -256,10 +264,16 @@
         </div>
       </div>
       
+      <!-- SECCIÓN: MAPA ELECTORAL -->
+      <section id="seccion-mapa-electoral" class="level-section" aria-label="Mapa electoral">
+        <iframe id="mapa-electoral-frame" title="Mapa electoral de Movimiento Ciudadano en la CDMX, 2024"
+          data-src="mapa-electoral.html?integrado=1" allowfullscreen></iframe>
+      </section>
     </main>
   </div> <!-- Fin de .main-wrapper -->
 
   <script src="script.js"></script>
+  <script src="mapa-electoral-integracion.js"></script>
 
   <!-- MODAL PARA AMPLIAR IMAGEN -->
   <div id="image-modal" class="image-modal" onclick="closeImageModal()">
@@ -271,3 +285,4 @@
   </div>
 </body>
 </html>
+
