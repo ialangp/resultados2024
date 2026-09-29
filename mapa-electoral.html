@@ -99,4 +99,3 @@ window.addEventListener('beforeprint',()=>{if(streetsOn)syncStreetView()});windo
 configure();window.addEventListener('resize',()=>{initial=fit(visible);setView(initial.slice())});
 window.addEventListener('message', e=>{if(e.source!==window.parent||e.data?.type!=='metis-map-resize')return;requestAnimationFrame(()=>{initial=fit(visible);setView(initial.slice())})});
 </script></body></html>
-
