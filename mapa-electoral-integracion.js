@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!section || !frame || !expand) return;
   const notifySize = () => {
     if (frame.hasAttribute('src')) {
-      frame.contentWindow.postMessage({type:'metis-map-resize'}, '*');
+      frame.contentWindow.postMessage({type:'metis-map-resize',expanded:document.body.classList.contains('mapa-electoral-ampliado')}, '*');
     }
   };
   const syncSection = () => {
@@ -34,3 +34,4 @@ document.addEventListener('DOMContentLoaded', () => {
   frame.addEventListener('load', notifySize);
   syncSection();
 });
+
