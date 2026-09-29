@@ -1,0 +1,12 @@
+/* Ajustes exclusivos del nuevo módulo; las demás secciones conservan su diseño. */
+#seccion-mapa-electoral:not(.active){display:none!important}
+body.mapa-electoral-activo .content-area{padding:0;overflow:hidden;display:flex;flex-direction:column;min-height:0}
+body.mapa-electoral-activo #seccion-mapa-electoral.active{display:flex;flex:1;min-height:0;width:100%;max-width:none}
+#mapa-electoral-frame{display:block;border:0;width:100%;height:100%;min-height:0;flex:1;background:#f2f5f7}
+#ampliar-mapa{display:none;border:1px solid #ccdbe5;border-radius:7px;padding:8px 12px;background:#fff;color:#183c53;font-size:13px;font-weight:600;cursor:pointer;margin-left:16px}
+body.mapa-electoral-activo #ampliar-mapa{display:inline-flex;align-items:center}
+body.mapa-electoral-activo .topbar{min-height:64px;padding-top:5px;padding-bottom:5px}
+body.mapa-electoral-activo .topbar-logo{height:48px}
+body.mapa-electoral-ampliado .sidebar{display:none}
+body.mapa-electoral-ampliado .sidebar-overlay{display:none!important}
+@media(max-width:850px){body.mapa-electoral-activo #ampliar-mapa{display:none}body.mapa-electoral-activo .report-title{font-size:19px}body.mapa-electoral-activo .topbar{padding-left:14px;padding-right:14px}}
